@@ -83,17 +83,11 @@
   // ---- Hero -------------------------------------------------------------
   function renderHero() {
     var hero = C.hero || {};
+    setText("hero-label", hero.label);
     setText("hero-greeting", hero.greeting);
     setText("hero-name", hero.name);
-    var tagline = hero.tagline || "";
-    var taglineEl = $("hero-tagline");
-    if (taglineEl) {
-      var html = tagline
-        .split(/,\s*/)
-        .map(escapeHtml)
-        .join(",<br>");
-      taglineEl.innerHTML = html.replace(/\s+and\s+([^,]+)$/, " and<br>$1");
-    }
+    setText("hero-tagline", hero.tagline);
+    setText("hero-subtitle", hero.subtitle);
     var img = $("hero-image");
     if (img) {
       img.src = encodePath(hero.image);
@@ -127,6 +121,13 @@
       }
       list.appendChild(li);
     });
+    var skillsButton = $("skills-scroll-button");
+    if (skillsButton) {
+      skillsButton.addEventListener("click", function () {
+        var target = $("expertise");
+        if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    }
   }
 
   // ---- Projects ---------------------------------------------------------
@@ -395,7 +396,9 @@
     list.innerHTML = "";
     (ed.items || []).forEach(function (item) {
       var li = el("li", "timeline__item");
-      li.appendChild(el("span", "timeline__dot"));
+      li.appendChild(
+        el("span", "timeline__dot" + (item.current ? " timeline__dot--filled" : ""))
+      );
       var inst = el("h3", "timeline__role");
       inst.textContent = item.institute || "";
       li.appendChild(inst);

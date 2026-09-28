@@ -22,7 +22,7 @@ window.SITE_CONTENT = {
   // ---- Header -------------------------------------------------------------
   header: {
     resumeLabel: "Resume",
-    resumeFile: "assets/resume/Asawari's Resume 1.pdf",
+    resumeFile: "assets/resume/Asawari_Sakharkar_Resume.pdf",
     findMeText: "You can find me on",
     // `icon` must match a key in assets/js/icons.js. Leave url "" to hide.
     socials: [
@@ -34,10 +34,12 @@ window.SITE_CONTENT = {
 
   // ---- Hero ---------------------------------------------------------------
   hero: {
+    label: "INFORMATION DESIGNER | UX RESEARCHER",
     greeting: "Hello~",
     name: "I am Asawari Sakharkar",
     tagline:
-      "An Information Designer, UX Researcher, A Problem Solver.",
+      "Information designer with a background in UX Research, Data Visualization, and Front-end Development, working across research, design, and product.",
+    subtitle: "I turn ambiguous problems into evidence, and evidence into product decisions.",
     // Tip: in Figma, select the whole locket group ("Group 32") and export it
     // as ONE transparent PNG for the cleanest result, then point to it here.
     image: "assets/images/Group 32.png",
@@ -63,7 +65,7 @@ window.SITE_CONTENT = {
 
   // ---- My Projects --------------------------------------------------------
   projects: {
-    heading: "My Projects",
+    heading: "Products I've Worked On",
     // Each category has a subtitle and a live case-study count.
     categories: [
       {
@@ -78,8 +80,8 @@ window.SITE_CONTENT = {
       {
         title: "UI Case Studies",
         items: [
-          { image: "assets/images/projects/UniversalCalculator_tileImage.png", title: "Universal Calculator", url: "https://www.behance.net/gallery/224749961/Daily-UI-004" },
           { image: "assets/images/projects/sruti_tileImage.png", title: "Śruti: Corporate Learning Platform", url: "https://www.behance.net/gallery/246535769/Corporate-Learning-Platform" },
+          { image: "assets/images/projects/UniversalCalculator_tileImage.png", title: "Universal Calculator", url: "https://www.behance.net/gallery/224749961/Daily-UI-004" },
         ],
       },
       {
@@ -167,6 +169,7 @@ window.SITE_CONTENT = {
         program: "Information Design and Data Visualization",
         period: "July 2024 - July 2027",
         location: "Pune, Maharashtra",
+        current: true,
       },
       {
         institute: "Edit Institute, Pune",

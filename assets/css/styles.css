@@ -7,6 +7,7 @@
   --maroon-soft: rgba(109, 12, 21, 0.46);
   --ink: #000000;
   --ink-body: #101010;
+  --muted: #625d58;
   --paper: #f2efe9;
   --white: #ffffff;
 
@@ -204,6 +205,14 @@ a {
   line-height: 1.22;
 }
 
+.hero__label {
+  margin: 0 0 1rem;
+  color: var(--maroon);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
 .hero__greeting,
 .hero__name {
   display: block;
@@ -214,10 +223,19 @@ a {
 
 .hero__tagline {
   margin: 0;
-  max-width: 55ch;
-  font-size: clamp(1.15rem, 2.4vw, 2rem);
+  max-width: 45ch;
+  font-size: clamp(calc(1.15rem - 6pt), calc(2.4vw - 6pt), calc(2rem - 6pt));
   color: var(--ink);
   font-weight: 400;
+}
+
+.hero__subtitle {
+  margin: 1rem 0 0;
+  max-width: 42ch;
+  color: var(--maroon);
+  font-size: 1.15rem;
+  font-style: italic;
+  line-height: 1.6;
 }
 
 .hero__art {
@@ -290,6 +308,20 @@ a {
 .tag--accent:focus {
   background: rgba(255, 255, 255, 0.15);
   box-shadow: none;
+}
+
+.tag--action {
+  margin-top: 1.5rem;
+  background: var(--maroon);
+  color: var(--white);
+  border: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+.tag--action:hover,
+.tag--action:focus-visible {
+  background: var(--maroon-deep);
 }
 
 /* ==========================================================================
@@ -874,6 +906,9 @@ a {
     order: -1;
   }
   .hero__tagline {
+    margin-inline: auto;
+  }
+  .hero__subtitle {
     margin-inline: auto;
   }
   .header__inner {
