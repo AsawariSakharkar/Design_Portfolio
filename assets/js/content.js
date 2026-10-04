@@ -38,8 +38,8 @@ window.SITE_CONTENT = {
     greeting: "Hello~",
     name: "I am Asawari Sakharkar",
     tagline:
-      "Information designer with a background in UX Research, Data Visualization, and Front-end Development, working across research, design, and product.",
-    subtitle: "I turn ambiguous problems into evidence, and evidence into product decisions.",
+      "Information designer with a background in UX research, data visualization, and front-end development, working across research, design, and product development.",
+    subtitle: "I turn ambiguous problems into evidence, and evidence into design decisions.",
     // Tip: in Figma, select the whole locket group ("Group 32") and export it
     // as ONE transparent PNG for the cleanest result, then point to it here.
     image: "assets/images/Group 32.png",
@@ -48,7 +48,7 @@ window.SITE_CONTENT = {
 
   // ---- My Skills -------------------------------------------------------
   expertise: {
-    heading: "My Skills",
+    heading: "My Strengths",
     // accent:true renders the outlined pill style ("And an outfit planner").
     tags: [
       { label: "Data Driven Design" },
@@ -61,6 +61,12 @@ window.SITE_CONTENT = {
       { label: "UX Design" },
      // { label: "And an Outfit Planner", accent: true },
     ],
+    impact: [
+      { metric: "15+ User interviews", caption: "Converting interview insights into user segment and journey map" },
+      { metric: "30+ App screens", caption: "Original ideas, redesign, prototyping which are up and running" },
+      { metric: "20+ Website pages", caption: "Live project, client work and web-app design" },
+      { metric: "Cross-functional collaboration", caption: "Experienced working with diverse teams, stakeholders, developers and designers" },
+    ],
   },
 
   // ---- My Projects --------------------------------------------------------
@@ -71,24 +77,24 @@ window.SITE_CONTENT = {
       {
         title: "UX Case Studies",
         items: [
-          { image: "assets/images/projects/Arohi_tileImage.png", title: "Arohi: Disaster Management Interface", url: "https://www.behance.net/gallery/245227537/AROHI-Disaster-Management-Interface" },
-          { image: "assets/images/projects/suchalck_tileImage.png", title: "Suchalak: Better Navigation", url: "https://www.behance.net/gallery/245164655/Suchalak" },
-          { image: "assets/images/projects/mae_tileImage.png", title: "Mae: Virtual Mom", url: "https://www.behance.net/gallery/254510655/Mae-Virtual-mom-who-takes-care-of-your-welbeing" },
-          { image: "assets/images/projects/dandelion_tileImage.png", title: "Dandelion: To Break Your Overthinking", url: "https://www.behance.net/gallery/255660865/Dandelion-to-break-your-overthinking" },
+          { image: "assets/images/projects/Arohi_tileImage.png", title: "Arohi: Disaster Management Interface", description: "A case study exploring a clearer interface for disaster management.", tags: ["Disaster Response", "Information Architecture", "Scenario Mapping", "Ecosystem Design"], pdf: "assets/project-pdfs/Arohi.pdf", url: "https://www.behance.net/gallery/245227537/AROHI-Disaster-Management-Interface" },
+          { image: "assets/images/projects/suchalck_tileImage.png", title: "Suchalak: Better Navigation", description: "A navigation-focused case study exploring intuitive wayfinding.", tags: ["Navigation", "Data Driven Design","UI Design", "Psychology"],pdf: "assets/project-pdfs/Suchalak.pdf", url: "https://www.behance.net/gallery/245164655/Suchalak" },
+          { image: "assets/images/projects/mae_tileImage.png", title: "Mae: Virtual Mom", description: "A virtual companion concept centered on everyday wellbeing support.", tags: ["Digital Wellbeing", "UX Design","App UI", "User Research", "Data Analysis"], pdf: "assets/project-pdfs/Mae.pdf", url: "https://www.behance.net/gallery/254510655/Mae-Virtual-mom-who-takes-care-of-your-welbeing" },
+          { image: "assets/images/projects/dandelion_tileImage.png", title: "Dandelion: To Break Your Overthinking", description: "A digital concept for helping people recognize and work through overthinking.", tags: ["Quality of life", "Prototyping","Usability","Vibe coding"], pdf: "assets/project-pdfs/Dandelion.pdf", url: "https://www.behance.net/gallery/255660865/Dandelion-to-break-your-overthinking" },
         ],
       },
       {
         title: "UI Case Studies",
         items: [
-          { image: "assets/images/projects/sruti_tileImage.png", title: "Śruti: Corporate Learning Platform", url: "https://www.behance.net/gallery/246535769/Corporate-Learning-Platform" },
-          { image: "assets/images/projects/UniversalCalculator_tileImage.png", title: "Universal Calculator", url: "https://www.behance.net/gallery/224749961/Daily-UI-004" },
+          { image: "assets/images/projects/sruti_tileImage.png", title: "Śruti: Corporate Learning Platform", description: "A learning platform concept focused on access to corporate training.", tags: ["Corporate Learning", "UI/UX Design","Design Thinking"], pdf: "assets/project-pdfs/Sruti.pdf", url: "https://www.behance.net/gallery/246535769/Corporate-Learning-Platform" },
+          { image: "assets/images/projects/UniversalCalculator_tileImage.png", title: "Universal Calculator", description: "A flexible calculator interface for everyday calculations.", tags: ["Utility", "UI Design"], pdf: "assets/project-pdfs/UniversalCalculator.pdf", url: "https://www.behance.net/gallery/224749961/Daily-UI-004", openInNewTab: true },
         ],
       },
       {
         title: "Data Visualization",
         items: [
-          { image: "assets/images/projects/sagaram_tileImage.png", title: "Sagarm: Effect of Ocean Acidification", url: "https://www.behance.net/gallery/246071569/Effect-of-Ocean-Acidification" },
-          { image: "assets/images/projects/perfume_tileImage.png", title: "What fragrances do college students prefer?", url: "https://www.behance.net/gallery/252967607/What-fragrances-do-college-students-prefer" },
+          { image: "assets/images/projects/sagaram_tileImage.png", title: "Sagarm: Effect of Ocean Acidification", description: "A data visualization exploring the effects of ocean acidification.", tags: ["Data Visualization", "Ocean Acidification"], pdf: "assets/project-pdfs/Sagarm.pdf", url: "https://www.behance.net/gallery/246071569/Effect-of-Ocean-Acidification" },
+          { image: "assets/images/projects/perfume_tileImage.png", title: "What fragrances do college students prefer?", description: "A data-led look at fragrance preferences among college students.", tags: ["Student Preferences", "Data Visualization"], pdf: "assets/project-pdfs/Perfume.pdf", url: "https://www.behance.net/gallery/252967607/What-fragrances-do-college-students-prefer" },
         ],
       },
     ],

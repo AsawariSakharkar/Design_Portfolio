@@ -86,7 +86,34 @@
     setText("hero-label", hero.label);
     setText("hero-greeting", hero.greeting);
     setText("hero-name", hero.name);
-    setText("hero-tagline", hero.tagline);
+    var tagline = $("hero-tagline");
+    if (tagline) {
+      var highlights = ["UX research", "data visualization", "front-end development"];
+      var remaining = hero.tagline || "";
+      tagline.textContent = "";
+      while (remaining) {
+        var nextIndex = -1;
+        var nextHighlight = "";
+        highlights.forEach(function (phrase) {
+          var phraseIndex = remaining.indexOf(phrase);
+          if (phraseIndex !== -1 && (nextIndex === -1 || phraseIndex < nextIndex)) {
+            nextIndex = phraseIndex;
+            nextHighlight = phrase;
+          }
+        });
+        if (nextIndex === -1) {
+          tagline.appendChild(document.createTextNode(remaining));
+          break;
+        }
+        if (nextIndex > 0) {
+          tagline.appendChild(document.createTextNode(remaining.slice(0, nextIndex)));
+        }
+        var highlight = el("span", "hero__highlight");
+        highlight.textContent = nextHighlight;
+        tagline.appendChild(highlight);
+        remaining = remaining.slice(nextIndex + nextHighlight.length);
+      }
+    }
     setText("hero-subtitle", hero.subtitle);
     var img = $("hero-image");
     if (img) {
@@ -121,6 +148,20 @@
       }
       list.appendChild(li);
     });
+    var impactPanel = $("impact-panel");
+    if (impactPanel) {
+      impactPanel.innerHTML = "";
+      (e.impact || []).forEach(function (item) {
+        var stat = el("li", "impact-panel__item");
+        var metric = el("p", "impact-panel__metric");
+        metric.textContent = item.metric;
+        var caption = el("p", "impact-panel__caption");
+        caption.textContent = item.caption;
+        stat.appendChild(metric);
+        stat.appendChild(caption);
+        impactPanel.appendChild(stat);
+      });
+    }
     var skillsButton = $("skills-scroll-button");
     if (skillsButton) {
       skillsButton.addEventListener("click", function () {
@@ -139,8 +180,19 @@
     grid.innerHTML = "";
 
     function appendProjectCard(item) {
+      var entry = el("div", "project-entry");
       var card;
-      if (item.url) {
+      if (item.openInNewTab && item.url) {
+        card = el("a", "project-card");
+        card.href = item.url;
+        card.target = "_blank";
+        card.rel = "noopener noreferrer";
+      } else if (item.title) {
+        card = el("a", "project-card");
+        card.href = window.matchMedia("(max-width: 860px)").matches
+          ? encodePath(item.pdf || "assets/project-pdfs/Arohi.pdf")
+          : "project.html?project=" + encodeURIComponent(item.title);
+      } else if (item.url) {
         card = el("a", "project-card");
         card.href = item.url;
         card.target = "_blank";
@@ -162,7 +214,23 @@
         card.appendChild(overlay);
       }
 
-      grid.appendChild(card);
+      entry.appendChild(card);
+      if (item.description) {
+        var description = el("p", "project-card__description");
+        description.textContent = item.description;
+        entry.appendChild(description);
+      }
+      if (item.tags && item.tags.length) {
+        var tags = el("ul", "project-tags");
+        tags.setAttribute("aria-label", "Project tags");
+        item.tags.forEach(function (label) {
+          var tag = el("li", "project-tags__item");
+          tag.textContent = label;
+          tags.appendChild(tag);
+        });
+        entry.appendChild(tags);
+      }
+      grid.appendChild(entry);
     }
 
     var categories = p.categories || [];
