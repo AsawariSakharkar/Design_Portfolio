@@ -134,17 +134,6 @@ window.SITE_CONTENT = {
     // `current: true` gives the filled timeline dot (recent roles).
     items: [
       {
-        role: "UX Design Consultant",
-        org: "Saarogya",
-        duration: "Feb 2026 - July 2026",
-        // current: true,
-        description: [
-          "Support design and product decisions by aligning them with the organization's vision.",
-          "Contribute to the UX and Human-Centered Design (HCD) of Nitya Karma and 16 Points.",
-          "Lead the redesign of the company website to improve user experience and engagement.",
-        ],
-      },
-      {
         role: "UX Designer/Researcher Intern",
         org: "Cosmino",
         duration: "April 2026 - June 2026",
@@ -155,6 +144,17 @@ window.SITE_CONTENT = {
           "Translated research insight into 20+ redesigned website pages, improving information hierarchy and content discoverability based on evidence rather than assumption.",
           "Designed 30+ mobile app screens by translating research findings directly into interaction flows and feature recommendations that shaped product roadmap decisions.",
           "Built the Business Model Canvas and partnered with 3 cross-functional teams to connect research findings to business and marketing strategy",
+        ],
+      },
+      {
+        role: "UX Design Consultant",
+        org: "Saarogya",
+        duration: "Feb 2026 - July 2026",
+        // current: true,
+        description: [
+          "Support design and product decisions by aligning them with the organization's vision.",
+          "Contribute to the UX and Human-Centered Design (HCD) of Nitya Karma and 16 Points.",
+          "Lead the redesign of the company website to improve user experience and engagement.",
         ],
       },
       {
