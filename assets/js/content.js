@@ -187,7 +187,7 @@ window.SITE_CONTENT = {
     items: [
       {
         institute: "MIT Institute of Design, Pune",
-        degree: "Master's of Design (MDes)",
+        degree: "Master's  of Design (MDes)",
         program: "Information Design and Data Visualization",
         period: "July 2024 - July 2027",
         location: "Pune, Maharashtra",
