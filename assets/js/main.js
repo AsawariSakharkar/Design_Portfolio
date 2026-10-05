@@ -447,9 +447,22 @@
         li.appendChild(duration);
       }
       if (item.description) {
-        var desc = el("p", "timeline__desc");
-        desc.textContent = item.description;
-        li.appendChild(desc);
+        if (Array.isArray(item.description)) {
+          var descList = el("ul", "timeline__desc-list");
+          item.description.forEach(function (point) {
+            if (!point) return;
+            var descItem = el("li", "timeline__desc-item");
+            descItem.textContent = point;
+            descList.appendChild(descItem);
+          });
+          if (descList.children.length) {
+            li.appendChild(descList);
+          }
+        } else {
+          var desc = el("p", "timeline__desc");
+          desc.textContent = item.description;
+          li.appendChild(desc);
+        }
       }
       list.appendChild(li);
     });
@@ -467,14 +480,19 @@
       li.appendChild(
         el("span", "timeline__dot" + (item.current ? " timeline__dot--filled" : ""))
       );
-      var inst = el("h3", "timeline__role");
-      inst.textContent = item.institute || "";
-      li.appendChild(inst);
+      if (item.degree) {
+        var degree = el("p", "edu__degree");
+        degree.textContent = item.degree;
+        li.appendChild(degree);
+      }
       if (item.program) {
         var prog = el("p", "edu__program");
         prog.textContent = item.program;
         li.appendChild(prog);
       }
+      var inst = el("h3", "timeline__role edu__institute");
+      inst.textContent = item.institute || "";
+      li.appendChild(inst);
       var meta = el("p", "edu__meta");
       meta.innerHTML =
         [item.period, item.location]

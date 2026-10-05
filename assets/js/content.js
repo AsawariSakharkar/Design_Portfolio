@@ -138,30 +138,45 @@ window.SITE_CONTENT = {
         org: "Saarogya",
         duration: "Feb 2026 - July 2026",
         // current: true,
-        description:
-          "At Saarogya, I support design and product decisions by aligning them with the organization's vision. I contribute to the UX and Human-Centered Design (HCD) of Nitya Karma and 16 Points, while also leading the redesign of the company website to enhance user experience and engagement.",
+        description: [
+          "Support design and product decisions by aligning them with the organization's vision.",
+          "Contribute to the UX and Human-Centered Design (HCD) of Nitya Karma and 16 Points.",
+          "Lead the redesign of the company website to improve user experience and engagement.",
+        ],
       },
       {
-        role: "UX Designer/Researcher",
+        role: "UX Designer/Researcher Intern",
         org: "Cosmino",
         duration: "April 2026 - June 2026",
         // current: true,
-        description:
-          "Contributed to early-stage product development through user research, competitive analysis, user testing, go-to-market planning, marketing and outreach strategy, and brand development.",
+        description: [
+          "Conducted 15+ semi-structured user interviews to investigate product strong points and expectation for the product background.",
+          "Synthesized interview findings into 4 primary user segments and end-to-end journey maps, surfacing patterns across complex workflows for cross-functional stakeholders",
+          "Translated research insight into 20+ redesigned website pages, improving information hierarchy and content discoverability based on evidence rather than assumption.",
+          "Designed 30+ mobile app screens by translating research findings directly into interaction flows and feature recommendations that shaped product roadmap decisions.",
+          "Built the Business Model Canvas and partnered with 3 cross-functional teams to connect research findings to business and marketing strategy",
+        ],
       },
       {
-        role: "UI / UX Designer",
+        role: "UI / UX Designer Intern",
         org: "Diginovators",
         duration: "Mar 2024 - June 2024",
-        description:
-          "I collaborated with the project manager and senior designers to create web pages for a client. I participated in multiple stages of the design thinking process, from initial ideas to the final prototype.",
+        description: [
+          "Designed responsive web interfaces for 2 client projects, working directly with project managers and senior designers",
+          "Presented design concepts and research rationale during review sessions, incorporating stakeholder feedback across 4+ iterations",
+          "Created 15+ wireframes and high-fidelity prototypes throughout a structured design-thinking process",
+        ],
       },
       {
         role: "UI Developer",
         org: "Red Nucleus",
         duration: "May 2022 - April 2024",
-        description:
-          "I contributed to the development and improvement of e-learning modules for pharmaceutical companies. I worked with a team of developers to implement design specifications and write code.",
+        description: [
+          "Built and maintained 25+ e-learning modules for global pharmaceutical clients, working within strict compliance, accessibility, and multi-market localization constraints",
+          "Performed systematic QA across desktop, mobile, and tablet devices, identifying and resolving 100+ usability and responsiveness issues",
+          "Collaborated daily with designers, developers, and QA specialists, translating design intent into production-ready outcomes",
+          "Contributed to design decisions on typography, spacing, color, and accessibility standards to protect consistency at scale",
+        ],
       },
     ],
   },
@@ -172,6 +187,7 @@ window.SITE_CONTENT = {
     items: [
       {
         institute: "MIT Institute of Design, Pune",
+        degree: "Master's of Design (MDes)",
         program: "Information Design and Data Visualization",
         period: "July 2024 - July 2027",
         location: "Pune, Maharashtra",
@@ -179,13 +195,15 @@ window.SITE_CONTENT = {
       },
       {
         institute: "Edit Institute, Pune",
-        program: "Diploma in UI/UX Designing",
+        degree: "Diploma of Designing",
+        program: "UI/UX Designing",
         period: "July 2023 - Dec 2023",
         location: "Pune, Maharashtra",
       },
       {
         institute: "Vishwakarma Institute of Technology, Pune",
-        program: "BTech Electronics Engineering",
+        degree: "Bachelor's of Technology (BTech)",
+        program: "Electronics Engineering",
         period: "Aug 2018 - Aug 2022",
         location: "Pune, Maharashtra",
       },

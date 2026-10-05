@@ -961,11 +961,47 @@ a {
   color: var(--ink-body);
 }
 
+.timeline__desc-list {
+  margin: 0.6rem 0 0;
+  padding-left: 1.5rem;
+  max-width: 60ch;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  color: var(--ink-body);
+  list-style: disc;
+}
+
+.timeline__desc-item {
+  margin: 0.3rem 0;
+  list-style: disc;
+}
+
+.timeline__desc-item::marker {
+  color: var(--maroon);
+}
+
+.edu__institute {
+  font-family: var(--font-meta);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink-body);
+  letter-spacing: 0.02em;
+}
+
+.edu__degree {
+  font-family: var(--font-meta) !important;
+  font-size: clamp(1.15rem, 2vw, 1.55rem) !important;
+  font-weight: 600 !important;
+  color: var(--maroon) !important;
+  margin: 0 0 0.25rem;
+  letter-spacing: -0.01em;
+}
+
 /* Education variant uses the Amiko meta font */
 .edu__program {
-  font-family: var(--font-meta);
-  font-size: 1.2rem;
-  color: var(--ink-body);
+  font-family: var(--font-meta) !important;
+  font-size: 1.2rem !important;
+  color: var(--ink-body) !important;
   margin: 0 0 0.4rem;
 }
 
