@@ -93,8 +93,8 @@ window.SITE_CONTENT = {
       {
         title: "Data Visualization",
         items: [
-          { image: "assets/images/projects/sagaram_tileImage.png", title: "Sagarm: Effect of Ocean Acidification", description: "A data visualization exploring the effects of ocean acidification.", tags: ["Data Visualization", "Ocean Acidification"], pdf: "assets/project-pdfs/Sagarm.pdf", url: "https://www.behance.net/gallery/246071569/Effect-of-Ocean-Acidification" },
           { image: "assets/images/projects/perfume_tileImage.png", title: "What fragrances do college students prefer?", description: "A data-led look at fragrance preferences among college students.", tags: ["Student Preferences", "Data Visualization"], pdf: "assets/project-pdfs/Perfume.pdf", url: "https://www.behance.net/gallery/252967607/What-fragrances-do-college-students-prefer" },
+          { image: "assets/images/projects/sagaram_tileImage.png", title: "Sagarm: Effect of Ocean Acidification", description: "A data visualization exploring the effects of ocean acidification.", tags: ["Data Visualization", "Ocean Acidification"], pdf: "assets/project-pdfs/Sagarm.pdf", url: "https://www.behance.net/gallery/246071569/Effect-of-Ocean-Acidification" },
         ],
       },
     ],
