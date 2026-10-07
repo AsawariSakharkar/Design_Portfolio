@@ -87,7 +87,7 @@ window.SITE_CONTENT = {
         title: "UI Case Studies",
         items: [
           { image: "assets/images/projects/sruti_tileImage.png", title: "Śruti: Corporate Learning Platform", description: "A learning platform concept focused on access to corporate training.", tags: ["Corporate Learning", "UI/UX Design","Design Thinking"], pdf: "assets/project-pdfs/Sruti.pdf", url: "https://www.behance.net/gallery/246535769/Corporate-Learning-Platform" },
-          { image: "assets/images/projects/UniversalCalculator_tileImage.png", title: "Universal Calculator", description: "A flexible calculator interface for everyday calculations.", tags: ["Utility", "UI Design"], pdf: "assets/project-pdfs/UniversalCalculator.pdf", url: "https://www.behance.net/gallery/224749961/Daily-UI-004", openInNewTab: true },
+          { image: "assets/images/projects/UniversalCalculator_tileImage.png", title: "Universal Calculator", description: "A flexible calculator interface for everyday calculations.", tags: ["Utility", "UI Design"], pdf: "assets/project-pdfs/UniversalCalculator.pdf", url: "https://www.behance.net/gallery/224749961/Daily-UI-004" },
         ],
       },
       {

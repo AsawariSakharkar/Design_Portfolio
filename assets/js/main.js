@@ -182,7 +182,7 @@
     function appendProjectCard(item) {
       var entry = el("div", "project-entry");
       var card;
-      if (item.openInNewTab && item.url) {
+      if (item.url) {
         card = el("a", "project-card");
         card.href = item.url;
         card.target = "_blank";
@@ -192,11 +192,6 @@
         card.href = window.matchMedia("(max-width: 860px)").matches
           ? encodePath(item.pdf || "assets/project-pdfs/Arohi.pdf")
           : "project.html?project=" + encodeURIComponent(item.title);
-      } else if (item.url) {
-        card = el("a", "project-card");
-        card.href = item.url;
-        card.target = "_blank";
-        card.rel = "noopener noreferrer";
       } else {
         card = el("div", "project-card");
       }
