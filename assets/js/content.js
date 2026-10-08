@@ -15,15 +15,15 @@ window.SITE_CONTENT = {
   meta: {
     title: "Asawari Sakharkar — Information Designer & UX Researcher",
     description:
-      "Portfolio of Asawari Sakharkar — Information Designer, UX Researcher, and problem solver.",
+      "Portfolio of Asawari Sakharkar — Information Designer, UX Designer and Product Designer.",
     favicon: "assets/favicononinini.jpeg",
   },
 
   // ---- Header -------------------------------------------------------------
   header: {
     resumeLabel: "Resume",
-    resumeFile: "assets/resume/Asawari_Sakharkar_Resume.pdf",
-    findMeText: "Find me on",
+    resumeFile: "assets/resume.pdf",
+    findMeText: "You can find me on",
     // `icon` must match a key in assets/js/icons.js. Leave url "" to hide.
     socials: [
       { icon: "medium", label: "Medium", url: "https://medium.com/@asawarisakharkar2000" },
@@ -34,30 +34,28 @@ window.SITE_CONTENT = {
 
   // ---- Hero ---------------------------------------------------------------
   hero: {
-    label: "INFORMATION DESIGNER, UX RESEARCHER  &  DESIGN WRITER",
     name: "Asawari Sakharkar",
     tagline:
       "Information designer with a background in UX research, data visualization, and front-end development, working across research, design, and product development.",
     subtitle: "I turn ambiguous problems into evidence, and evidence into design decisions.",
-    // Tip: in Figma, select the whole locket group ("Group 32") and export it
-    // as ONE transparent PNG for the cleanest result, then point to it here.
     image: "assets/images/Group 32.png",
-    imageAlt: "An open locket showing two photos of Asawari",
+    imageAlt: "Two portraits of Asawari inside an open locket",
   },
 
   // ---- My Skills -------------------------------------------------------
   expertise: {
-    heading: "My Strengths",
+    heading: "My Skills",
+    groups: ["Research", "Design", "Data & Visualization", "Prototyping & Tools"],
     // accent:true renders the outlined pill style ("And an outfit planner").
     tags: [
-      { label: "Data Driven Design" },
-      { label: "Design Thinking" },
-      { label: "Design Strategy" },
-      { label: "User Research" },
-      { label: "UX Writing" },
-      { label: "Psychology" },
-      { label: "Accessibility" },
-      { label: "UX Design" },
+      { label: "Data Driven Design", group: "Data & Visualization" },
+      { label: "Design Thinking", group: "Design" },
+      { label: "Design Strategy", group: "Design" },
+      { label: "User Research", group: "Research" },
+      { label: "UX Writing", group: "Design" },
+      { label: "Psychology", group: "Research" },
+      { label: "Accessibility", group: "Research" },
+      { label: "UX Design", group: "Design" },
      // { label: "And an Outfit Planner", accent: true },
     ],
     impact: [
@@ -108,19 +106,25 @@ window.SITE_CONTENT = {
     items: [
       {
         title: "Our Different Senses",
-        // excerpt: "When we understand an object through a different lens.",
+        excerpt: "When we understand an object through a different lens.",
+        date: "[Add publication date]",
+        // TODO: replace the profile URL with this article's direct URL.
         url: "https://medium.com/@asawarisakharkar2000",
         image: "assets/images/medium_imges/e257b2a72d0a35f8c6dfb072447f3f22.jpg",
       },
       {
         title: "The diffrences in design POV and strategy POV",
-        // excerpt: "When your design gets rejected because it has no selling point.",
+        excerpt: "When your design gets rejected because it has no selling point.",
+        date: "[Add publication date]",
+        // TODO: replace the profile URL with this article's direct URL.
         url: "https://medium.com/@asawarisakharkar2000",
         image: "assets/images/medium_imges/0_aGJIN3s4E_CcSgUX.webp",
       },
       {
         title: "10 Practices that helped me in my UX Summer Internship this year",
-        // excerpt: "The practices I picked up while working as a UX Design Intern at Cosmino.",
+        excerpt: "The practices I picked up while working as a UX Design Intern at Cosmino.",
+        date: "[Add publication date]",
+        // TODO: replace the profile URL with this article's direct URL.
         url: "https://medium.com/@asawarisakharkar2000",
         image: "assets/images/medium_imges/c893f0c327a7ac9697d56e08f8285203.jpg",
       },
@@ -188,6 +192,7 @@ window.SITE_CONTENT = {
         institute: "MIT Institute of Design, Pune",
         degree: "Master's of Design (MDes)",
         program: "Information Design and Data Visualization",
+        coursework: ["Information Design", "Data Visualization", "Design Research", "Design Strategy"],
         period: "July 2024 - July 2027",
         location: "Pune, Maharashtra",
         current: true,
@@ -196,6 +201,7 @@ window.SITE_CONTENT = {
         institute: "Edit Institute, Pune",
         degree: "Diploma of Designing",
         program: "UI/UX Designing",
+        coursework: ["Fintech Design", "Design Thinking", "User Experience Design","User Interface Design"],
         period: "July 2023 - Dec 2023",
         location: "Pune, Maharashtra",
       },
@@ -203,6 +209,7 @@ window.SITE_CONTENT = {
         institute: "Vishwakarma Institute of Technology, Pune",
         degree: "Bachelor's of Technology (BTech)",
         program: "Electronics Engineering",
+        coursework: ["Machine Learning", "Neural Networks", "Internet of Things"],
         period: "Aug 2018 - Aug 2022",
         location: "Pune, Maharashtra",
       },
@@ -353,7 +360,7 @@ window.SITE_CONTENT = {
 
   // ---- Let's Connect (footer) --------------------------------------------
   connect: {
-    heading: "Let's Connect",
+    heading: "Hiring for UX or information design? Let's talk.",
     email: "asawarisakharkar2000@gmail.com",
     // Right-hand quick links with a diagonal arrow, as in the design.
     links: [

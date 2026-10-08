@@ -7,39 +7,63 @@
     <title>Asawari Sakharkar — Portfolio</title>
     <meta
       name="description"
-      content="Portfolio of Asawari Sakharkar — Information Designer, UX Researcher, problem solver and fashion lover."
+      content="Portfolio of Asawari Sakharkar — Information Designer, UX Designer and Product Designer."
     />
+    <meta property="og:title" content="Asawari Sakharkar — Design Portfolio" />
+    <meta
+      property="og:description"
+      content="Portfolio of Asawari Sakharkar — Information Designer, UX Designer and Product Designer."
+    />
+    <!-- TODO: replace with an absolute URL to a portfolio preview image. -->
+    <meta property="og:image" content="https://[YOUR-DOMAIN]/assets/images/og-image.jpg" />
+    <meta property="og:type" content="website" />
     <link rel="icon" type="image/jpeg" href="assets/favicononinini.jpeg" />
 
-    <!-- Fonts matched to the Figma file: Instrument Sans + Amiko -->
+    <!-- Two font families: Fraunces for headings and DM Sans for body text. -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Amiko:wght@400;600;700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap"
       rel="stylesheet"
     />
 
     <link rel="stylesheet" href="assets/css/styles.css" />
   </head>
 
-  <body>
+  <body id="top">
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <!-- ===================== HEADER ===================== -->
     <header class="site-header" id="site-header">
       <div class="container header__inner">
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-label="Open navigation"
+          aria-controls="primary-navigation"
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
         <nav class="primary-nav" aria-label="Main navigation">
-          <ul class="primary-nav__list">
+          <ul class="primary-nav__list" id="primary-navigation">
             <li><a class="primary-nav__link" href="#projects">Work</a></li>
+            <li><a class="primary-nav__link" href="#expertise">My Skills</a></li>
             <li><a class="primary-nav__link" href="#experience">Experience</a></li>
-            <li><a class="primary-nav__link" href="#fashion">About Me</a></li>
+            <li><a class="primary-nav__link" href="#education">Education</a></li>
+            <li><a class="primary-nav__link" href="#about-me">About Me</a></li>
             <li>
+              <!-- TODO: place the final resume PDF at assets/resume.pdf or update this href. -->
               <a
                 class="primary-nav__link primary-nav__link--resume"
                 id="resume-btn"
-                href="#"
+                href="assets/resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <span id="resume-label">Resume</span>
+                <span class="visually-hidden">(opens in a new tab)</span>
                 <svg
                   class="primary-nav__external-icon"
                   viewBox="0 0 24 24"
@@ -60,57 +84,83 @@
         </nav>
 
         <nav class="socials" aria-label="Social links">
+          <span class="socials__statement">Information Designer · UX Designer · Product Designer</span>
           <span class="socials__label" id="find-me-text">You can find me on</span>
           <ul class="socials__list" id="socials-list"></ul>
         </nav>
       </div>
     </header>
 
-    <main>
+    <main id="main-content" tabindex="-1">
       <!-- ===================== HERO ===================== -->
       <section class="hero" id="hero">
         <div class="container hero__inner">
           <div class="hero__text">
+            <p class="section-eyebrow hero__eyebrow">Designing for people, clarity, and better decisions</p>
             <h1 class="hero__title">
               <span class="hero__greeting" id="hero-greeting"></span>
               <span class="hero__name" id="hero-name"></span>
             </h1>
             <p class="hero__tagline" id="hero-tagline"></p>
             <p class="hero__subtitle" id="hero-subtitle"></p>
+            <ul class="hero__identity" aria-label="Professional identity">
+              <li>Information Designer</li>
+              <li>UX &amp; Product Designer</li>
+              <li>M.Des. Information Design &amp; Data Visualization</li>
+            </ul>
+            <p class="hero__positioning">[ONE SENTENCE: what I do and who it's for]</p>
+            <div class="hero__actions">
+              <a class="button button--primary" href="#projects">See the work</a>
+            </div>
           </div>
           <figure class="hero__art">
-            <img id="hero-image" src="" alt="" width="476" height="332" />
+            <img id="hero-image" src="assets/images/Group 32.png" alt="An open antique locket with two portraits of Asawari, one on each side" width="509" height="376" loading="eager" fetchpriority="high" />
           </figure>
-          <p class="hero__label" id="hero-label"></p>
+        </div>
+      </section>
+
+      <!-- TODO: replace every metric placeholder with verified, current numbers only. -->
+      <section class="metrics-strip" aria-label="Portfolio metrics">
+        <div class="container metrics-strip__grid">
+          <div class="metric"><strong>[NUMBER]</strong><span>[LABEL]</span></div>
+          <div class="metric"><strong>[NUMBER]</strong><span>[LABEL]</span></div>
+          <div class="metric"><strong>[NUMBER]</strong><span>[LABEL]</span></div>
+          <div class="metric"><strong>[NUMBER]</strong><span>[LABEL]</span></div>
+        </div>
+      </section>
+
+      <!-- ===================== PROJECTS ===================== -->
+      <section class="projects" id="projects">
+        <div class="container">
+          <p class="section-eyebrow">01 / Work</p>
+          <h2 class="section-title" id="projects-heading">My Projects</h2>
+          <p class="section-subtitle">Selected work across research, product design, and data visualization.</p>
+          <div class="project-grid" id="project-grid"></div>
         </div>
       </section>
 
       <!-- ===================== EXPERTISE ===================== -->
       <section class="band-maroon expertise" id="expertise">
         <div class="container">
+          <p class="section-eyebrow">02 / Capabilities</p>
           <h2 class="section-title section-title--light" id="expertise-heading">
             My Skills
           </h2>
+          <p class="section-subtitle">A toolkit for making complex problems easier to understand and use.</p>
           <ul class="tags" id="tags-list"></ul>
         </div>
         <ul class="impact-panel" id="impact-panel" aria-label="Selected project outcomes"></ul>
       </section>
 
-      <!-- ===================== PROJECTS ===================== -->
-      <section class="projects" id="projects">
-        <div class="container">
-          <h2 class="section-title" id="projects-heading">My Projects</h2>
-          <div class="project-grid" id="project-grid"></div>
-        </div>
-      </section>
-
       <!-- ===================== MEDIUM ARTICLES ===================== -->
       <section class="band-maroon articles" id="articles">
         <div class="container">
+          <p class="section-eyebrow">03 / Writing</p>
           <h2 class="section-title section-title--light" id="articles-heading">
             Latest from Medium
           </h2>
           <p class="articles__sub" id="articles-sub"></p>
+          <!-- TODO: add publication dates when confirmed for the static Medium articles. -->
           <div class="article-grid" id="articles-list"></div>
         </div>
       </section>
@@ -118,7 +168,9 @@
       <!-- ===================== EXPERIENCE ===================== -->
       <section class="timeline-section" id="experience">
         <div class="container">
+          <p class="section-eyebrow">04 / Experience</p>
           <h2 class="section-title" id="experience-heading">My Experience</h2>
+          <p class="section-subtitle">Work across UX research, product design, and interface development.</p>
           <ol class="timeline" id="experience-list"></ol>
         </div>
       </section>
@@ -127,15 +179,19 @@
       <!-- ===================== EDUCATION ===================== -->
       <section class="timeline-section" id="education">
         <div class="container">
+          <p class="section-eyebrow">05 / Education</p>
           <h2 class="section-title" id="education-heading">My Education</h2>
+          <p class="section-subtitle">A foundation in design, information, and technology.</p>
           <ol class="timeline timeline--edu" id="education-list"></ol>
         </div>
       </section>
 
       <!-- ===================== FASHION ===================== -->
-      <section class="band-maroon fashion" id="fashion">
+      <section class="band-maroon fashion" id="about-me">
         <div class="container">
+          <p class="section-eyebrow">06 / The person behind the work</p>
           <h2 class="fashion__heading" id="fashion-heading"></h2>
+          <p class="section-subtitle">Optional for hiring, useful for how I see things.</p>
           <p class="fashion__greeting" id="fashion-greeting"></p>
           <div class="fashion__about-layout">
             <div class="fashion__about" id="fashion-about"></div>
@@ -152,6 +208,11 @@
         <div class="container">
           <h3 class="fashion__sub" id="fashion-sub"></h3>
           <p class="fashion__outfit-intro" id="fashion-outfit-intro"></p>
+          <div class="currently-strip">
+            <span>Currently reading: [BOOK]</span>
+            <span>Currently wearing: [OUTFIT]</span>
+            <span>Currently eating: [DISH]</span>
+          </div>
         </div>
         <div class="outfit-scroller" id="outfit-scroller" tabindex="0"
              aria-label="Outfit photo gallery, scroll horizontally"></div>
@@ -162,13 +223,15 @@
     <footer class="connect" id="connect">
       <div class="container connect__inner">
         <div class="connect__left">
-          <h2 class="section-title" id="connect-heading">Let's Connect</h2>
-          <a class="connect__email" id="connect-email" href="#"></a>
+          <p class="section-eyebrow">07 / Get in touch</p>
+          <h2 class="section-title" id="connect-heading">Hiring for UX or information design? Let's talk.</h2>
+          <a class="connect__email" id="connect-email" href="mailto:asawarisakharkar2000@gmail.com" aria-label="Email Asawari">Email Asawari</a>
         </div>
         <ul class="connect__links" id="connect-links"></ul>
       </div>
       <div class="container">
         <p class="colophon" id="footer-text"></p>
+        <a class="back-to-top" href="#top">Back to top ↑</a>
       </div>
     </footer>
 

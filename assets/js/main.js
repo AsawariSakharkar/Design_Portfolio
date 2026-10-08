@@ -87,7 +87,6 @@
   // ---- Hero -------------------------------------------------------------
   function renderHero() {
     var hero = C.hero || {};
-    setText("hero-label", hero.label);
     setText("hero-greeting", hero.greeting);
     setText("hero-name", hero.name);
     var tagline = $("hero-tagline");
@@ -98,7 +97,7 @@
     var img = $("hero-image");
     if (img) {
       img.src = encodePath(hero.image);
-      img.alt = hero.imageAlt || "";
+      img.alt = hero.imageAlt || "Portfolio portrait";
     }
   }
 
@@ -109,14 +108,36 @@
     var list = $("tags-list");
     if (!list) return;
     list.innerHTML = "";
+    var groups = Object.create(null);
+    (e.groups || []).forEach(function (groupName) {
+      var group = el("li", "tag-group");
+      var heading = el("h3", "tag-group__title");
+      heading.textContent = groupName;
+      var groupList = el("ul", "tag-group__list");
+      group.appendChild(heading);
+      group.appendChild(groupList);
+      list.appendChild(group);
+      groups[groupName] = groupList;
+    });
     (e.tags || []).forEach(function (t) {
+      var groupName = t.group || "Skills";
+      if (!groups[groupName]) {
+        var group = el("li", "tag-group");
+        var heading = el("h3", "tag-group__title");
+        heading.textContent = groupName;
+        var groupList = el("ul", "tag-group__list");
+        group.appendChild(heading);
+        group.appendChild(groupList);
+        list.appendChild(group);
+        groups[groupName] = groupList;
+      }
       var li = el("li", "tag" + (t.accent ? " tag--accent" : ""));
       li.textContent = t.label;
       if (t.label === "And an Outfit Planner" || t.accent) {
         li.tabIndex = 0;
         li.setAttribute("role", "button");
         li.addEventListener("click", function () {
-          var target = $("fashion");
+          var target = $("about-me");
           if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
         });
         li.addEventListener("keypress", function (event) {
@@ -126,7 +147,14 @@
           }
         });
       }
-      list.appendChild(li);
+      groups[groupName].appendChild(li);
+    });
+    Object.keys(groups).forEach(function (groupName) {
+      if (groups[groupName].children.length) return;
+      var placeholder = el("li", "tag tag--placeholder");
+      placeholder.textContent =
+        groupName === "Prototyping & Tools" ? "[Add tools here]" : "[Add skills here]";
+      groups[groupName].appendChild(placeholder);
     });
     var impactPanel = $("impact-panel");
     if (impactPanel) {
@@ -154,6 +182,9 @@
 
     function appendProjectCard(item) {
       var entry = el("div", "project-entry");
+      var status = el("span", "project-status");
+      status.textContent = item.status || "Case study";
+      entry.appendChild(status);
       var card;
       if (item.url) {
         card = el("a", "project-card");
@@ -172,6 +203,8 @@
       img.src = encodePath(item.image);
       img.alt = item.title || "Project";
       img.loading = "lazy";
+      img.width = 800;
+      img.height = 600;
       card.appendChild(img);
 
       if (item.title) {
@@ -191,12 +224,42 @@
       if (item.tags && item.tags.length) {
         var tags = el("ul", "project-tags");
         tags.setAttribute("aria-label", "Project tags");
-        item.tags.forEach(function (label) {
+        item.tags.slice(0, 3).forEach(function (label) {
           var tag = el("li", "project-tags__item");
           tag.textContent = label;
           tags.appendChild(tag);
         });
         entry.appendChild(tags);
+      }
+      var role = el("p", "project-role");
+      role.textContent = "Role: " + (item.role || "[Add your role]");
+      entry.appendChild(role);
+
+      var steps = el("ol", "project-steps");
+      [
+        ["Problem", item.problem],
+        ["Research", item.research],
+        ["Solution", item.solution],
+        ["Impact", item.impact],
+      ].forEach(function (step) {
+        var stepItem = el("li", "project-steps__item");
+        var stepLabel = el("strong");
+        stepLabel.textContent = step[0];
+        var stepText = el("span");
+        stepText.textContent = step[1] || "[" + step[0] + " summary]";
+        stepItem.appendChild(stepLabel);
+        stepItem.appendChild(stepText);
+        steps.appendChild(stepItem);
+      });
+      entry.appendChild(steps);
+
+      if (item.url) {
+        var caseStudyLink = el("a", "project-case-study");
+        caseStudyLink.href = item.url;
+        caseStudyLink.target = "_blank";
+        caseStudyLink.rel = "noopener noreferrer";
+        caseStudyLink.textContent = "Read case study";
+        entry.appendChild(caseStudyLink);
       }
       grid.appendChild(entry);
     }
@@ -223,7 +286,8 @@
 
     if (p.seeMore && p.seeMore.label) {
       var more = el("a", "project-more-button");
-      more.href = p.seeMore.url || "#";
+      if (!p.seeMore.url) return;
+      more.href = p.seeMore.url;
       if (p.seeMore.url) {
         more.target = "_blank";
         more.rel = "noopener noreferrer";
@@ -259,6 +323,8 @@
         img.src = encodePath(item.image);
         img.alt = item.title || "Medium article image";
         img.loading = "lazy";
+        img.width = 800;
+        img.height = 450;
         card.appendChild(img);
       }
       var header = el("div", "article-card__header");
@@ -271,11 +337,29 @@
         header.appendChild(arrow);
       }
       card.appendChild(header);
+      if (item.date) {
+        var date = el("time", "article-card__meta");
+        var parsedDate = new Date(item.date);
+        if (!Number.isNaN(parsedDate.getTime())) {
+          date.dateTime = parsedDate.toISOString();
+          date.textContent = parsedDate.toLocaleDateString(undefined, {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+          });
+        } else {
+          date.textContent = item.date;
+        }
+        card.appendChild(date);
+      }
       if (item.excerpt) {
         var excerpt = el("p", "article-card__excerpt");
         excerpt.textContent = item.excerpt;
         card.appendChild(excerpt);
       }
+      var readLink = el("span", "article-card__read-link");
+      readLink.textContent = "Read on Medium";
+      card.appendChild(readLink);
       list.appendChild(card);
     });
   }
@@ -371,6 +455,9 @@
         return {
           title: title,
           url: link,
+          date: item.querySelector("pubDate")
+            ? item.querySelector("pubDate").textContent.trim()
+            : "",
           excerpt: excerpt,
         };
       });
@@ -402,39 +489,49 @@
     list.innerHTML = "";
     (ex.items || []).forEach(function (item) {
       var li = el("li", "timeline__item");
+      var date = el("time", "timeline__date");
+      date.textContent = item.duration || "[Add dates]";
+      li.appendChild(date);
+      var details = el("div", "timeline__content");
       var marker = el("span", "timeline__marker");
       var dot = el("span", "timeline__dot" + (item.current ? " timeline__dot--filled" : ""));
       marker.setAttribute("aria-hidden", "true");
       marker.appendChild(dot);
+      details.appendChild(marker);
       var role = el("h3", "timeline__role");
       role.innerHTML =
         escapeHtml(item.role || "") +
         (item.org ? ' <span class="at">@' + escapeHtml(item.org) + "</span>" : "");
-      li.appendChild(marker);
-      li.appendChild(role);
-      if (item.duration) {
-        var duration = el("p", "timeline__duration");
-        duration.textContent = escapeHtml(item.duration);
-        li.appendChild(duration);
+      details.appendChild(role);
+      var orgLocation = el("p", "timeline__organization");
+      var initials = el("span", "timeline__initial");
+      initials.setAttribute("aria-hidden", "true");
+      initials.textContent = (item.org || "?").trim().charAt(0).toUpperCase();
+      var organizationName = el("span");
+      organizationName.textContent = item.org || "[Organization]";
+      var location = el("span");
+      location.textContent = item.location || "[Location]";
+      orgLocation.appendChild(initials);
+      orgLocation.appendChild(organizationName);
+      orgLocation.appendChild(location);
+      details.appendChild(orgLocation);
+      var descriptions = Array.isArray(item.description)
+        ? item.description.filter(Boolean)
+        : item.description
+          ? [item.description]
+          : [];
+      var bulletList = el("ul", "timeline__desc-list");
+      var bucketSize = Math.ceil(descriptions.length / 3);
+      for (var i = 0; i < 3; i++) {
+        var bullet = el("li", "timeline__desc-item");
+        var bulletText = descriptions
+          .slice(i * bucketSize, (i + 1) * bucketSize)
+          .join(" ");
+        bullet.textContent = bulletText || "[Action] resulting in [measurable outcome]";
+        bulletList.appendChild(bullet);
       }
-      if (item.description) {
-        if (Array.isArray(item.description)) {
-          var descList = el("ul", "timeline__desc-list");
-          item.description.forEach(function (point) {
-            if (!point) return;
-            var descItem = el("li", "timeline__desc-item");
-            descItem.textContent = point;
-            descList.appendChild(descItem);
-          });
-          if (descList.children.length) {
-            li.appendChild(descList);
-          }
-        } else {
-          var desc = el("p", "timeline__desc");
-          desc.textContent = item.description;
-          li.appendChild(desc);
-        }
-      }
+      details.appendChild(bulletList);
+      li.appendChild(details);
       list.appendChild(li);
     });
   }
@@ -451,26 +548,34 @@
       li.appendChild(
         el("span", "timeline__dot" + (item.current ? " timeline__dot--filled" : ""))
       );
+      var headingRow = el("div", "edu__heading-row");
       if (item.degree) {
         var degree = el("p", "edu__degree");
         degree.textContent = item.degree;
-        li.appendChild(degree);
+        headingRow.appendChild(degree);
       }
+      if (item.institute) {
+        var institute = el("h3", "timeline__role edu__institute");
+        institute.textContent = item.institute;
+        headingRow.appendChild(institute);
+      }
+      var meta = el("p", "edu__meta");
+      meta.textContent = [item.period, item.location].filter(Boolean).join(" · ");
+      if (meta.textContent) headingRow.appendChild(meta);
+      li.appendChild(headingRow);
+      var coursework = el("ul", "education-coursework");
+      coursework.setAttribute("aria-label", "Selected coursework");
+      (item.coursework || ["[Add selected coursework]"]).forEach(function (course) {
+        var chip = el("li", "project-tags__item");
+        chip.textContent = course;
+        coursework.appendChild(chip);
+      });
+      li.appendChild(coursework);
       if (item.program) {
         var prog = el("p", "edu__program");
         prog.textContent = item.program;
         li.appendChild(prog);
       }
-      var inst = el("h3", "timeline__role edu__institute");
-      inst.textContent = item.institute || "";
-      li.appendChild(inst);
-      var meta = el("p", "edu__meta");
-      meta.innerHTML =
-        [item.period, item.location]
-          .filter(Boolean)
-          .map(escapeHtml)
-          .join("<br>");
-      li.appendChild(meta);
       list.appendChild(li);
     });
     setupEducationTimeline(list);
@@ -527,6 +632,8 @@
     img.src = encodePath(photo.image);
     img.alt = photo.alt || "Outfit";
     img.loading = "lazy";
+    img.width = 280;
+    img.height = 410;
     img.draggable = false;
     fig.appendChild(img);
     return fig;
@@ -539,6 +646,8 @@
       img.src = encodePath(book.image);
       img.alt = book.title || "Book cover";
       img.loading = "lazy";
+      img.width = 180;
+      img.height = 260;
       img.draggable = false;
       figure.appendChild(img);
     } else {
@@ -585,6 +694,8 @@
         aboutImage.src = encodePath(f.aboutImage);
         aboutImage.alt = f.aboutImageAlt || "About me";
         aboutImage.loading = "lazy";
+        aboutImage.width = 968;
+        aboutImage.height = 1082;
         aboutImage.addEventListener("error", function () {
           aboutImageHolder.innerHTML = "";
           var imagePlaceholder = el("span", "fashion__image-placeholder");
@@ -676,7 +787,8 @@
     originalCount,
     direction,
     cardSelector,
-    manualClass
+    manualClass,
+    manualOnly
   ) {
     if (!track.children.length) return;
 
@@ -685,7 +797,7 @@
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     // Reduced-motion / no-JS-animation fallback: plain manual scroll.
-    if (reduceMotion) {
+    if (reduceMotion || manualOnly) {
       scroller.classList.add(manualClass);
       return;
     }
@@ -772,7 +884,10 @@
   // ---- Connect ----------------------------------------------------------
   function renderConnect() {
     var c = C.connect || {};
-    setText("connect-heading", c.heading || "Let's Connect");
+    setText(
+      "connect-heading",
+      c.heading || "Hiring for UX or information design? Let's talk."
+    );
     var email = $("connect-email");
     if (email && c.email) {
       email.textContent = c.email;
@@ -781,15 +896,37 @@
     var list = $("connect-links");
     if (!list) return;
     list.innerHTML = "";
-    (c.links || []).forEach(function (link) {
+    var links = (c.links || []).slice();
+    var resumeLink = {
+      label: "Resume",
+      url: (C.header && C.header.resumeFile) || "assets/resume.pdf",
+    };
+    var linkedinIndex = links.findIndex(function (link) {
+      return link.label === "LinkedIn";
+    });
+    links.splice(linkedinIndex < 0 ? 0 : linkedinIndex + 1, 0, resumeLink);
+    var linkOrder = { LinkedIn: 0, Resume: 1, "Medium Articles": 2 };
+    links.sort(function (a, b) {
+      var aOrder = linkOrder[a.label] === undefined ? 3 : linkOrder[a.label];
+      var bOrder = linkOrder[b.label] === undefined ? 3 : linkOrder[b.label];
+      return aOrder - bOrder;
+    });
+    links.forEach(function (link) {
       if (!link.url) return;
       var li = el("li");
       var a = el("a", "connect__link");
       a.href = link.url;
-      a.target = "_blank";
-      a.rel = "noopener noreferrer";
+      if (/^https?:/i.test(link.url) || link.url.toLowerCase().endsWith(".pdf")) {
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+      }
       var label = el("span");
       label.textContent = link.label;
+      if (link.label === "Resume") {
+        var newTabNote = el("span", "visually-hidden");
+        newTabNote.textContent = "(opens in a new tab)";
+        label.appendChild(newTabNote);
+      }
       var arrow = el("span", "arrow");
       arrow.innerHTML = ARROW_DIAG;
       a.appendChild(label);
@@ -810,27 +947,43 @@
   }
 
   // ---- Active section navigation ---------------------------------------
+  function setupMobileNavigation() {
+    var toggle = document.querySelector(".nav-toggle");
+    var navigation = document.querySelector(".primary-nav");
+    if (!toggle || !navigation) return;
+
+    function closeMenu() {
+      navigation.classList.remove("is-open");
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-label", "Open navigation");
+    }
+
+    toggle.addEventListener("click", function () {
+      var isOpen = toggle.getAttribute("aria-expanded") === "true";
+      navigation.classList.toggle("is-open", !isOpen);
+      toggle.setAttribute("aria-expanded", String(!isOpen));
+      toggle.setAttribute("aria-label", isOpen ? "Open navigation" : "Close navigation");
+    });
+    navigation.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", closeMenu);
+    });
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") closeMenu();
+    });
+    window.addEventListener("resize", function () {
+      if (window.innerWidth > 768) closeMenu();
+    });
+  }
+
   function setupActiveNavigation() {
     var links = Array.prototype.slice.call(
       document.querySelectorAll('.primary-nav__link[href^="#"]')
     );
     if (!links.length) return;
 
-    function updateActiveLink() {
-      var focusY = window.innerHeight / 2;
-      var activeLink = null;
-
+    function setActiveLink(sectionId) {
       links.forEach(function (link) {
-        var section = document.getElementById(link.hash.slice(1));
-        if (!section) return;
-        var bounds = section.getBoundingClientRect();
-        if (bounds.top <= focusY && bounds.bottom > focusY) {
-          activeLink = link;
-        }
-      });
-
-      links.forEach(function (link) {
-        if (link === activeLink) {
+        if (link.hash.slice(1) === sectionId) {
           link.setAttribute("aria-current", "location");
         } else {
           link.removeAttribute("aria-current");
@@ -838,19 +991,53 @@
       });
     }
 
-    var updateScheduled = false;
-    function scheduleUpdate() {
-      if (updateScheduled) return;
-      updateScheduled = true;
-      window.requestAnimationFrame(function () {
-        updateActiveLink();
-        updateScheduled = false;
-      });
+    var sections = links
+      .map(function (link) {
+        return document.getElementById(link.hash.slice(1));
+      })
+      .filter(Boolean);
+    if (!sections.length) return;
+
+    if (!("IntersectionObserver" in window)) {
+      function updateActiveLink() {
+        var focusY = window.innerHeight / 2;
+        var current = sections.find(function (section) {
+          var bounds = section.getBoundingClientRect();
+          return bounds.top <= focusY && bounds.bottom > focusY;
+        });
+        setActiveLink(current ? current.id : "");
+      }
+      window.addEventListener("scroll", updateActiveLink, { passive: true });
+      window.addEventListener("resize", updateActiveLink);
+      updateActiveLink();
+      return;
     }
 
-    window.addEventListener("scroll", scheduleUpdate, { passive: true });
-    window.addEventListener("resize", scheduleUpdate);
-    updateActiveLink();
+    var visibleSections = new Set();
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            visibleSections.add(entry.target);
+          } else {
+            visibleSections.delete(entry.target);
+          }
+        });
+
+        var focusY = window.innerHeight / 2;
+        var current = Array.from(visibleSections).sort(function (a, b) {
+          return (
+            Math.abs(a.getBoundingClientRect().top - focusY) -
+            Math.abs(b.getBoundingClientRect().top - focusY)
+          );
+        })[0];
+        setActiveLink(current ? current.id : "");
+      },
+      { rootMargin: "-35% 0px -55% 0px", threshold: 0 }
+    );
+    sections.forEach(function (section) {
+      observer.observe(section);
+    });
   }
 
   // ---- Scroll reveal ----------------------------------------------------
@@ -860,7 +1047,9 @@
       ".hero__art",
       ".section-title",
       ".tag",
-      ".project-card",
+      ".project-entry",
+      ".article-card",
+      ".metric",
       ".timeline__item",
       ".fashion__heading",
       ".connect__link",
@@ -917,6 +1106,7 @@
     renderFashion();
     renderConnect();
     renderFooter();
+    setupMobileNavigation();
     setupActiveNavigation();
     setupReveal();
   }
