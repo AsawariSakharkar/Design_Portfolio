@@ -92,31 +92,7 @@
     setText("hero-name", hero.name);
     var tagline = $("hero-tagline");
     if (tagline) {
-      var highlights = ["UX research", "data visualization", "front-end development"];
-      var remaining = hero.tagline || "";
-      tagline.textContent = "";
-      while (remaining) {
-        var nextIndex = -1;
-        var nextHighlight = "";
-        highlights.forEach(function (phrase) {
-          var phraseIndex = remaining.indexOf(phrase);
-          if (phraseIndex !== -1 && (nextIndex === -1 || phraseIndex < nextIndex)) {
-            nextIndex = phraseIndex;
-            nextHighlight = phrase;
-          }
-        });
-        if (nextIndex === -1) {
-          tagline.appendChild(document.createTextNode(remaining));
-          break;
-        }
-        if (nextIndex > 0) {
-          tagline.appendChild(document.createTextNode(remaining.slice(0, nextIndex)));
-        }
-        var highlight = el("span", "hero__highlight");
-        highlight.textContent = nextHighlight;
-        tagline.appendChild(highlight);
-        remaining = remaining.slice(nextIndex + nextHighlight.length);
-      }
+      tagline.textContent = hero.tagline || "";
     }
     setText("hero-subtitle", hero.subtitle);
     var img = $("hero-image");
@@ -164,13 +140,6 @@
         stat.appendChild(metric);
         stat.appendChild(caption);
         impactPanel.appendChild(stat);
-      });
-    }
-    var skillsButton = $("skills-scroll-button");
-    if (skillsButton) {
-      skillsButton.addEventListener("click", function () {
-        var target = $("expertise");
-        if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
       });
     }
   }

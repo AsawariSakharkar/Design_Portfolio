@@ -23,7 +23,7 @@ window.SITE_CONTENT = {
   header: {
     resumeLabel: "Resume",
     resumeFile: "assets/resume/Asawari_Sakharkar_Resume.pdf",
-    findMeText: "You can find me on",
+    findMeText: "Find me on",
     // `icon` must match a key in assets/js/icons.js. Leave url "" to hide.
     socials: [
       { icon: "medium", label: "Medium", url: "https://medium.com/@asawarisakharkar2000" },
@@ -34,7 +34,7 @@ window.SITE_CONTENT = {
 
   // ---- Hero ---------------------------------------------------------------
   hero: {
-    label: "INFORMATION DESIGNER | UX RESEARCHER",
+    label: "INFORMATION DESIGNER, UX RESEARCHER  &  DESIGN WRITER",
     name: "Asawari Sakharkar",
     tagline:
       "Information designer with a background in UX research, data visualization, and front-end development, working across research, design, and product development.",
@@ -129,7 +129,7 @@ window.SITE_CONTENT = {
 
   // ---- My Experience (timeline) ------------------------------------------
   experience: {
-    heading: "My Experience",
+    heading: "Professional Experience",
     // `current: true` gives the filled timeline dot (recent roles).
     items: [
       {
@@ -182,7 +182,7 @@ window.SITE_CONTENT = {
 
   // ---- My Education (timeline) -------------------------------------------
   education: {
-    heading: "My Education",
+    heading: "Academic Background",
     items: [
       {
         institute: "MIT Institute of Design, Pune",
@@ -222,7 +222,7 @@ window.SITE_CONTENT = {
       "If you see me with a tote bag, a paperback, and a snack, yes, that's the whole personality. No, I won't be taking questions (unless it's about where to eat).",
     ],
     booksHeading: "Books that I have read and loved",
-    subheading: "My Outfit Checks!",
+    subheading: "Outfit that speak my style and personality",
     outfitIntro:
       "A collection of looks that capture my personal style, from everyday favorites to pieces I love experimenting with.",
     books: [
