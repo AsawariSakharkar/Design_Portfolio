@@ -433,12 +433,15 @@
     list.innerHTML = "";
     (ex.items || []).forEach(function (item) {
       var li = el("li", "timeline__item");
+      var marker = el("span", "timeline__marker");
       var dot = el("span", "timeline__dot" + (item.current ? " timeline__dot--filled" : ""));
+      marker.setAttribute("aria-hidden", "true");
+      marker.appendChild(dot);
       var role = el("h3", "timeline__role");
       role.innerHTML =
         escapeHtml(item.role || "") +
         (item.org ? ' <span class="at">@' + escapeHtml(item.org) + "</span>" : "");
-      li.appendChild(dot);
+      li.appendChild(marker);
       li.appendChild(role);
       if (item.duration) {
         var duration = el("p", "timeline__duration");
@@ -501,6 +504,40 @@
       li.appendChild(meta);
       list.appendChild(li);
     });
+    setupEducationTimeline(list);
+  }
+
+  function setupEducationTimeline(list) {
+    var dots = list.querySelectorAll(".timeline__dot");
+    if (!dots.length) return;
+
+    function measureLine() {
+      var listTop = list.getBoundingClientRect().top;
+      var firstDot = dots[0].getBoundingClientRect();
+      var lastDot = dots[dots.length - 1].getBoundingClientRect();
+      var lineTop = firstDot.top + firstDot.height / 2 - listTop;
+      var lineHeight = Math.max(
+        0,
+        lastDot.top + lastDot.height / 2 - firstDot.top - firstDot.height / 2
+      );
+
+      list.style.setProperty("--timeline-line-top", lineTop + "px");
+      list.style.setProperty("--timeline-line-height", lineHeight + "px");
+    }
+    measureLine();
+
+    if (!("IntersectionObserver" in window)) {
+      list.classList.add("is-animated");
+      return;
+    }
+
+    var observer = new IntersectionObserver(
+      function (entries) {
+        list.classList.toggle("is-animated", entries[0].isIntersecting);
+      },
+      { threshold: 0.15 }
+    );
+    observer.observe(list);
   }
 
   // ---- Fashion ----------------------------------------------------------
@@ -570,6 +607,31 @@
         appendFormattedText(paragraph, text);
         about.appendChild(paragraph);
       });
+    }
+    var aboutImageHolder = $("fashion-image-holder");
+    if (aboutImageHolder) {
+      aboutImageHolder.innerHTML = "";
+      if (f.aboutImage) {
+        var aboutImage = el("img");
+        aboutImage.src = encodePath(f.aboutImage);
+        aboutImage.alt = f.aboutImageAlt || "About me";
+        aboutImage.loading = "lazy";
+        aboutImage.addEventListener("error", function () {
+          aboutImageHolder.innerHTML = "";
+          var imagePlaceholder = el("span", "fashion__image-placeholder");
+          imagePlaceholder.textContent = "Add your photo";
+          imagePlaceholder.setAttribute("role", "img");
+          imagePlaceholder.setAttribute("aria-label", "Photo placeholder");
+          aboutImageHolder.appendChild(imagePlaceholder);
+        });
+        aboutImageHolder.appendChild(aboutImage);
+      } else {
+        var imagePlaceholder = el("span", "fashion__image-placeholder");
+        imagePlaceholder.textContent = "Add your photo";
+        imagePlaceholder.setAttribute("role", "img");
+        imagePlaceholder.setAttribute("aria-label", "Photo placeholder");
+        aboutImageHolder.appendChild(imagePlaceholder);
+      }
     }
     setText("fashion-books-heading", f.booksHeading);
     setText("fashion-sub", f.subheading);
