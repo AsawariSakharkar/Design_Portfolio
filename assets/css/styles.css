@@ -477,8 +477,8 @@ a {
 
 .article-card {
   display: block;
-  width: 90%;
-  justify-self: center;
+  width: 100%;
+  justify-self: stretch;
   min-height: 340px;
   padding: 1.25rem;
   border-radius: var(--radius-card);
