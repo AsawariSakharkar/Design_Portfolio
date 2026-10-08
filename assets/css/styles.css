@@ -594,6 +594,22 @@ a {
 
 .project-entry {
   min-width: 0;
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: color-mix(in srgb, var(--color-surface) 50%, transparent);
+  box-shadow: 0 4px 16px color-mix(in srgb, var(--color-text) 5%, transparent);
+  transition:
+    transform 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.project-entry:hover,
+.project-entry:focus-within {
+  transform: translateY(-4px);
+  border-color: var(--maroon);
+  box-shadow: 0 14px 28px rgb(90 20 31 / 12%);
 }
 
 .project-card {
@@ -1229,6 +1245,10 @@ a {
 
 .fashion__paragraph {
   margin: 0 0 0.85rem;
+}
+
+.fashion__paragraph strong {
+  color: var(--maroon);
 }
 
 .fashion__paragraph:last-child {
@@ -2347,12 +2367,6 @@ p {
   font-weight: 600;
 }
 
-.hero__positioning {
-  max-width: 60ch;
-  margin: 1.2rem 0 0;
-  color: var(--muted);
-}
-
 .hero__actions {
   display: flex;
   flex-wrap: wrap;
@@ -2563,6 +2577,13 @@ p {
 .project-case-study:hover,
 .article-card__read-link:hover {
   color: var(--maroon-dark);
+}
+
+.project-case-study__icon {
+  width: 1em;
+  height: 1em;
+  flex: 0 0 auto;
+  transform: translateY(-1px);
 }
 
 .project-more-button {

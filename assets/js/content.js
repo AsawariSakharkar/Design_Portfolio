@@ -42,9 +42,9 @@ window.SITE_CONTENT = {
     imageAlt: "Two portraits of Asawari inside an open locket",
   },
 
-  // ---- My Skills -------------------------------------------------------
+  // ---- Skills ----------------------------------------------------------
   expertise: {
-    heading: "My Skills",
+    heading: "Skills",
     groups: ["Research", "Design", "Data & Visualization", "Prototyping & Tools"],
     // accent:true renders the outlined pill style ("And an outfit planner").
     tags: [
@@ -74,24 +74,110 @@ window.SITE_CONTENT = {
       {
         title: "UX Case Studies",
         items: [
-          { image: "assets/images/projects/Arohi_tileImage.png", title: "Arohi: Disaster Management Interface", description: "A case study exploring a clearer interface for disaster management.", tags: ["Disaster Response", "Information Architecture", "Scenario Mapping", "Ecosystem Design"], pdf: "assets/project-pdfs/Arohi.pdf", url: "https://www.behance.net/gallery/245227537/AROHI-Disaster-Management-Interface" },
-          { image: "assets/images/projects/suchalck_tileImage.png", title: "Suchalak: Better Navigation", description: "A navigation-focused case study exploring intuitive wayfinding.", tags: ["Navigation", "Data Driven Design","UI Design", "Psychology"],pdf: "assets/project-pdfs/Suchalak.pdf", url: "https://www.behance.net/gallery/245164655/Suchalak" },
-          { image: "assets/images/projects/mae_tileImage.png", title: "Mae: Virtual Mom", description: "A virtual companion concept centered on everyday wellbeing support.", tags: ["Digital Wellbeing", "UX Design","App UI", "User Research", "Data Analysis"], pdf: "assets/project-pdfs/Mae.pdf", url: "https://www.behance.net/gallery/254510655/Mae-Virtual-mom-who-takes-care-of-your-welbeing" },
-          { image: "assets/images/projects/dandelion_tileImage.png", title: "Dandelion: To Break Your Overthinking", description: "A digital concept for helping people recognize and work through overthinking.", tags: ["Quality of life", "Prototyping","Usability","Vibe coding"], pdf: "assets/project-pdfs/Dandelion.pdf", url: "https://www.behance.net/gallery/255660865/Dandelion-to-break-your-overthinking" },
+          { image: "assets/images/projects/Arohi_tileImage.png", 
+            title: "Arohi: Disaster Management Interface", 
+            description: "A case study exploring a clearer interface for disaster management.", 
+            tags: ["Disaster Response", "Information Architecture", "Scenario Mapping", "Ecosystem Design"], 
+            role: "UX Designer, Information Architect",
+            problem: "Communication and coordination issues in disaster management",
+            research: "Data points prioritized and mapped to user needs",
+            solution: "Information architecture and interface design",
+            impact: "Emotional support and improved coordination",
+            pdf: "assets/project-pdfs/Arohi.pdf", url: "https://www.behance.net/gallery/245227537/AROHI-Disaster-Management-Interface" 
+          },
+
+          { image: "assets/images/projects/suchalck_tileImage.png", 
+            title: "Suchalak: Better Navigation", 
+            description: "A navigation-focused case study exploring intuitive wayfinding.", 
+            tags: ["Navigation", "Data Driven Design","UI Design", "Psychology"],
+            role: "UX Researcher, Information Designer",
+            problem: "Making navigation situationally aware",
+            research: "Finding the right data points to improve navigation",
+            solution: "Intuitive UI cues and information",
+            impact: "Situationally aware navigation and improved user experience",
+            pdf: "assets/project-pdfs/Suchalak.pdf", url: "https://www.behance.net/gallery/245164655/Suchalak" 
+          },
+
+          { image: "assets/images/projects/mae_tileImage.png", 
+            title: "Mae: Virtual Mom", 
+            description: "A virtual companion concept centered on everyday wellbeing support.", 
+            tags: ["Digital Wellbeing", "UX Design","App UI", "User Research", "Data Analysis"], 
+            role: "UX Designer, Researcher",
+            problem: "Mood based food habits and wellbeing support for users",
+            research: "Understanding user needs and preferences through interviews and surveys",
+            solution: "A virtual companion app that provides personalized wellbeing support and guidance",
+            impact: "Adjust cravings and improve overall wellbeing through personalized support and guidance",
+            pdf: "assets/project-pdfs/Mae.pdf", url: "https://www.behance.net/gallery/254510655/Mae-Virtual-mom-who-takes-care-of-your-welbeing" 
+          },
+
+          { image: "assets/images/projects/dandelion_tileImage.png", 
+            title: "Dandelion: To Break Your Overthinking", 
+            description: "A digital concept for helping people recognize and work through overthinking.", 
+            tags: ["Quality of life", "Prototyping","Usability","Vibe coding"], 
+            role: "UX Designer, Researcher, Prototyper",
+            problem: "Helping users recognize and work through overthinking patterns",
+            research: "Effective methods for identifying and addressing overthinking behaviors",
+            solution: "Accessible and engaging digital tools for self-reflection and overthinking",
+            impact: "Improved mental clarity and reduced overthinking through self-reflection and mindfulness practices",
+            pdf: "assets/project-pdfs/Dandelion.pdf", url: "https://www.behance.net/gallery/255660865/Dandelion-to-break-your-overthinking" 
+          },
         ],
       },
       {
         title: "UI Case Studies",
         items: [
-          { image: "assets/images/projects/sruti_tileImage.png", title: "Śruti: Corporate Learning Platform", description: "A learning platform concept focused on access to corporate training.", tags: ["Corporate Learning", "UI/UX Design","Design Thinking"], pdf: "assets/project-pdfs/Sruti.pdf", url: "https://www.behance.net/gallery/246535769/Corporate-Learning-Platform" },
-          { image: "assets/images/projects/UniversalCalculator_tileImage.png", title: "Universal Calculator", description: "A flexible calculator interface for everyday calculations.", tags: ["Utility", "UI Design"], pdf: "assets/project-pdfs/UniversalCalculator.pdf", url: "https://www.behance.net/gallery/224749961/Daily-UI-004" },
+          { image: "assets/images/projects/sruti_tileImage.png", 
+            title: "Śruti: Corporate Learning Platform", 
+            description: "A learning platform concept focused on access to corporate training.", 
+            tags: ["Corporate Learning", "UI/UX Design","Design Thinking"], 
+            role: "UX Designer, UI Designer, Researcher",
+            problem: "Multiple tabs and scattered information leading to confusion and inefficiency in corporate learning",
+            research: "Best practices for corporate learning platforms and user needs analysis",
+            solution: "Cumulative learning platform with a unified interface and streamlined navigation",
+            impact: "Improved learning outcomes and user satisfaction through a more intuitive and efficient learning experience",
+            pdf: "assets/project-pdfs/Sruti.pdf", 
+            url: "https://www.behance.net/gallery/246535769/Corporate-Learning-Platform" 
+          },
+
+          { image: "assets/images/projects/UniversalCalculator_tileImage.png", 
+            title: "Universal Calculator", 
+            description: "A flexible calculator interface for everyday calculations.", 
+            tags: ["Utility", "UI Design"], 
+            role: "UI Designer",
+            problem: "Plain and unengaging calculator interfaces that lack flexibility and customization",
+            research: "User needs and preferences for calculator interfaces, including common use cases and desired features",
+            solution: "Tactile and visually engaging calculator interface",
+            impact: "Improved user experience and engagement through a more flexible and customizable calculator interface",
+            pdf: "assets/project-pdfs/UniversalCalculator.pdf", 
+            url: "https://www.behance.net/gallery/224749961/Daily-UI-004" },
         ],
       },
       {
         title: "Data Visualization",
         items: [
-          { image: "assets/images/projects/perfume_tileImage.png", title: "What fragrances do college students prefer?", description: "A data-led look at fragrance preferences among college students.", tags: ["Student Preferences", "Data Visualization"], pdf: "assets/project-pdfs/Perfume.pdf", url: "https://www.behance.net/gallery/252967607/What-fragrances-do-college-students-prefer" },
-          { image: "assets/images/projects/sagaram_tileImage.png", title: "Sagarm: Effect of Ocean Acidification", description: "A data visualization exploring the effects of ocean acidification.", tags: ["Data Visualization", "Ocean Acidification"], pdf: "assets/project-pdfs/Sagarm.pdf", url: "https://www.behance.net/gallery/246071569/Effect-of-Ocean-Acidification" },
+          { image: "assets/images/projects/perfume_tileImage.png", 
+            title: "What fragrances do college students prefer?", 
+            description: "A data-led look at fragrance preferences among college students.", 
+            tags: ["Student Preferences", "Data Visualization"], 
+            role: "UX Designer",
+            problem: "Preferences and trends in fragrance",
+            research: "Pattern finding and data analysis of fragrance preferences among college students",
+            solution: "Data visualization and insights into fragrance preferences",
+            impact: "Most preferred fragrances and trends among college students, informing marketing and product development decisions",
+            pdf: "assets/project-pdfs/Perfume.pdf", 
+            url: "https://www.behance.net/gallery/252967607/What-fragrances-do-college-students-prefer" 
+          },
+          { image: "assets/images/projects/sagaram_tileImage.png", 
+            title: "Sagarm: Effect of Ocean Acidification", 
+            description: "A data visualization exploring the effects of ocean acidification.", 
+            tags: ["Data Visualization", "Ocean Acidification"], 
+            role: "UX Designer",
+            problem: "Understanding the impact of ocean acidification on marine ecosystems and human communities",
+            research: "Finding relevant data and analyzing the effects of ocean acidification on marine life and human communities",
+            solution: "Data visualization and insights into the effects of ocean acidification",
+            impact: "Enhanced understanding of the impacts of ocean acidification on marine and human communities",
+            pdf: "assets/project-pdfs/Sagarm.pdf", 
+            url: "https://www.behance.net/gallery/246071569/Effect-of-Ocean-Acidification" },
         ],
       },
     ],
@@ -107,7 +193,7 @@ window.SITE_CONTENT = {
       {
         title: "Our Different Senses",
         excerpt: "When we understand an object through a different lens.",
-        date: "[Add publication date]",
+        date: "Aug 9, 2026",
         // TODO: replace the profile URL with this article's direct URL.
         url: "https://medium.com/@asawarisakharkar2000",
         image: "assets/images/medium_imges/e257b2a72d0a35f8c6dfb072447f3f22.jpg",
@@ -115,15 +201,15 @@ window.SITE_CONTENT = {
       {
         title: "The diffrences in design POV and strategy POV",
         excerpt: "When your design gets rejected because it has no selling point.",
-        date: "[Add publication date]",
+        date: "July 12, 2026",
         // TODO: replace the profile URL with this article's direct URL.
         url: "https://medium.com/@asawarisakharkar2000",
         image: "assets/images/medium_imges/0_aGJIN3s4E_CcSgUX.webp",
       },
       {
         title: "10 Practices that helped me in my UX Summer Internship this year",
-        excerpt: "The practices I picked up while working as a UX Design Intern at Cosmino.",
-        date: "[Add publication date]",
+        excerpt: "The practices I picked up while working as a UX Design Intern at Cosmino (a startup) that helped me design and deliver better.",
+        date: "June 27, 2026",
         // TODO: replace the profile URL with this article's direct URL.
         url: "https://medium.com/@asawarisakharkar2000",
         image: "assets/images/medium_imges/c893f0c327a7ac9697d56e08f8285203.jpg",
@@ -140,6 +226,7 @@ window.SITE_CONTENT = {
         role: "UX Designer/Researcher Intern",
         org: "Cosmino",
         duration: "April 2026 - June 2026",
+        location: "Pune",
         // current: true,
         description: [
           "Conducted 15+ semi-structured user interviews to investigate product strong points and expectation for the product background.",
@@ -153,6 +240,7 @@ window.SITE_CONTENT = {
         role: "UX Design Consultant",
         org: "Saarogya",
         duration: "Feb 2026 - July 2026",
+        location: "Pune",
         // current: true,
         description: [
           "Support design and product decisions by aligning them with the organization's vision.",
@@ -164,6 +252,7 @@ window.SITE_CONTENT = {
         role: "UI / UX Designer Intern",
         org: "Diginovators",
         duration: "Mar 2024 - June 2024",
+        location: "Pune",
         description: [
           "Designed responsive web interfaces for 2 client projects, working directly with project managers and senior designers",
           "Presented design concepts and research rationale during review sessions, incorporating stakeholder feedback across 4+ iterations",
@@ -174,11 +263,11 @@ window.SITE_CONTENT = {
         role: "UI Developer",
         org: "Red Nucleus",
         duration: "May 2022 - April 2024",
+        location: "Pune",
         description: [
           "Built and maintained 25+ e-learning modules for global pharmaceutical clients, working within strict compliance, accessibility, and multi-market localization constraints",
           "Performed systematic QA across desktop, mobile, and tablet devices, identifying and resolving 100+ usability and responsiveness issues",
           "Collaborated daily with designers, developers, and QA specialists, translating design intent into production-ready outcomes",
-          "Contributed to design decisions on typography, spacing, color, and accessibility standards to protect consistency at scale",
         ],
       },
     ],

@@ -104,7 +104,7 @@
   // ---- Expertise --------------------------------------------------------
   function renderExpertise() {
     var e = C.expertise || {};
-    setText("expertise-heading", e.heading || "My Expertise");
+    setText("expertise-heading", e.heading || "Skills");
     var list = $("tags-list");
     if (!list) return;
     list.innerHTML = "";
@@ -258,7 +258,29 @@
         caseStudyLink.href = item.url;
         caseStudyLink.target = "_blank";
         caseStudyLink.rel = "noopener noreferrer";
-        caseStudyLink.textContent = "Read case study";
+        var caseStudyLabel = el("span");
+        caseStudyLabel.textContent = "Read case study";
+        var externalIcon = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "svg"
+        );
+        externalIcon.setAttribute("class", "project-case-study__icon");
+        externalIcon.setAttribute("viewBox", "0 0 20 20");
+        externalIcon.setAttribute("aria-hidden", "true");
+        externalIcon.setAttribute("focusable", "false");
+        var externalPath = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "path"
+        );
+        externalPath.setAttribute("d", "M6 14 14 6M7 6h7v7");
+        externalPath.setAttribute("fill", "none");
+        externalPath.setAttribute("stroke", "currentColor");
+        externalPath.setAttribute("stroke-width", "1.8");
+        externalPath.setAttribute("stroke-linecap", "round");
+        externalPath.setAttribute("stroke-linejoin", "round");
+        externalIcon.appendChild(externalPath);
+        caseStudyLink.appendChild(caseStudyLabel);
+        caseStudyLink.appendChild(externalIcon);
         entry.appendChild(caseStudyLink);
       }
       grid.appendChild(entry);
