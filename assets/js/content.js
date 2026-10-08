@@ -35,8 +35,7 @@ window.SITE_CONTENT = {
   // ---- Hero ---------------------------------------------------------------
   hero: {
     label: "INFORMATION DESIGNER | UX RESEARCHER",
-    greeting: "Hello~",
-    name: "I am Asawari Sakharkar",
+    name: "Asawari Sakharkar",
     tagline:
       "Information designer with a background in UX research, data visualization, and front-end development, working across research, design, and product development.",
     subtitle: "I turn ambiguous problems into evidence, and evidence into design decisions.",
@@ -212,8 +211,29 @@ window.SITE_CONTENT = {
 
   // ---- Fashion gallery (horizontal scroll) -------------------------------
   fashion: {
-    heading: "When I am not designing I explore Fashion",
+    heading: "About Me",
+    greeting: "Hi, I'm Asawari.",
+    paragraphs: [
+      "I design things for a living, but I live for three obsessions: <strong>fashion, fiction, and food.</strong>",
+      "One minute I'm deciding whether an outfit needs one more layer, the next I'm three chapters deep in a book I swore I'd only \"start,\" and somewhere in between I'm planning my next meal like it's a strategic operation. My wardrobe, my bookshelf, and my camera roll of dinners have a lot in common: all curated, slightly out of control, and always making room for one more.",
+      "Fashion taught me that the right details change everything. Books taught me that every detail tells a story. Food taught me that the best things are made with care and meant to be shared. Together, they're why I notice what others scroll past: the stitching, the sentence, the pinch of spice that makes something feel <em>intentional</em>.",
+      "If you see me with a tote bag, a paperback, and a snack, yes, that's the whole personality. No, I won't be taking questions (unless it's about where to eat).",
+    ],
+    booksHeading: "Books that I have read and loved",
     subheading: "My Outfit Checks!",
+    outfitIntro:
+      "A collection of looks that capture my personal style, from everyday favorites to pieces I love experimenting with.",
+    // Replace these placeholders with book cover image paths when available.
+    books: [
+      { title: "Book cover 1" },
+      { title: "Book cover 2" },
+      { title: "Book cover 3" },
+      { title: "Book cover 4" },
+      { title: "Book cover 5" },
+      { title: "Book cover 6" },
+      { title: "Book cover 7" },
+      { title: "Book cover 8" },
+    ],
     // Portrait images scroll horizontally in an auto-moving carousel.
     // Add/remove freely — file names are URL-encoded automatically in main.js.
     photos: [

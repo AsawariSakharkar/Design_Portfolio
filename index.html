@@ -26,15 +26,38 @@
     <!-- ===================== HEADER ===================== -->
     <header class="site-header" id="site-header">
       <div class="container header__inner">
-        <a class="btn-resume" id="resume-btn" href="#" download>
-          <svg class="btn-resume__icon" viewBox="0 0 24 24" aria-hidden="true">
-            <path
-              fill="currentColor"
-              d="M12 3a1 1 0 0 1 1 1v9.59l2.3-2.3a1 1 0 0 1 1.4 1.42l-4 4a1 1 0 0 1-1.4 0l-4-4a1 1 0 1 1 1.4-1.42l2.3 2.3V4a1 1 0 0 1 1-1zM5 19a1 1 0 0 1 1-1h12a1 1 0 1 1 0 2H6a1 1 0 0 1-1-1z"
-            />
-          </svg>
-          <span id="resume-label">Resume</span>
-        </a>
+        <nav class="primary-nav" aria-label="Main navigation">
+          <ul class="primary-nav__list">
+            <li><a class="primary-nav__link" href="#projects">Work</a></li>
+            <li><a class="primary-nav__link" href="#experience">Experience</a></li>
+            <li><a class="primary-nav__link" href="#fashion">About Me</a></li>
+            <li>
+              <a
+                class="primary-nav__link primary-nav__link--resume"
+                id="resume-btn"
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span id="resume-label">Resume</span>
+                <svg
+                  class="primary-nav__external-icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M7 17 17 7M9 7h8v8"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </nav>
 
         <nav class="socials" aria-label="Social links">
           <span class="socials__label" id="find-me-text">You can find me on</span>
@@ -119,7 +142,19 @@
       <section class="band-maroon fashion" id="fashion">
         <div class="container">
           <h2 class="fashion__heading" id="fashion-heading"></h2>
-          <p class="fashion__sub" id="fashion-sub"></p>
+          <p class="fashion__greeting" id="fashion-greeting"></p>
+          <div class="fashion__about" id="fashion-about"></div>
+          <h3 class="fashion__sub" id="fashion-books-heading"></h3>
+        </div>
+        <div
+          class="book-scroller"
+          id="book-scroller"
+          tabindex="0"
+          aria-label="Book cover gallery, scroll horizontally"
+        ></div>
+        <div class="container">
+          <h3 class="fashion__sub" id="fashion-sub"></h3>
+          <p class="fashion__outfit-intro" id="fashion-outfit-intro"></p>
         </div>
         <div class="outfit-scroller" id="outfit-scroller" tabindex="0"
              aria-label="Outfit photo gallery, scroll horizontally"></div>

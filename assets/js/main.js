@@ -60,7 +60,11 @@
     setText("find-me-text", h.findMeText || "You can find me on");
 
     var btn = $("resume-btn");
-    if (btn && h.resumeFile) btn.setAttribute("href", encodePath(h.resumeFile));
+    if (btn && h.resumeFile) {
+      btn.setAttribute("href", encodePath(h.resumeFile));
+      btn.target = "_blank";
+      btn.rel = "noopener noreferrer";
+    }
 
     var list = $("socials-list");
     if (!list) return;
@@ -522,6 +526,27 @@
     return fig;
   }
 
+  function buildBookCover(book) {
+    var figure = el("figure", "book-cover");
+    if (book.image) {
+      var img = el("img");
+      img.src = encodePath(book.image);
+      img.alt = book.title || "Book cover";
+      img.loading = "lazy";
+      img.draggable = false;
+      figure.appendChild(img);
+    } else {
+      var placeholder = el("div", "book-cover__placeholder");
+      placeholder.setAttribute("role", "img");
+      placeholder.setAttribute("aria-label", book.title || "Book cover placeholder");
+      var label = el("span");
+      label.textContent = "Add cover image";
+      placeholder.appendChild(label);
+      figure.appendChild(placeholder);
+    }
+    return figure;
+  }
+
   function shuffleArray(array) {
     var shuffled = array.slice();
     for (var i = shuffled.length - 1; i > 0; i--) {
@@ -536,7 +561,38 @@
   function renderFashion() {
     var f = C.fashion || {};
     setText("fashion-heading", f.heading);
+    setText("fashion-greeting", f.greeting);
+    var about = $("fashion-about");
+    if (about) {
+      about.innerHTML = "";
+      (f.paragraphs || []).forEach(function (text) {
+        var paragraph = el("p", "fashion__paragraph");
+        appendFormattedText(paragraph, text);
+        about.appendChild(paragraph);
+      });
+    }
+    setText("fashion-books-heading", f.booksHeading);
     setText("fashion-sub", f.subheading);
+    setText("fashion-outfit-intro", f.outfitIntro);
+    var bookScroller = $("book-scroller");
+    if (bookScroller) {
+      bookScroller.innerHTML = "";
+      var books = f.books || [];
+      var bookTrack = el("div", "book-track");
+      books.forEach(function (book) {
+        bookTrack.appendChild(buildBookCover(book));
+      });
+      bookScroller.appendChild(bookTrack);
+      setupCarousel(
+        bookScroller,
+        bookTrack,
+        books.length,
+        1,
+        ".book-cover",
+        "book-scroller--manual"
+      );
+    }
+
     var scroller = $("outfit-scroller");
     if (!scroller) return;
 
@@ -549,11 +605,48 @@
     });
     scroller.appendChild(track);
 
-    setupCarousel(scroller, track, photos.length);
+    setupCarousel(
+      scroller,
+      track,
+      photos.length,
+      -1,
+      ".outfit",
+      "outfit-scroller--manual"
+    );
+  }
+
+  function appendFormattedText(target, text) {
+    var parsed = new DOMParser().parseFromString(String(text || ""), "text/html");
+
+    function appendNodes(source, destination) {
+      Array.prototype.forEach.call(source.childNodes, function (node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+          destination.appendChild(document.createTextNode(node.nodeValue));
+        } else if (node.nodeType === Node.ELEMENT_NODE) {
+          var tagName = node.tagName.toLowerCase();
+          if (tagName === "strong" || tagName === "em") {
+            var formatted = document.createElement(tagName);
+            appendNodes(node, formatted);
+            destination.appendChild(formatted);
+          } else {
+            appendNodes(node, destination);
+          }
+        }
+      });
+    }
+
+    appendNodes(parsed.body, target);
   }
 
   // ---- Auto-moving carousel --------------------------------------------
-  function setupCarousel(scroller, track, originalCount) {
+  function setupCarousel(
+    scroller,
+    track,
+    originalCount,
+    direction,
+    cardSelector,
+    manualClass
+  ) {
     if (!track.children.length) return;
 
     var reduceMotion =
@@ -562,7 +655,7 @@
 
     // Reduced-motion / no-JS-animation fallback: plain manual scroll.
     if (reduceMotion) {
-      scroller.classList.add("outfit-scroller--manual");
+      scroller.classList.add(manualClass);
       return;
     }
 
@@ -580,28 +673,34 @@
     var offset = 0;
     var loopWidth = 0;
     var lastTime = null;
+    var hasMeasured = false;
 
     function measure() {
       // Distance from the first item to its duplicate = one full loop.
       var dup = track.children[originalCount];
       loopWidth = dup ? dup.offsetLeft : track.scrollWidth / 2;
+      if (!hasMeasured) {
+        offset = direction > 0 ? -loopWidth : 0;
+        hasMeasured = true;
+      }
     }
     measure();
     window.addEventListener("resize", measure);
 
-    // Slow down drastically while hovering any outfit; pause on grab.
+    function pointerIsOnCard(target) {
+      return target.closest && target.closest(cardSelector);
+    }
+
+    // Slow down drastically while hovering a gallery card.
     scroller.addEventListener("pointerenter", function (e) {
-      if (e.target.closest && e.target.closest(".outfit")) {
+      if (pointerIsOnCard(e.target)) {
         targetSpeed = SLOW_SPEED;
       }
     });
     scroller.addEventListener(
       "pointerover",
       function (e) {
-        targetSpeed =
-          e.target.closest && e.target.closest(".outfit")
-            ? SLOW_SPEED
-            : NORMAL_SPEED;
+        targetSpeed = pointerIsOnCard(e.target) ? SLOW_SPEED : NORMAL_SPEED;
       }
     );
     scroller.addEventListener("pointerout", function (e) {
@@ -629,8 +728,9 @@
       currentSpeed += (targetSpeed - currentSpeed) * Math.min(1, dt * 6);
 
       if (!paused && loopWidth > 0) {
-        offset -= currentSpeed * dt;
-        if (offset <= -loopWidth) offset += loopWidth;
+        offset += direction * currentSpeed * dt;
+        if (direction > 0 && offset >= 0) offset -= loopWidth;
+        if (direction < 0 && offset <= -loopWidth) offset += loopWidth;
         track.style.transform = "translate3d(" + offset + "px, 0, 0)";
       }
       requestAnimationFrame(frame);
@@ -676,6 +776,50 @@
       "footer-text",
       "© " + year + (name ? " " + name : "") + ". All rights reserved."
     );
+  }
+
+  // ---- Active section navigation ---------------------------------------
+  function setupActiveNavigation() {
+    var links = Array.prototype.slice.call(
+      document.querySelectorAll('.primary-nav__link[href^="#"]')
+    );
+    if (!links.length) return;
+
+    function updateActiveLink() {
+      var focusY = window.innerHeight / 2;
+      var activeLink = null;
+
+      links.forEach(function (link) {
+        var section = document.getElementById(link.hash.slice(1));
+        if (!section) return;
+        var bounds = section.getBoundingClientRect();
+        if (bounds.top <= focusY && bounds.bottom > focusY) {
+          activeLink = link;
+        }
+      });
+
+      links.forEach(function (link) {
+        if (link === activeLink) {
+          link.setAttribute("aria-current", "location");
+        } else {
+          link.removeAttribute("aria-current");
+        }
+      });
+    }
+
+    var updateScheduled = false;
+    function scheduleUpdate() {
+      if (updateScheduled) return;
+      updateScheduled = true;
+      window.requestAnimationFrame(function () {
+        updateActiveLink();
+        updateScheduled = false;
+      });
+    }
+
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+    updateActiveLink();
   }
 
   // ---- Scroll reveal ----------------------------------------------------
@@ -742,6 +886,7 @@
     renderFashion();
     renderConnect();
     renderFooter();
+    setupActiveNavigation();
     setupReveal();
   }
 
