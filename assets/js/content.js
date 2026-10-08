@@ -49,13 +49,21 @@ window.SITE_CONTENT = {
     // accent:true renders the outlined pill style ("And an outfit planner").
     tags: [
       { label: "Data Driven Design", group: "Data & Visualization" },
+      { label: "Data Analysis", group: "Data & Visualization" },
+      { label: "Data Storytelling", group: "Data & Visualization" },
+      { label: "Data Narratives", group: "Data & Visualization" },
       { label: "Design Thinking", group: "Design" },
+      { label: "UI Design", group: "Design" },
       { label: "Design Strategy", group: "Design" },
       { label: "User Research", group: "Research" },
       { label: "UX Writing", group: "Design" },
       { label: "Psychology", group: "Research" },
       { label: "Accessibility", group: "Research" },
       { label: "UX Design", group: "Design" },
+      { label: "Vibe Coding", group: "Prototyping & Tools" },
+      { label: "AI Agents", group: "Prototyping & Tools" },
+      { label: "AI Workflows", group: "Prototyping & Tools" },
+      { label: "AI Evaluation & Guardrails", group: "Prototyping & Tools" },
      // { label: "And an Outfit Planner", accent: true },
     ],
     impact: [
