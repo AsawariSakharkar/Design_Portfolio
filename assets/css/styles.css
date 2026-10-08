@@ -351,6 +351,17 @@ a {
   background: rgba(255, 255, 255, 0.1);
   -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
+  transition:
+    transform 220ms var(--ease),
+    background-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.impact-panel__item:hover,
+.impact-panel__item:active {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
 }
 
 .impact-panel__metric {
@@ -399,13 +410,18 @@ a {
   font-size: 1.5rem;
   line-height: 1.2;
   box-shadow: var(--shadow-sm);
-  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+  transition:
+    transform 0.25s var(--ease),
+    box-shadow 0.25s var(--ease),
+    background-color 0.25s ease;
   cursor: default;
 }
 
-.tag:hover {
-  transform: translateY(-3px);
+.tags .tag:hover,
+.tags .tag:active {
+  transform: translateY(-6px);
   box-shadow: var(--shadow-md);
+  background-color: #f4eeee;
 }
 
 .tag--accent {
@@ -417,7 +433,8 @@ a {
 }
 
 .tag--accent:hover,
-.tag--accent:focus {
+.tag--accent:focus,
+.tag--accent:active {
   background: rgba(255, 255, 255, 0.15);
   box-shadow: none;
 }
@@ -931,6 +948,36 @@ a {
   padding-bottom: 0;
 }
 
+.timeline--edu::before,
+.timeline--edu::after {
+  content: "";
+  position: absolute;
+  left: 13px;
+  top: var(--timeline-line-top, 17px);
+  width: 3px;
+  height: var(--timeline-line-height, 100%);
+  border-radius: 999px;
+}
+
+.timeline--edu::before {
+  background: rgba(109, 12, 21, 0.16);
+}
+
+.timeline--edu::after {
+  background: var(--maroon);
+  transform: scaleY(0);
+  transform-origin: bottom;
+}
+
+.timeline--edu.is-animated::after {
+  transform: scaleY(1);
+  transition: transform 1.4s var(--ease);
+}
+
+.timeline--edu .timeline__item {
+  z-index: 1;
+}
+
 /* connecting vertical line */
 .timeline__item::before {
   content: "";
@@ -940,6 +987,11 @@ a {
   bottom: -4px;
   width: 3px;
   background: var(--maroon);
+  z-index: 0;
+}
+
+.timeline--edu .timeline__item::before {
+  display: none;
 }
 
 .timeline__item:last-child::before {
@@ -959,6 +1011,76 @@ a {
 
 .timeline__dot--filled {
   background: var(--maroon-soft);
+}
+
+.timeline__marker {
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.timeline__marker::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: rgba(109, 12, 21, 0.24);
+  filter: blur(4px);
+  z-index: 0;
+}
+
+.timeline:not(.timeline--edu) .timeline__dot {
+  display: block;
+  position: relative;
+  left: auto;
+  top: auto;
+  z-index: 1;
+  filter: none;
+  border: 0;
+  background: var(--maroon);
+  clip-path: polygon(
+    50% 0,
+    61% 35%,
+    98% 35%,
+    68% 57%,
+    79% 95%,
+    50% 72%,
+    21% 95%,
+    32% 57%,
+    2% 35%,
+    39% 35%
+  );
+}
+
+.timeline:not(.timeline--edu) .timeline__dot::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  background: var(--white);
+  clip-path: polygon(
+    50% 0,
+    61% 35%,
+    98% 35%,
+    68% 57%,
+    79% 95%,
+    50% 72%,
+    21% 95%,
+    32% 57%,
+    2% 35%,
+    39% 35%
+  );
+}
+
+.timeline--edu .timeline__dot {
+  background: var(--white);
+}
+
+.timeline--edu .timeline__dot--filled {
+  background: var(--maroon);
 }
 
 .timeline__role {
@@ -1067,12 +1189,47 @@ a {
   font-weight: 600;
 }
 
+.fashion__about-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(220px, 0.75fr);
+  align-items: center;
+  gap: clamp(2rem, 5vw, 5rem);
+  margin-bottom: 2.75rem;
+}
+
 .fashion__about {
   max-width: 70ch;
-  margin: 0 0 2.75rem;
+  margin: 0;
   font-size: 1rem;
   line-height: 1.7;
   opacity: 0.92;
+}
+
+.fashion__image-holder {
+  display: block;
+  margin: 0;
+}
+
+.fashion__image-holder img {
+  display: block;
+  width: 100%;
+  height: auto;
+  animation: portrait-float 5.5s ease-in-out infinite;
+}
+
+@keyframes portrait-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.fashion__image-placeholder {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.95rem;
 }
 
 .fashion__paragraph {
@@ -1101,7 +1258,7 @@ a {
 .outfit-scroller,
 .book-scroller {
   overflow: hidden;
-  padding: 1rem 0 2rem;
+  padding: 2rem 0 2.5rem;
   /* Soft fade on both edges so cards slide in/out gracefully. */
   -webkit-mask-image: linear-gradient(
     to right,
@@ -1376,6 +1533,14 @@ a {
 }
 
 @media (max-width: 560px) {
+  .fashion__about-layout {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .fashion__image-holder {
+    width: min(100%, 360px);
+    justify-self: center;
+  }
   .project-grid,
   .article-grid {
     grid-template-columns: 1fr;

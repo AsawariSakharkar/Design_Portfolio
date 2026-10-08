@@ -213,6 +213,8 @@ window.SITE_CONTENT = {
   fashion: {
     heading: "About Me",
     greeting: "Hi, I'm Asawari.",
+    aboutImage: "assets/images/portrait/Group 19.png",
+    aboutImageAlt: "Portrait of Asawari",
     paragraphs: [
       "I design things for a living, but I live for three obsessions: <strong>fashion, fiction, and food.</strong>",
       "One minute I'm deciding whether an outfit needs one more layer, the next I'm three chapters deep in a book I swore I'd only \"start,\" and somewhere in between I'm planning my next meal like it's a strategic operation. My wardrobe, my bookshelf, and my camera roll of dinners have a lot in common: all curated, slightly out of control, and always making room for one more.",
@@ -223,16 +225,111 @@ window.SITE_CONTENT = {
     subheading: "My Outfit Checks!",
     outfitIntro:
       "A collection of looks that capture my personal style, from everyday favorites to pieces I love experimenting with.",
-    // Replace these placeholders with book cover image paths when available.
     books: [
-      { title: "Book cover 1" },
-      { title: "Book cover 2" },
-      { title: "Book cover 3" },
-      { title: "Book cover 4" },
-      { title: "Book cover 5" },
-      { title: "Book cover 6" },
-      { title: "Book cover 7" },
-      { title: "Book cover 8" },
+      {
+        title: "The Creative Act: A Way of Being",
+        image: "assets/images/book-covers/image.png",
+      },
+      {
+        title: "The Wedding Dress",
+        image: "assets/images/book-covers/image-1.png",
+      },
+      {
+        title: "The Palace of Illusions",
+        image: "assets/images/book-covers/image-2.png",
+      },
+      {
+        title: "Memoirs of a Geisha",
+        image: "assets/images/book-covers/image-3.png",
+      },
+      {
+        title: "The Alchemist",
+        image: "assets/images/book-covers/image-4.png",
+      },
+      {
+        title: "Deception Point",
+        image: "assets/images/book-covers/image 60.png",
+      },
+      {
+        title: "Harry Potter and the Cursed Child",
+        image: "assets/images/book-covers/image-1a.png",
+      },
+      {
+        title: "Krishna: Life and Song of the Blue God",
+        image: "assets/images/book-covers/image-2c.png",
+      },
+      {
+        title: "The Last Queen",
+        image: "assets/images/book-covers/image-3g.png",
+      },
+      {
+        title: "The Kite Runner",
+        image: "assets/images/book-covers/image-4s.png",
+      },
+      {
+        title: "The Book of Ichigo Ichie",
+        image: "assets/images/book-covers/image-5.png",
+      },
+      {
+        title: "The Legend of Parshu-Raam",
+        image: "assets/images/book-covers/image-7.png",
+      },
+      {
+        title: "Vishwamitra",
+        image: "assets/images/book-covers/image-8.png",
+      },
+      {
+        title: "Dollar Bahu",
+        image: "assets/images/book-covers/image-9.png",
+      },
+      {
+        title: "Three Thousand Stitches",
+        image: "assets/images/book-covers/image-10.png",
+      },
+      {
+        title: "Mahashweta",
+        image: "assets/images/book-covers/image-11.png",
+      },
+      {
+        title: "Valmiki's Women",
+        image: "assets/images/book-covers/image-12.png",
+      },
+      {
+        title: "Cosmos",
+        image: "assets/images/book-covers/image-14.png",
+      },
+      {
+        title: "Devi Purana",
+        image: "assets/images/book-covers/image-15.png",
+      },
+      {
+        title: "Taiwan Travelogue",
+        image: "assets/images/book-covers/image-16.png",
+      },
+      {
+        title: "Here, There and Everywhere",
+        image: "assets/images/book-covers/image-17.png",
+      },
+      {
+        title: "The Courage to Be Disliked",
+        image: "assets/images/book-covers/image-18.png",
+      },
+      {
+        title: "White Elephant",
+        image: "assets/images/book-covers/image-19.png",
+      },
+      {
+        title: "The Forest of Enchantments",
+        image: "assets/images/book-covers/image-20.png",
+      },
+      {
+        title: "The Diary of a Young Girl",
+        image: "assets/images/book-covers/image-21.png",
+      },
+      {
+        title: "Kaizen",
+        image: "assets/images/book-covers/imagea.png",
+      },
     ],
     // Portrait images scroll horizontally in an auto-moving carousel.
     // Add/remove freely — file names are URL-encoded automatically in main.js.
