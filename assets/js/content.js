@@ -22,7 +22,7 @@ window.SITE_CONTENT = {
   // ---- Header -------------------------------------------------------------
   header: {
     resumeLabel: "Resume",
-    resumeFile: "assets/resume.pdf",
+    resumeFile: "assets/resume/Asawari_Sakharkar_Resume.pdf",
     findMeText: "You can find me on",
     // `icon` must match a key in assets/js/icons.js. Leave url "" to hide.
     socials: [
@@ -449,7 +449,7 @@ window.SITE_CONTENT = {
 
   // ---- Let's Connect (footer) --------------------------------------------
   connect: {
-    heading: "Hiring for UX or information design? Let's talk.",
+    heading: "Hiring for UX or Information Design? Let's talk.",
     email: "asawarisakharkar2000@gmail.com",
     // Right-hand quick links with a diagonal arrow, as in the design.
     links: [
