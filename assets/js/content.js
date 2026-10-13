@@ -434,6 +434,10 @@ window.SITE_CONTENT = {
         title: "Kaizen",
         image: "assets/images/book-covers/imagea.png",
       },
+      {
+        title: "Fooled By Randomness",
+        image: "assets/images/book-covers/image_10.png",
+      },
     ],
     // Portrait images scroll horizontally in an auto-moving carousel.
     // Add/remove freely — file names are URL-encoded automatically in main.js.
