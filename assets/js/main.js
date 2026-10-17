@@ -192,10 +192,7 @@
         card.target = "_blank";
         card.rel = "noopener noreferrer";
       } else if (item.title) {
-        card = el("a", "project-card");
-        card.href = window.matchMedia("(max-width: 860px)").matches
-          ? encodePath(item.pdf || "assets/project-pdfs/Arohi.pdf")
-          : "project.html?project=" + encodeURIComponent(item.title);
+        card = el("div", "project-card");
       } else {
         card = el("div", "project-card");
       }

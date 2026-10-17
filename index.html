@@ -28,69 +28,12 @@
     />
 
     <link rel="stylesheet" href="assets/css/styles.css" />
-    <link rel="stylesheet" href="assets/css/cursor.css" />
   </head>
 
   <body id="top">
     <a class="skip-link" href="#main-content">Skip to content</a>
     <!-- ===================== HEADER ===================== -->
-    <header class="site-header" id="site-header">
-      <div class="container header__inner">
-        <button
-          class="nav-toggle"
-          type="button"
-          aria-label="Open navigation"
-          aria-controls="primary-navigation"
-          aria-expanded="false"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-        <nav class="primary-nav" aria-label="Main navigation">
-          <ul class="primary-nav__list" id="primary-navigation">
-            <li><a class="primary-nav__link" href="#projects">Work</a></li>
-            <li><a class="primary-nav__link" href="#expertise">Skills</a></li>
-            <li><a class="primary-nav__link" href="#experience">Experience</a></li>
-            <li><a class="primary-nav__link" href="#education">Education</a></li>
-            <li><a class="primary-nav__link" href="#about-me">About Me</a></li>
-            <li>
-              <!-- TODO: place the final resume PDF at assets/resume.pdf or update this href. -->
-              <a
-                class="primary-nav__link primary-nav__link--resume"
-                id="resume-btn"
-                href="assets/resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span id="resume-label">Resume</span>
-                <span class="visually-hidden">(opens in a new tab)</span>
-                <svg
-                  class="primary-nav__external-icon"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M7 17 17 7M9 7h8v8"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </a>
-            </li>
-          </ul>
-        </nav>
-
-        <nav class="socials" aria-label="Social links">
-          <!-- <span class="socials__statement">Information Designer · UX Designer · Product Designer</span> -->
-          <span class="socials__label" id="find-me-text">You can find me on</span>
-          <ul class="socials__list" id="socials-list"></ul>
-        </nav>
-      </div>
-    </header>
+    <header class="site-header" id="site-header"></header>
 
     <main id="main-content" tabindex="-1">
       <!-- ===================== HERO ===================== -->
@@ -110,7 +53,7 @@
               <li>M.Des. Information Design &amp; Data Visualization</li>
             </ul>
             <div class="hero__actions">
-              <a class="button button--primary" href="#projects">See the work</a>
+              <a class="button button--primary" href="#work">See the work</a>
             </div>
           </div>
           <figure class="hero__art">
@@ -164,7 +107,7 @@
       </section>
 
       <!-- ===================== PROJECTS ===================== -->
-      <section class="projects" id="projects">
+      <section class="projects" id="work">
         <div class="container">
           <p class="section-eyebrow">02 / Work</p>
           <h2 class="section-title" id="projects-heading">My Projects</h2>
@@ -258,8 +201,9 @@
     </footer>
 
     <script src="assets/js/content.js"></script>
+    <script src="assets/js/projects.js"></script>
     <script src="assets/js/icons.js"></script>
+    <script src="assets/js/header.js"></script>
     <script src="assets/js/main.js"></script>
-    <script src="assets/js/cursor.js"></script>
   </body>
 </html>
