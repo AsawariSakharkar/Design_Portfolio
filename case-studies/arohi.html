@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#1c1d1f" />
+    <meta
+      name="description"
+      content="Arohi — an emergency interface connecting people trapped in a disaster with rescue teams."
+    />
+    <title>Arohi · Asawari Sakharkar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+    <link rel="stylesheet" href="arohi.css" />
+  </head>
+  <body class="project-page case-study" data-site-root="../" id="top">
+    <a class="skip-link" href="#case-main">Skip to content</a>
+    <header class="site-header" id="site-header"></header>
+    <main id="case-main">
+      <section class="case-hero case-section" aria-labelledby="case-title">
+        <div class="case-container case-hero__grid">
+          <div class="case-hero__copy">
+            <h1 id="case-title">Arohi</h1>
+            <p class="case-lead">
+              An emergency interface that connects people trapped in a disaster with rescue teams in real time, so help arrives faster and responders see the real situation.
+            </p>
+            <div class="meta-chips" aria-label="Project details">
+              <span><strong>Role : </strong><em>UX Designer, UI Designer, Information Architect</em></span>
+              <span><strong>Timeline : </strong><em>3 weeks</em></span>
+              <span><strong>Tools : </strong><em>Figma, Fig-jam, Sheets</em></span>
+            </div>
+            <div class="case-outcome">
+              <p>Outcome: A unified emergency response interface for victims and rescue teams.</p>
+            </div>
+          </div>
+          <img src="../assets/arohi/Arohi_tileImage.png" alt="Arohi emergency interface showing an emergency call and SOS controls" width="2000" height="1457" sizes="(min-width: 700px) 50vw, 100vw" />
+          <div class="meta-tags" aria-label="Project tags">
+            <span>#UX</span>
+            <span>#UI Design</span>
+            <span>#Information Architecture</span>
+            <span>#Scenario Mapping</span>
+            <span>#Ecosystem Mapping</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="case-section reveal" aria-labelledby="problem-title">
+        <div class="case-container">
+          <p class="section-number">01 / The problem</p>
+          <h2 id="problem-title">In a disaster, nobody knows who to call, and responders can’t see what’s happening.</h2>
+          <p>Disasters are managed locally and outcomes depend on preparedness. The people hurt most are those trapped and the teams on the ground, because information is missing and communication is unclear.</p>
+          <p class="quote-label">Two perspectives</p>
+          <div class="quote-grid">
+            <blockquote>“The people stuck in disaster have no idea who to contact or where to contact.”</blockquote>
+            <blockquote>“The services have no point of contact and no understanding of the real situation.”</blockquote>
+          </div>
+          <div class="regions-layout">
+            <figure class="image-frame regions-figure">
+              <button class="regions-image-button" type="button" aria-label="Enlarge illustration">
+                <span class="ecosystem-stage">
+                  <img src="../assets/arohi/group213.png" alt="Isometric illustration of five regions around a flood disaster, R0 to R4, with orange arrows showing how information flows between them: trapped residents (R0, R1), families watching the news (R2), rescue teams (R3) and a newsroom (R4)." width="4699" height="5910" sizes="(min-width: 900px) 60vw, 100vw" loading="lazy" />
+                  <span class="region-highlight" aria-hidden="true"></span>
+                </span>
+              </button>
+              <figcaption>Five regions of influence, R0 (trapped) to R4 (government and media). Arrows show how information moves between them, and where it gets lost.</figcaption>
+            </figure>
+            <aside class="regions-legend" aria-label="How information flows">
+              <h3>How information flows</h3>
+              <ol>
+                <li><button class="region-toggle" type="button" data-region="r0" aria-pressed="false"><span>R0</span><p>People trapped in the disaster zone</p></button></li>
+                <li><button class="region-toggle" type="button" data-region="r1" aria-pressed="false"><span>R1</span><p>People stuck nearby, waiting for help</p></button></li>
+                <li><button class="region-toggle" type="button" data-region="r2" aria-pressed="false"><span>R2</span><p>Families trying to reach them and follow the news</p></button></li>
+                <li><button class="region-toggle" type="button" data-region="r3" aria-pressed="false"><span>R3</span><p>Rescue teams on the ground working with unclear information</p></button></li>
+                <li><button class="region-toggle" type="button" data-region="r4" aria-pressed="false"><span>R4</span><p>Control rooms and newsroom (government and media)</p></button></li>
+              </ol>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section class="case-section case-section--statement reveal" aria-labelledby="insight-title">
+        <div class="case-container">
+          <p class="section-number">02 / Key insight</p>
+          <h2 id="insight-title">Every stakeholder needs the same few facts: where, how bad, who is coming. The problem is that those facts don’t travel between them.</h2>
+          <p>One unified platform with two linked views, one for victims and one for rescuers.</p>
+        </div>
+      </section>
+
+      <section class="case-section reveal" aria-labelledby="research-title">
+        <div class="case-container">
+          <p class="section-number">03 / Research basis</p>
+          <h2 id="research-title">Designing around the people closest to the crisis.</h2>
+          <div class="mapping-block">
+            <div class="mapping-copy">
+              <p class="mapping-label">Method</p>
+              <h3>How I mapped the problem</h3>
+              <p>I traced how information moves from the first caller to every responder, to find where it gets lost.</p>
+              <h4>What the mapping set out to find</h4>
+              <ul>
+                <li>How information flows and what types of information flow</li>
+                <li>Key hotspots for information transfer</li>
+                <li>Who the main players are and the priority in which work is carried out</li>
+              </ul>
+              <div class="mapping-stats">
+                <div><strong>7</strong><span>services involved</span></div>
+                <div><strong>10</strong><span>data points identified</span></div>
+                <div><strong>4</strong><span>priority levels</span></div>
+              </div>
+              <p class="mapping-note">[Add your sources: interviews, reports, or desk research]</p>
+            </div>
+            <div class="mapping-media">
+              <figure class="mapping-figure">
+                <button class="mapping-image-button" type="button" aria-label="Enlarge situation mapping diagram">
+                  <span class="mapping-image-frame">
+                    <img src="../assets/arohi/situation-mapping.png" alt="Situation mapping diagram. A disaster event triggers calls to 112, which reach police and ambulance as first on-site reporters. After a briefing and an assessment of the situation, information branches to the medical team, the state disaster management team, and media and volunteers. Below it are a list of seven services involved and ten identified data points, color-coded by who needs them and when." width="1480" height="2520" sizes="(min-width: 900px) 640px, 100vw" loading="lazy" />
+                  </span>
+                </button>
+                <figcaption>Tap to enlarge</figcaption>
+              </figure>
+              <div class="data-points-layout">
+                <figure class="data-points-figure">
+                  <p class="mapping-label">What information is needed</p>
+                  <button class="data-points-image-button mapping-image-button" type="button" aria-label="Enlarge data points">
+                    <span class="data-points-image-frame mapping-image-frame">
+                      <span class="data-points-stage">
+                        <img src="../assets/arohi/data-points.png" alt="Ten identified data points. Red: count of death and injured, affected people. Yellow: type of disaster, scale of disaster. Green: affected area, location and affected span of area. Uncolored: cause of disaster, result of disaster, time of occurrence." width="1148" height="1190" loading="lazy" />
+                        <span class="data-band data-band--red" aria-hidden="true"></span>
+                        <span class="data-band data-band--yellow" aria-hidden="true"></span>
+                        <span class="data-band data-band--green" aria-hidden="true"></span>
+                        <span class="data-band data-band--white" aria-hidden="true"></span>
+                      </span>
+                    </span>
+                  </button>
+                  <figcaption>Each data point is color-coded by who needs it, and when. Colors match the legend.</figcaption>
+                  <ol class="sr-only">
+                    <li>Red: count of death and injured.</li>
+                    <li>Red: affected people.</li>
+                    <li>Yellow: type of disaster.</li>
+                    <li>Yellow: scale of disaster.</li>
+                    <li>Green: affected area.</li>
+                    <li>Green: location.</li>
+                    <li>Green: affected span of area.</li>
+                    <li>White: cause of disaster.</li>
+                    <li>White: result of disaster.</li>
+                    <li>White: time of occurrence.</li>
+                  </ol>
+                </figure>
+                <div class="mapping-legend" aria-label="Data point color legend">
+                  <button type="button" class="mapping-legend__item" data-data-group="red" aria-pressed="false"><span class="swatch swatch--red"></span><span>Required by first-hand reporters</span></button>
+                  <button type="button" class="mapping-legend__item" data-data-group="yellow" aria-pressed="false"><span class="swatch swatch--yellow"></span><span>Required to further send for help</span></button>
+                  <button type="button" class="mapping-legend__item" data-data-group="green" aria-pressed="false"><span class="swatch swatch--green"></span><span>Required to control the situation</span></button>
+                  <button type="button" class="mapping-legend__item" data-data-group="white" aria-pressed="false"><span class="swatch swatch--white"></span><span>Required for media and situation debrief and analysis</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="persona-grid">
+            <button class="persona persona-trigger" type="button" data-modal-target="persona-arvind"><h3>Arvind Patil</h3><p>42 · Sub-Inspector · Sangli</p><dl><dt>Pain</dt><dd>Unreliable networks, overloaded radio, no up-to-date maps.</dd><dt>Goal</dt><dd>Orderly evacuation and coordination with fire, rescue and NGOs.</dd></dl><span class="persona-trigger__label">View full persona →</span></button>
+            <button class="persona persona-trigger" type="button" data-modal-target="persona-ravi"><h3>Ravi Deshmukh</h3><p>38 · Affected resident · Nashik</p><dl><dt>Pain</dt><dd>Conflicting information, signal drops, no power.</dd><dt>Goal</dt><dd>Keep family safe and reach authorities.</dd></dl><span class="persona-trigger__label">View full persona →</span></button>
+            <button class="persona persona-trigger" type="button" data-modal-target="persona-sanvi"><h3>Sanvi Saranjame</h3><p>32 · Rescue responder · Nashik</p><dl><dt>Pain</dt><dd>Disorganized local data, weak government-NGO coordination.</dd><dt>Goal</dt><dd>Reach as many stranded people as possible, fast.</dd></dl><span class="persona-trigger__label">View full persona →</span></button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Region</th><th>Biggest pain</th><th>What Arohi does</th></tr></thead>
+              <tbody>
+                <tr><th>R0 Trapped</th><td>Physical pain, confusion</td><td>One-tap SOS, camera, “help is reaching you” countdown</td></tr>
+                <tr><th>R1 Stuck nearby</th><td>No one to contact</td><td>Call 112 and see status of help</td></tr>
+                <tr><th>R2 Families</th><td>Anxiety, no status</td><td>Status and location updates</td></tr>
+                <tr><th>R3 Rescue teams</th><td>Which information to trust, too many requests</td><td>Dashboard with red, orange, yellow zones</td></tr>
+                <tr><th>R4 Govt and media</th><td>Late updates</td><td>Live status of help provided</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="case-section reveal" aria-labelledby="decisions-title">
+        <div class="case-container">
+          <p class="section-number">04 / Design decisions</p>
+          <div class="decision-layout">
+            <figure class="image-frame">
+              <button class="image-lightbox-button" type="button" aria-label="Enlarge Arohi user interface screens">
+                <img src="../assets/arohi/ui-screens.png" alt="Arohi user interface screens showing emergency actions" width="1200" height="900" loading="lazy" />
+              </button>
+              <figcaption>Victim flows share one information architecture.</figcaption>
+            </figure>
+            <div><h2 id="decisions-title">Small actions made legible under pressure.</h2>
+              <div class="decision-list">
+                <article><span>01</span><h3>A 10-second countdown with a swipe to cancel</h3><p>Panic causes accidental calls, so starting is fast and cancelling is deliberate.</p></article>
+                <article><span>02</span><h3>Highlight yourself with flash, sound and vibration</h3><p>Trapped people have no way to signal location, so the phone becomes a beacon.</p></article>
+                <article><span>03</span><h3>Two flows, one information architecture</h3><p>Victims and rescuers need the same facts at different depths.</p></article>
+              </div>
+            </div>
+          </div>
+          <div class="flow-wireframes">
+            <figure class="flow-figure">
+              <p class="flow-label">Step 1 · Navigation flow for victims</p>
+              <div class="flow-image-scroll" tabindex="0" aria-label="Scrollable navigation flow">
+                <div class="flow-image-frame">
+                  <button class="flow-image-button image-lightbox-button" type="button" aria-label="Enlarge navigation flow">
+                    <img src="../assets/arohi/nav-flow.png" alt="Navigation flow of the Arohi interface. SOS mode leads to the emergency call, which branches into help countdown, menu for more help, call again, and highlighters (sound, flash light, vibrate). Menu for more help enters the dashboard, which branches into highlight you on map, request help, status of request and contact more help, leading to medical, service and volunteer options and to NGO, police, fire control and state authority." width="1977" height="890" loading="lazy" />
+                  </button>
+                </div>
+                <p class="flow-scroll-hint">Swipe to see the full flow</p>
+              </div>
+              <figcaption>Every path starts from one SOS action and ends in a request for help.</figcaption>
+              <ol class="sr-only">
+                <li>SOS mode leads to the emergency call.</li>
+                <li>The emergency call branches into help countdown, menu for more help, call again, and highlighters: sound, flash light, and vibrate.</li>
+                <li>The menu for more help enters the dashboard.</li>
+                <li>The dashboard branches into highlight you on map, request help, status of request, and contact more help.</li>
+                <li>Contact more help leads to medical, service, and volunteer options, and to NGO, police, fire control, and state authority.</li>
+              </ol>
+            </figure>
+            <figure class="wireframes-figure">
+              <p class="flow-label">Step 2 · Navigation for responders</p>
+              <div class="wireframes-scroll" tabindex="0" aria-label="Scrollable wireframes">
+                <div class="wireframes-image-frame">
+                  <div class="wireframes-stage">
+                    <button class="wireframes-image-button image-lightbox-button" type="button" aria-label="Enlarge wireframes">
+                      <img src="../assets/arohi/wireframes.png" alt="Five wireframes: emergency call with a 10-second countdown and swipe to cancel; connected call with camera, ambulance and police buttons; help arriving in 12:58 minutes with open dashboard, call again and highlight yourself options; dashboard with a map, a highlight-you button and a request status area; and a contact-more-help screen with NGOs, hospitals, fire brigade and NDM." width="1977" height="810" loading="lazy" />
+                      <span class="wireframe-highlight" aria-hidden="true"></span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <figcaption>Five screens carry the critical path from SOS to a live dashboard.</figcaption>
+              <ol class="sr-only">
+                <li>Emergency call with a 10-second countdown and swipe to cancel.</li>
+                <li>Connected call with camera, ambulance, and police buttons.</li>
+                <li>Help arriving in 12:58 minutes with open dashboard, call again, and highlight yourself options.</li>
+                <li>Dashboard with a map, a highlight-you button, and a request status area.</li>
+                <li>Contact-more-help screen with NGOs, hospitals, fire brigade, and NDM.</li>
+              </ol>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="case-section reveal" aria-labelledby="prototype-title">
+        <div class="case-container">
+          <p class="section-number">05 / Prototype</p>
+          <h2 id="prototype-title">The Arohi prototype in action</h2>
+          <div class="prototype-tabs" role="tablist" aria-label="Arohi prototypes">
+            <button id="prototype-sos-tab" role="tab" aria-selected="true" aria-controls="prototype-sos">Victim SOS app · mobile</button>
+            <button id="prototype-dashboard-tab" role="tab" aria-selected="false" aria-controls="prototype-dashboard" tabindex="-1">Rescue dashboard · iPad / desktop</button>
+          </div>
+          <div id="prototype-sos" class="prototype-panel prototype-panel--sos" role="tabpanel" aria-labelledby="prototype-sos-tab">
+            <p class="sr-only">The Victim SOS app prototype demonstrates the emergency call flow, countdown, connected responders, estimated arrival, and personal highlighting tools.</p>
+            <div class="prototype-sos-layout">
+              <div>
+                <div class="prototype-embed prototype-embed--phone" data-src="https://emergency-sos-response.ai.studio/">
+                  <div class="prototype-bar">
+                    <div class="prototype-title"><span class="prototype-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>Victim SOS app · Live prototype</span></div>
+                    <div class="prototype-actions"><a class="prototype-open" target="_blank" rel="noopener noreferrer">Open in new tab ↗</a><button class="prototype-fullscreen" type="button">Full screen</button></div>
+                  </div>
+                  <div class="phone-frame">
+                    <div class="phone-notch" aria-hidden="true"></div>
+                    <div class="phone-screen prototype-stage">
+                      <div class="prototype-cover">
+                        <img src="../assets/arohi/ui-screens.png" alt="Arohi victim SOS app screens" width="1200" height="900" loading="lazy" />
+                        <div class="prototype-cover-overlay"><button class="prototype-launch" type="button"><span aria-hidden="true">▶</span>Try the SOS app</button><p>Interactive · tap through the emergency flow</p></div>
+                      </div>
+                      <div class="prototype-loading" hidden><span aria-hidden="true"></span><span>Loading prototype…</span></div>
+                      <div class="prototype-fallback" hidden><p>The prototype couldn’t load here. Open it in a new tab instead.</p><a class="prototype-fallback-open" target="_blank" rel="noopener noreferrer">Open in new tab ↗</a><button class="prototype-retry" type="button">Try again</button></div>
+                    </div>
+                  </div>
+                  <div class="prototype-phone-actions"><a class="prototype-open" target="_blank" rel="noopener noreferrer">Open in new tab ↗</a><button class="prototype-restart" type="button">Restart</button><button class="prototype-fullscreen" type="button">Full screen</button></div>
+                  <noscript><a href="https://emergency-sos-response.ai.studio/" target="_blank" rel="noopener noreferrer">Open in new tab ↗</a></noscript>
+                </div>
+              </div>
+              <div class="prototype-howto"><h3>How to try it</h3><ol><li><span>1</span>Tap the SOS button to start an emergency call.</li><li><span>2</span>Watch the 10-second countdown. Swipe to cancel.</li><li><span>3</span>See the connected screen: camera, ambulance, police.</li><li><span>4</span>Check the “Help is reaching you” screen and the estimated arrival.</li><li><span>5</span>Try “Highlight yourself”: sound, flash, vibrate.</li></ol><p class="prototype-note">The green and orange elements evoke a sense of relief that the help is on the way.</p></div>
+            </div>
+          </div>
+          <div id="prototype-dashboard" class="prototype-panel" role="tabpanel" aria-labelledby="prototype-dashboard-tab" hidden>
+            <div class="prototype-embed" data-src="https://resq-command-dashboar.ai.studio/">
+              <div class="prototype-bar"><div class="prototype-title"><span class="prototype-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>ResQ Command Dashboard · Live prototype</span></div><div class="prototype-actions"><a class="prototype-open" target="_blank" rel="noopener noreferrer">Open in new tab ↗</a><button class="prototype-fullscreen" type="button">Full screen</button></div></div>
+              <div class="prototype-stage"><div class="prototype-cover"><img src="../assets/arohi/dashboard.png" alt="Arohi rescue team dashboard showing priority zones and requests" width="1400" height="900" loading="lazy" /><div class="prototype-cover-overlay"><button class="prototype-launch" type="button"><span aria-hidden="true">▶</span>Try the prototype</button><p>Interactive · best on desktop or tablet</p></div></div><div class="prototype-loading" hidden><span aria-hidden="true"></span><span>Loading prototype…</span></div><div class="prototype-fallback" hidden><p>The prototype couldn’t load here. Open it in a new tab instead.</p><a class="prototype-fallback-open" target="_blank" rel="noopener noreferrer">Open in new tab ↗</a><button class="prototype-retry" type="button">Try again</button></div></div>
+              <noscript><a href="https://resq-command-dashboar.ai.studio/" target="_blank" rel="noopener noreferrer">Open in new tab ↗</a></noscript>
+            </div>
+            <p class="prototype-caption">Live map with priority zones and a request queue (iPad/desktop). Click inside to explore.</p><p class="prototype-tip">Try: tap a red zone on the map, then check the request queue.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="case-section reveal" aria-labelledby="validation-title">
+        <div class="case-container">
+          <p class="section-number">06 / Validation</p>
+          <h2 id="validation-title">Testing what needs to work when attention is limited.</h2>
+          <div id="validation-content">
+            <div class="placeholder">The green and orange elements evoke a sense of relief that the help is on the way.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="case-section reveal" aria-labelledby="constraints-title">
+        <div class="case-container">
+          <p class="section-number">07 / Constraints and next steps</p>
+          <div class="split-copy"><div><h2 id="constraints-title">It depends on a network, which disasters often take away.</h2><p>The UI is the easy part; the next step is a resilient device. The information architecture and navigation stay constant because that is where UX matters most in a crisis.</p><ul><li>Waterproof and impact-proof body</li><li>Tactile buttons</li><li>Disaster-adaptable color palette</li><li>Radio network for connection</li></ul></div><figure class="image-frame"><img src="../assets/arohi/device.png" alt="Concept image of a resilient Arohi emergency device" width="1000" height="800" loading="lazy" /><figcaption>A resilient device concept for conditions where a phone network may fail.</figcaption></figure></div>
+        </div>
+      </section>
+
+      <section class="case-section reveal" aria-labelledby="appendix-title">
+        <div class="case-container">
+          <p class="section-number">Appendix</p>
+          <h2 id="appendix-title">Data Visualizations</h2>
+          <figure class="image-frame"><img src="../assets/arohi/situation-map.png" alt="Situation map showing interventions and information loss across a disaster response" width="1400" height="900" loading="lazy" /><figcaption>Situation mapping: who intervenes at which stage, and where information gets lost.</figcaption></figure>
+          <div class="appendix-links"><a class="text-link" href="#">Research papers →</a></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="case-footer">
+      <a class="case-behance-button" href="https://www.behance.net/gallery/245227537/AROHI-Disaster-Management-Interface" target="_blank" rel="noopener noreferrer">View on Behance <span aria-hidden="true">→</span></a>
+      <a class="text-link" href="#top">Back to top ↑</a>
+    </footer>
+    <div class="lightbox" id="regions-lightbox" hidden role="dialog" aria-modal="true" aria-label="Enlarged illustration">
+      <button class="lightbox__close" type="button" aria-label="Close enlarged illustration">×</button>
+      <img src="../assets/arohi/group213.png" alt="" width="4699" height="5910" />
+    </div>
+    <dialog id="persona-arvind" class="persona-modal" aria-labelledby="persona-arvind-title">
+      <div class="persona-modal__header">
+        <h2 id="persona-arvind-title">Persona 1</h2>
+      </div>
+      <button class="persona-modal__close" type="button" aria-label="Close persona">×</button>
+      <img src="../assets/arohi/persona-arvind.png" alt="Persona sheet for Sub-Inspector Arvind Patil, 42, Sangli, Maharashtra: behaviors, pain points, goals and a six-step journey from deployment and area assessment to reporting and handover." width="1560" height="1600" />
+      <p class="persona-modal__source">Research-based persona. Source: 2020 flood reports</p>
+    </dialog>
+    <dialog id="persona-ravi" class="persona-modal" aria-labelledby="persona-ravi-title">
+      <div class="persona-modal__header">
+        <h2 id="persona-ravi-title">Persona 2</h2>
+      </div>
+      <button class="persona-modal__close" type="button" aria-label="Close persona">×</button>
+      <img src="../assets/arohi/persona-ravi.png" alt="Persona sheet for affected resident Ravi Deshmukh, 38, Nashik: behaviors, pain points, goals and journey." width="1560" height="1600" />
+      <p class="persona-modal__source">Research-based persona. Source: 2020 flood reports</p>
+    </dialog>
+    <dialog id="persona-sanvi" class="persona-modal" aria-labelledby="persona-sanvi-title">
+      <div class="persona-modal__header">
+        <h2 id="persona-sanvi-title">Persona 3</h2>
+      </div>
+      <button class="persona-modal__close" type="button" aria-label="Close persona">×</button>
+      <img src="../assets/arohi/persona-sanvi.png" alt="Persona sheet for rescue responder Sanvi Saranjame, 32, Nashik: behaviors, pain points, goals and journey." width="1560" height="1600" />
+      <p class="persona-modal__source">Research-based persona. Source: 2020 flood reports</p>
+    </dialog>
+    <script src="../assets/js/content.js"></script>
+    <script src="../assets/js/icons.js"></script>
+    <script src="../assets/js/header.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script>
+      const TEST_DATA = {
+        method: { type: "", participants: null, date: "", prototype: "", tasks: [] },
+        participants: [],
+        taskResults: [],
+        responses: [],
+        findings: [],
+        next: ""
+      };
+      const renderValidation = () => {
+        const root = document.getElementById("validation-content");
+        if (!TEST_DATA || (!TEST_DATA.method.participants && !TEST_DATA.method.type && !TEST_DATA.method.date && !TEST_DATA.method.tasks.length && !TEST_DATA.taskResults.length && !TEST_DATA.responses.length && !TEST_DATA.findings.length)) return;
+        root.textContent = "";
+        const make = (tag, text, className) => { const node = document.createElement(tag); if (text !== undefined) node.textContent = text; if (className) node.className = className; return node; };
+        const summary = [TEST_DATA.method.participants ? `${TEST_DATA.method.participants} participants` : "", TEST_DATA.method.type, TEST_DATA.method.date].filter(Boolean).join(" · ");
+        if (summary) root.append(make("p", summary, "validation-summary"));
+        const stats = make("div", undefined, "validation-stats");
+        const addStat = (label, value) => { if (value !== undefined && value !== null && value !== "") { const card = make("div"); card.append(make("strong", value), make("span", label)); stats.append(card); } };
+        addStat("participants", TEST_DATA.method.participants);
+        addStat("tasks tested", TEST_DATA.method.tasks.length || TEST_DATA.taskResults.length || null);
+        const completed = TEST_DATA.taskResults.reduce((sum, item) => sum + (Number(item.completed) || 0), 0), total = TEST_DATA.taskResults.reduce((sum, item) => sum + (Number(item.total) || 0), 0);
+        addStat("overall task completion", total ? `${completed}/${total}` : null);
+        addStat("findings", TEST_DATA.findings.length || null);
+        if (stats.children.length) root.append(stats);
+        if (TEST_DATA.taskResults.length) {
+          const chart = make("div", undefined, "validation-chart"); chart.append(make("h3", "Task results"));
+          const table = make("table", undefined, "validation-table sr-only"), body = make("tbody");
+          TEST_DATA.taskResults.forEach((item) => { const ratio = item.total ? Math.max(0, Math.min(100, item.completed / item.total * 100)) : 0, row = make("div", undefined, "validation-task"); row.setAttribute("role", "img"); row.setAttribute("aria-label", `${item.task}: ${item.completed} of ${item.total} completed`); const track = make("div", undefined, "validation-track"), fill = make("span"); fill.dataset.width = `${ratio}%`; fill.style.width = "0"; track.append(fill); row.append(make("span", item.task), track, make("strong", `${item.completed}/${item.total}${item.avgSeconds ? ` · ${item.avgSeconds}s` : ""}`)); chart.append(row); const tr = make("tr"); [item.task, `${item.completed}/${item.total}`, item.avgSeconds || ""].forEach((value) => tr.append(make("td", value))); body.append(tr); }); table.append(body); root.append(chart); const bars = root.querySelectorAll(".validation-track span"); if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) bars.forEach((bar) => { bar.style.width = bar.dataset.width; }); else { const barObserver = new IntersectionObserver((entries, observer) => entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.style.width = entry.target.dataset.width; observer.unobserve(entry.target); } })); bars.forEach((bar) => barObserver.observe(bar)); }
+        }
+        if (TEST_DATA.responses.length) {
+          const section = make("section", undefined, "validation-quotes"), filters = make("div", undefined, "validation-filters"), themes = ["All", ...new Set(TEST_DATA.responses.map((item) => item.theme).filter(Boolean))], grid = make("div", undefined, "validation-quote-grid"), all = [...TEST_DATA.responses];
+          themes.forEach((theme, index) => { const button = make("button", theme, "validation-filter"); button.type = "button"; button.setAttribute("aria-pressed", String(index === 0)); button.onclick = () => { filters.querySelectorAll("button").forEach((item) => item.setAttribute("aria-pressed", String(item === button))); grid.querySelectorAll("blockquote").forEach((card) => { card.hidden = theme !== "All" && card.dataset.theme !== theme; }); }; filters.append(button); }); section.append(make("h3", "What participants said"), filters);
+          all.forEach((item, index) => { const card = make("blockquote"); card.dataset.theme = item.theme || ""; if (index > 5) card.hidden = true; card.append(make("p", `“${item.quote}”`)); const person = TEST_DATA.participants.find((candidate) => candidate.id === item.participant), cite = make("cite", `${item.participant}${person?.role ? ` · ${person.role}` : ""}${person?.age ? ` · ${person.age}` : ""}`), theme = make("span", item.theme || "Other", "validation-theme"), dot = make("span", item.sentiment || "neutral", `sentiment sentiment--${item.sentiment || "neutral"}`); cite.append(theme, dot); card.append(cite); grid.append(card); }); if (all.length > 6) { const more = make("button", "Show more", "validation-more"); more.type = "button"; more.onclick = () => { grid.querySelectorAll("blockquote").forEach((card) => { card.hidden = false; }); more.hidden = true; }; section.append(more); } section.append(grid); root.append(section);
+        }
+        if (TEST_DATA.findings.length) { const section = make("section", undefined, "validation-findings"), rank = { high: 0, medium: 1, low: 2 }; section.append(make("h3", "Findings to changes")); [...TEST_DATA.findings].sort((a, b) => (rank[a.severity] ?? 3) - (rank[b.severity] ?? 3)).forEach((item) => { const card = make("article", undefined, "validation-finding"); const left = make("div"); left.append(make("span", item.severity, `severity severity--${item.severity}`), make("h4", item.title), make("p", item.evidence)); const right = make("div", undefined, "validation-change"); right.append(make("span", "→", "validation-arrow"), make("p", item.change), make("small", item.screen ? `Screen: ${item.screen}` : "")); card.append(left, right); section.append(card); }); root.append(section); }
+        if (TEST_DATA.next) root.append(make("p", `What I’d test next: ${TEST_DATA.next}`, "validation-next"));
+      };
+      renderValidation();
+    </script>
+    <script>
+      const imageButton = document.querySelector(".regions-image-button");
+      const stage = document.querySelector(".ecosystem-stage");
+      const lightbox = document.getElementById("regions-lightbox");
+      const closeButton = lightbox.querySelector(".lightbox__close");
+      const regionPositions = {
+        r0: { left: "88%", top: "20%", width: "27%" },
+        r1: { left: "77%", top: "28%", width: "29%" },
+        r2: { left: "26%", top: "46%", width: "44%" },
+        r3: { left: "74%", top: "69%", width: "49%" },
+        r4: { left: "25%", top: "82%", width: "44%" }
+      };
+      const regionToggles = Array.from(document.querySelectorAll(".region-toggle"));
+      const dataStage = document.querySelector(".data-points-stage");
+      const dataToggles = Array.from(document.querySelectorAll(".mapping-legend__item"));
+      const dataBands = {
+        red: { top: "7%", height: "18%" },
+        yellow: { top: "26%", height: "18%" },
+        green: { top: "54%", height: "39%" },
+        white: { top: "44%", height: "56%" }
+      };
+      const clearRegion = () => {
+        delete imageButton.dataset.region;
+        regionToggles.forEach((item) => item.setAttribute("aria-pressed", "false"));
+      };
+      const clearData = () => {
+        delete dataStage.dataset.active;
+        dataToggles.forEach((item) => item.setAttribute("aria-pressed", "false"));
+      };
+      let lightboxTrigger = imageButton;
+      const closeLightbox = () => { lightbox.hidden = true; lightbox.classList.remove("lightbox--mapping"); lightboxTrigger.focus(); };
+      const openLightbox = (button) => {
+        lightboxTrigger = button;
+        const source = button.querySelector("img");
+        const preview = lightbox.querySelector("img");
+        preview.src = source.src;
+        preview.alt = source.alt;
+        lightbox.classList.toggle("lightbox--mapping", button.classList.contains("mapping-image-button"));
+        lightbox.hidden = false;
+        closeButton.focus();
+      };
+      document.querySelectorAll(".regions-image-button, .mapping-image-button, .image-lightbox-button").forEach((button) => {
+        button.addEventListener("click", () => openLightbox(button));
+      });
+      closeButton.addEventListener("click", closeLightbox);
+      lightbox.addEventListener("click", (event) => { if (event.target === lightbox) closeLightbox(); });
+      document.addEventListener("keydown", (event) => {
+        if (event.key !== "Escape") return;
+        if (!lightbox.hidden) closeLightbox();
+        clearRegion();
+        clearData();
+      });
+      regionToggles.forEach((toggle) => {
+        toggle.addEventListener("click", () => {
+          const active = toggle.getAttribute("aria-pressed") === "true";
+          if (active) {
+            clearRegion();
+            return;
+          }
+          const position = regionPositions[toggle.dataset.region];
+          regionToggles.forEach((item) => item.setAttribute("aria-pressed", "false"));
+          toggle.setAttribute("aria-pressed", "true");
+          imageButton.dataset.region = toggle.dataset.region;
+          Object.entries(position).forEach(([property, value]) => {
+            stage.querySelector(".region-highlight").style[property] = value;
+          });
+          if (window.innerWidth < 900) {
+            stage.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "center" });
+          }
+        });
+      });
+      dataToggles.forEach((toggle) => {
+        toggle.addEventListener("click", () => {
+          const group = toggle.dataset.dataGroup;
+          if (dataStage.dataset.active === group) {
+            clearData();
+            return;
+          }
+          dataStage.dataset.active = group;
+          dataToggles.forEach((item) => item.setAttribute("aria-pressed", String(item === toggle)));
+          const band = dataBands[group];
+          const target = dataStage.querySelector(`.data-band--${group}`);
+          target.style.top = band.top;
+          target.style.height = band.height;
+        });
+      });
+      document.addEventListener("click", (event) => {
+        if (!event.target.closest(".regions-legend")) clearRegion();
+        if (!event.target.closest(".data-points-layout")) clearData();
+      });
+      const embedPrototypes = (embed) => {
+        const url = embed.dataset.src;
+        const stage = embed.querySelector(".prototype-stage");
+        const openLinks = embed.querySelectorAll(".prototype-open, .prototype-fallback-open");
+        openLinks.forEach((link) => { link.href = url; });
+        const load = () => {
+          if (embed.classList.contains("prototype-embed--phone") === false && window.matchMedia("(max-width: 699px)").matches) {
+            embed.querySelector(".prototype-open").click();
+            return;
+          }
+          embed.querySelector(".prototype-cover").classList.add("is-loaded");
+          embed.querySelector(".prototype-loading").hidden = false;
+          embed.querySelector(".prototype-fallback").hidden = true;
+          embed.classList.remove("is-fallback");
+          const iframe = document.createElement("iframe");
+          iframe.src = url;
+          iframe.title = embed.classList.contains("prototype-embed--phone") ? "Arohi emergency SOS app prototype" : "ResQ rescue team dashboard prototype";
+          iframe.loading = "lazy";
+          iframe.referrerPolicy = "no-referrer";
+          iframe.allow = "fullscreen; geolocation 'none'; camera 'none'; microphone 'none'; vibrate 'none'";
+          iframe.sandbox.add("allow-scripts", "allow-same-origin", "allow-forms", "allow-popups");
+          iframe.addEventListener("load", () => { embed.querySelector(".prototype-loading").hidden = true; });
+          stage.querySelector("iframe")?.remove();
+          stage.append(iframe);
+          window.setTimeout(() => {
+            if (!embed.querySelector(".prototype-loading").hidden) {
+              embed.querySelector(".prototype-loading").hidden = true;
+              embed.querySelector(".prototype-fallback").hidden = false;
+              embed.classList.add("is-fallback");
+            }
+          }, 8000);
+        };
+        embed.querySelector(".prototype-launch").addEventListener("click", load);
+        embed.querySelector(".prototype-retry").addEventListener("click", load);
+        embed.querySelector(".prototype-restart")?.addEventListener("click", load);
+        embed.querySelectorAll(".prototype-fullscreen").forEach((button) => button.addEventListener("click", () => stage.requestFullscreen ? stage.requestFullscreen() : embed.querySelector(".prototype-open").click()));
+      };
+      document.querySelectorAll(".prototype-embed").forEach(embedPrototypes);
+      const tabs = Array.from(document.querySelectorAll(".prototype-tabs [role=\"tab\"]"));
+      const panels = tabs.map((tab) => document.getElementById(tab.getAttribute("aria-controls")));
+      const activateTab = (index, updateHash = true) => {
+        tabs.forEach((tab, i) => { const active = i === index; tab.setAttribute("aria-selected", String(active)); tab.tabIndex = active ? 0 : -1; panels[i].hidden = !active; });
+        if (updateHash) history.replaceState(null, "", index ? "#prototype-dashboard" : "#prototype-sos");
+      };
+      const hashIndex = window.location.hash === "#prototype-dashboard" ? 1 : 0;
+      activateTab(hashIndex, false);
+      tabs.forEach((tab, index) => {
+        tab.addEventListener("click", () => activateTab(index));
+        tab.addEventListener("keydown", (event) => {
+          const next = event.key === "ArrowRight" ? (index + 1) % tabs.length : event.key === "ArrowLeft" ? (index + tabs.length - 1) % tabs.length : event.key === "Home" ? 0 : event.key === "End" ? tabs.length - 1 : index;
+          if (next !== index) { event.preventDefault(); activateTab(next); tabs[next].focus(); }
+        });
+      });
+      document.addEventListener("fullscreenchange", () => document.querySelectorAll(".prototype-fullscreen").forEach((button) => { button.textContent = document.fullscreenElement ? "Exit full screen" : "Full screen"; }));
+      let modalScrollY = 0;
+      document.querySelectorAll("[data-modal-target]").forEach((card) => {
+        const dialog = document.getElementById(card.dataset.modalTarget);
+        const close = dialog.querySelector(".persona-modal__close");
+        card.addEventListener("click", () => { modalScrollY = window.scrollY; dialog.showModal(); document.body.style.top = `-${modalScrollY}px`; document.body.classList.add("modal-open"); close.focus(); });
+        dialog.addEventListener("click", (event) => { if (event.target === dialog) dialog.close(); });
+        dialog.addEventListener("close", () => { document.body.classList.remove("modal-open"); document.body.style.top = ""; window.scrollTo(0, modalScrollY); card.focus(); });
+        close.addEventListener("click", () => dialog.close());
+      });
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add("is-visible"));
+      }, { threshold: 0.12 });
+      document.querySelectorAll(".reveal").forEach((section) => observer.observe(section));
+    </script>
+  </body>
+</html>

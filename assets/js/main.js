@@ -56,12 +56,13 @@
   // ---- Header -----------------------------------------------------------
   function renderHeader() {
     var h = C.header || {};
+    var assetPrefix = document.body.dataset.siteRoot || "";
     setText("resume-label", h.resumeLabel || "Resume");
     setText("find-me-text", h.findMeText || "You can find me on");
 
     var btn = $("resume-btn");
     if (btn && h.resumeFile) {
-      btn.setAttribute("href", encodePath(h.resumeFile));
+      btn.setAttribute("href", assetPrefix + encodePath(h.resumeFile));
       btn.target = "_blank";
       btn.rel = "noopener noreferrer";
     }
@@ -186,7 +187,10 @@
       status.textContent = item.status || "Case study";
       entry.appendChild(status);
       var card;
-      if (item.url) {
+      if (item.title === "Arohi: Disaster Management Interface") {
+        card = el("a", "project-card");
+        card.href = "case-studies/arohi.html";
+      } else if (item.url) {
         card = el("a", "project-card");
         card.href = item.url;
         card.target = "_blank";
@@ -252,9 +256,12 @@
 
       if (item.url) {
         var caseStudyLink = el("a", "project-case-study");
-        caseStudyLink.href = item.url;
-        caseStudyLink.target = "_blank";
-        caseStudyLink.rel = "noopener noreferrer";
+        var isArohiCaseStudy = item.title === "Arohi: Disaster Management Interface";
+        caseStudyLink.href = isArohiCaseStudy ? "case-studies/arohi.html" : item.url;
+        if (!isArohiCaseStudy) {
+          caseStudyLink.target = "_blank";
+          caseStudyLink.rel = "noopener noreferrer";
+        }
         var caseStudyLabel = el("span");
         caseStudyLabel.textContent = "Read case study";
         var externalIcon = document.createElementNS(
