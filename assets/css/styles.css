@@ -59,6 +59,7 @@ body {
   font-family: var(--font-ui);
   color: var(--color-text);
   background: var(--color-cream);
+  cursor: auto;
   line-height: 1.35;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -2488,12 +2489,14 @@ p {
 }
 
 .metric {
+  position: relative;
   display: flex;
   min-height: 5rem;
   flex-direction: column;
   justify-content: center;
   padding-inline: 1rem;
   border-left: 2px solid var(--maroon-light);
+  cursor: default;
 }
 
 .metric strong {
@@ -2503,9 +2506,49 @@ p {
   line-height: 1.15;
 }
 
-.metric span {
+.metric__label {
   color: var(--muted);
   font-size: 0.82rem;
+}
+
+.metric__takeaway {
+  position: absolute;
+  z-index: 2;
+  top: calc(100% + 0.75rem);
+  left: 1rem;
+  width: min(18rem, calc(100vw - 4rem));
+  padding: 0.8rem 0.95rem;
+  border: 1px solid var(--border);
+  border-radius: 1.5rem;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.82rem;
+  line-height: 1.4;
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(0.5rem) scale(0.96);
+  transform-origin: top left;
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.metric__takeaway::after {
+  position: absolute;
+  top: -0.4rem;
+  left: 1rem;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-top: 1px solid var(--border);
+  border-left: 1px solid var(--border);
+  background: var(--surface);
+  content: "";
+  transform: rotate(45deg);
+}
+
+.metric:hover .metric__takeaway,
+.metric:focus-visible .metric__takeaway {
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
 
 .expertise,

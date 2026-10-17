@@ -28,6 +28,7 @@
     />
 
     <link rel="stylesheet" href="assets/css/styles.css" />
+    <link rel="stylesheet" href="assets/css/cursor.css" />
   </head>
 
   <body id="top">
@@ -125,10 +126,26 @@
             Highlights of volunteering, hackathons, and conferences attended.
           </p>
           <div class="metrics-strip__grid">
-            <div class="metric"><strong>UX India 2026</strong><span>Delegate</span></div>
-            <div class="metric"><strong>UXplorer '26</strong><span>Hackathon Participant</span></div>
-            <div class="metric"><strong>Medium Day '26</strong><span>Participant</span></div>
-            <div class="metric"><strong>IUCAA Volunteer</strong><span>Science Day 2019</span></div>
+            <div class="metric" tabindex="0" aria-describedby="metric-ux-india">
+              <strong>UX India 2026</strong>
+              <span class="metric__label">Delegate</span>
+              <span class="metric__takeaway" id="metric-ux-india">Rising Leaders: AI in Design Processes</span>
+            </div>
+            <div class="metric" tabindex="0" aria-describedby="metric-uxplorer">
+              <strong>UXplorer '26</strong>
+              <span class="metric__label">Hackathon Participant</span>
+              <span class="metric__takeaway" id="metric-uxplorer">Building a product from concept to launch in a fast-paced environment.</span>
+            </div>
+            <div class="metric" tabindex="0" aria-describedby="metric-medium-day">
+              <strong>Medium Day '26</strong>
+              <span class="metric__label">Participant</span>
+              <span class="metric__takeaway" id="metric-medium-day">Design writing journey</span>
+            </div>
+            <div class="metric" tabindex="0" aria-describedby="metric-iucaa">
+              <strong>IUCAA Volunteer</strong>
+              <span class="metric__label">Science Day 2019</span>
+              <span class="metric__takeaway" id="metric-iucaa">Explaining complex astronomical concepts to general audience.</span>
+            </div>
           </div>
         </div>
       </section>
@@ -243,5 +260,6 @@
     <script src="assets/js/content.js"></script>
     <script src="assets/js/icons.js"></script>
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/cursor.js"></script>
   </body>
 </html>
