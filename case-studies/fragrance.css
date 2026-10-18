@@ -1,0 +1,18 @@
+.fragrance-page{background:#E5E5E5;color:#2a2133}
+.fragrance-page main{background:#E5E5E5}
+.fragrance-page > .site-header{position:static;top:auto;z-index:auto;background:#E5E5E5;color:#2a2133;border-bottom:1px solid #cdb8e6;box-shadow:none}
+.fragrance-page .site-header .brand,.fragrance-page .site-header .socials__label,.fragrance-page .site-header .social-link{color:#8e0fb5}
+.fragrance-page .site-header .brand:hover,.fragrance-page .site-header .brand:focus-visible,.fragrance-page .site-header .social-link:hover,.fragrance-page .site-header .social-link:focus-visible{color:#8e0fb5;text-decoration:underline;text-underline-offset:3px;opacity:.78}
+.fragrance-intro{width:100%;height:0;margin:0;padding:0;overflow:hidden}
+.fragrance-intro .back-link{color:#8e0fb5;font-weight:600;text-decoration:none}
+.fragrance-intro .back-link:hover,.fragrance-intro .back-link:focus-visible{text-decoration:underline;text-underline-offset:3px}
+.pdf-pages{box-sizing:border-box;width:100%;margin:0;padding-inline:0;background:#E5E5E5}
+.pdf-pages picture{display:block;margin:0;padding:0;border:0;line-height:0}
+.pdf-pages img{display:block;width:100%;max-width:100%;height:auto;aspect-ratio:auto;max-height:none;object-fit:initial;object-position:initial;margin:0;padding:0;border:0;border-radius:0;box-shadow:none;transform:none}
+.pdf-pages,.pdf-pages picture,.pdf-pages picture:last-child{overflow:visible}
+.pdf-pages picture:last-child img{display:block;width:100%;height:auto;max-width:100%;max-height:none;aspect-ratio:auto;object-fit:initial;object-position:initial;overflow:visible}
+.fragrance-footer{width:min(100% - 3rem,1120px);margin:0 auto;padding:2rem max(1rem,env(safe-area-inset-left)) calc(4rem + env(safe-area-inset-bottom)) max(1rem,env(safe-area-inset-right));background:#E5E5E5}
+.fragrance-footer{display:block;margin-top:96px;padding-top:32px;border-top:1px solid #cdb8e6}
+.fragrance-footer a{color:#8e0fb5;font-weight:600;text-underline-offset:3px;transition:color 200ms ease,opacity 200ms ease}
+.fragrance-footer a:hover,.fragrance-footer a:focus-visible{color:#8e0fb5;text-decoration:underline;opacity:.78}
+@media(max-width:600px){.fragrance-footer{width:calc(100% - 2rem)}}
