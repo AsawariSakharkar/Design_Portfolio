@@ -292,7 +292,7 @@
       <section class="case-section reveal" aria-labelledby="validation-title">
         <div class="case-container">
           <p class="section-number">06 / Validation</p>
-          <h2 id="validation-title">Testing what needs to work when attention is limited.</h2>
+          <h2 id="validation-title">[Validation headline]</h2>
           <div id="validation-content">
             <div class="placeholder">The green and orange elements evoke a sense of relief that the help is on the way.</div>
           </div>
@@ -354,40 +354,51 @@
     <script src="../assets/js/main.js"></script>
     <script>
       const TEST_DATA = {
-        method: { type: "", participants: null, date: "", prototype: "", tasks: [] },
-        participants: [],
-        taskResults: [],
-        responses: [],
-        findings: [],
-        next: ""
+        headline: "I will use this in a disaster",
+        rationale: "A disaster isn’t something people can imagine accurately. So each participant first heard a researched scenario, so they acted from empathy, not from assumptions.",
+        snapshot: { participants: 3, order: ["survivor", "volunteer"], date: "August 2026", prototype: "SOS app and Rescue dashboard", method: "Interview, scenario briefing, task test, feedback interview" },
+        participants: [
+          { id: "P1", scenarios: ["survivor", "volunteer"], role: "[role]", ageRange: "[age range]" },
+          { id: "P2", scenarios: ["survivor", "volunteer"], role: "[role]", ageRange: "[age range]" },
+          { id: "P3", scenarios: ["survivor", "volunteer"], role: "[role]", ageRange: "[age range]" }
+        ],
+        scenarios: {
+          survivor: { label: "Survivor", question: "Can I reach help, and do I feel safe?", task: "Do what you would do first.", steps: ["Scenario", "Interview", "Use the app", "Feedback"] },
+          volunteer: { label: "Volunteer", question: "Do I know where to go, and in what priority?", task: "Find the critical patient and call for medical help.", steps: ["Persona briefing", "Interview", "Use the device", "Feedback"] }
+        },
+        scoreboard: {
+          survivor: [
+            { label: "The information architecture made me feel safe", yes: 3, total: 3 },
+            { label: "I felt help would reach me", yes: 3, total: 3 },
+            { label: "The features helped me ask for help better", yes: 2, total: 3 }
+          ],
+          volunteer: [
+            { label: "Found the critical patient", yes: "3", total: 3 },
+            { label: "Called for medical help without a hint", yes: "1", total: 3 },
+            { label: "Could act on priority and request type", yes: "1", total: 3 }
+          ]
+        },
+        quotes: [
+          { participant: "P1", scenario: "survivor", role: "Survivor", theme: "Reassurance", quote: "The status, give me reassurance that help will arrive." },
+          { participant: "P2", scenario: "survivor", role: "Survivor", theme: "Clarity", quote: "I can use this for other people too, which gives me ability to help them." },
+          { participant: "P3", scenario: "survivor", role: "Survivor", theme: "Speed", quote: "I can quicky share where i am." }
+        ],
+        limits: "Three participants gives direction, not proof. Each person tested both scenarios, so the survivor and volunteer results come from the same three people.",
+        next: "Next I’d test with 5 disaster managemet expaerts and 7 more prople from age above 25."
       };
       const renderValidation = () => {
-        const root = document.getElementById("validation-content");
-        if (!TEST_DATA || (!TEST_DATA.method.participants && !TEST_DATA.method.type && !TEST_DATA.method.date && !TEST_DATA.method.tasks.length && !TEST_DATA.taskResults.length && !TEST_DATA.responses.length && !TEST_DATA.findings.length)) return;
-        root.textContent = "";
-        const make = (tag, text, className) => { const node = document.createElement(tag); if (text !== undefined) node.textContent = text; if (className) node.className = className; return node; };
-        const summary = [TEST_DATA.method.participants ? `${TEST_DATA.method.participants} participants` : "", TEST_DATA.method.type, TEST_DATA.method.date].filter(Boolean).join(" · ");
-        if (summary) root.append(make("p", summary, "validation-summary"));
-        const stats = make("div", undefined, "validation-stats");
-        const addStat = (label, value) => { if (value !== undefined && value !== null && value !== "") { const card = make("div"); card.append(make("strong", value), make("span", label)); stats.append(card); } };
-        addStat("participants", TEST_DATA.method.participants);
-        addStat("tasks tested", TEST_DATA.method.tasks.length || TEST_DATA.taskResults.length || null);
-        const completed = TEST_DATA.taskResults.reduce((sum, item) => sum + (Number(item.completed) || 0), 0), total = TEST_DATA.taskResults.reduce((sum, item) => sum + (Number(item.total) || 0), 0);
-        addStat("overall task completion", total ? `${completed}/${total}` : null);
-        addStat("findings", TEST_DATA.findings.length || null);
-        if (stats.children.length) root.append(stats);
-        if (TEST_DATA.taskResults.length) {
-          const chart = make("div", undefined, "validation-chart"); chart.append(make("h3", "Task results"));
-          const table = make("table", undefined, "validation-table sr-only"), body = make("tbody");
-          TEST_DATA.taskResults.forEach((item) => { const ratio = item.total ? Math.max(0, Math.min(100, item.completed / item.total * 100)) : 0, row = make("div", undefined, "validation-task"); row.setAttribute("role", "img"); row.setAttribute("aria-label", `${item.task}: ${item.completed} of ${item.total} completed`); const track = make("div", undefined, "validation-track"), fill = make("span"); fill.dataset.width = `${ratio}%`; fill.style.width = "0"; track.append(fill); row.append(make("span", item.task), track, make("strong", `${item.completed}/${item.total}${item.avgSeconds ? ` · ${item.avgSeconds}s` : ""}`)); chart.append(row); const tr = make("tr"); [item.task, `${item.completed}/${item.total}`, item.avgSeconds || ""].forEach((value) => tr.append(make("td", value))); body.append(tr); }); table.append(body); root.append(chart); const bars = root.querySelectorAll(".validation-track span"); if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) bars.forEach((bar) => { bar.style.width = bar.dataset.width; }); else { const barObserver = new IntersectionObserver((entries, observer) => entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.style.width = entry.target.dataset.width; observer.unobserve(entry.target); } })); bars.forEach((bar) => barObserver.observe(bar)); }
-        }
-        if (TEST_DATA.responses.length) {
-          const section = make("section", undefined, "validation-quotes"), filters = make("div", undefined, "validation-filters"), themes = ["All", ...new Set(TEST_DATA.responses.map((item) => item.theme).filter(Boolean))], grid = make("div", undefined, "validation-quote-grid"), all = [...TEST_DATA.responses];
-          themes.forEach((theme, index) => { const button = make("button", theme, "validation-filter"); button.type = "button"; button.setAttribute("aria-pressed", String(index === 0)); button.onclick = () => { filters.querySelectorAll("button").forEach((item) => item.setAttribute("aria-pressed", String(item === button))); grid.querySelectorAll("blockquote").forEach((card) => { card.hidden = theme !== "All" && card.dataset.theme !== theme; }); }; filters.append(button); }); section.append(make("h3", "What participants said"), filters);
-          all.forEach((item, index) => { const card = make("blockquote"); card.dataset.theme = item.theme || ""; if (index > 5) card.hidden = true; card.append(make("p", `“${item.quote}”`)); const person = TEST_DATA.participants.find((candidate) => candidate.id === item.participant), cite = make("cite", `${item.participant}${person?.role ? ` · ${person.role}` : ""}${person?.age ? ` · ${person.age}` : ""}`), theme = make("span", item.theme || "Other", "validation-theme"), dot = make("span", item.sentiment || "neutral", `sentiment sentiment--${item.sentiment || "neutral"}`); cite.append(theme, dot); card.append(cite); grid.append(card); }); if (all.length > 6) { const more = make("button", "Show more", "validation-more"); more.type = "button"; more.onclick = () => { grid.querySelectorAll("blockquote").forEach((card) => { card.hidden = false; }); more.hidden = true; }; section.append(more); } section.append(grid); root.append(section);
-        }
-        if (TEST_DATA.findings.length) { const section = make("section", undefined, "validation-findings"), rank = { high: 0, medium: 1, low: 2 }; section.append(make("h3", "Findings to changes")); [...TEST_DATA.findings].sort((a, b) => (rank[a.severity] ?? 3) - (rank[b.severity] ?? 3)).forEach((item) => { const card = make("article", undefined, "validation-finding"); const left = make("div"); left.append(make("span", item.severity, `severity severity--${item.severity}`), make("h4", item.title), make("p", item.evidence)); const right = make("div", undefined, "validation-change"); right.append(make("span", "→", "validation-arrow"), make("p", item.change), make("small", item.screen ? `Screen: ${item.screen}` : "")); card.append(left, right); section.append(card); }); root.append(section); }
-        if (TEST_DATA.next) root.append(make("p", `What I’d test next: ${TEST_DATA.next}`, "validation-next"));
+        const root = document.getElementById("validation-content"), d = TEST_DATA, make = (tag, text, cls) => { const n = document.createElement(tag); if (text !== undefined) n.textContent = text; if (cls) n.className = cls; if (typeof text === "string" && /\[[^\]]+\]/.test(text)) n.classList.add("is-placeholder"); return n; };
+        root.textContent = ""; const title = document.getElementById("validation-title"); title.textContent = d.headline; if (/\[[^\]]+\]/.test(d.headline)) title.classList.add("is-placeholder");
+        root.append(make("p", `${d.snapshot.participants} participants · each took both scenarios · ${d.snapshot.date} · ${d.snapshot.prototype}`, "validation-snapshot"));
+        const rationale = make("section", undefined, "validation-rationale"); rationale.append(make("h3", "Why I tested this way"), make("p", d.rationale));
+        (d.snapshot.order || ["survivor", "volunteer"]).forEach((key) => { const strip = make("ol", undefined, "validation-steps"); d.scenarios[key].steps.forEach((step, i) => { const li = make("li"); li.append(make("span", i + 1, "validation-step-number"), make("span", step)); if (i < d.scenarios[key].steps.length - 1) li.append(make("span", "→", "validation-step-arrow")); strip.append(li); }); rationale.append(strip); }); root.append(rationale);
+        const scenarios = make("section", undefined, "validation-scenarios"); scenarios.append(make("h3", "Two scenarios, two questions")); const scenarioGrid = make("div", undefined, "validation-scenario-grid");
+        (d.snapshot.order || ["survivor", "volunteer"]).forEach((key) => { const s = d.scenarios[key], card = make("article", undefined, "validation-scenario"); card.append(make("span", s.label, "validation-tag"), make("h4", s.question), make("p", `Task: ${s.task}`, "validation-task-copy")); const ids = make("div", undefined, "validation-participant-chips"); d.participants.filter((p) => p.scenarios.includes(key)).forEach((p) => ids.append(make("span", p.id, "validation-chip"))); card.append(ids); scenarioGrid.append(card); }); scenarios.append(scenarioGrid); scenarios.append(make("p", "All 3 participants completed both tests, so every result below is out of 3 for each scenario.", "validation-scenario-note")); root.append(scenarios);
+        const boards = make("section", undefined, "validation-scoreboards"); boards.append(make("h3", "Did it work?")); const boardGrid = make("div", undefined, "validation-scoreboard-grid");
+        (d.snapshot.order || ["survivor", "volunteer"]).forEach((key) => { const board = make("article", undefined, "validation-scoreboard"); board.append(make("h4", d.scenarios[key].label)); d.scoreboard[key].forEach((item) => { const row = make("div", undefined, "validation-score-row"), dots = make("span", undefined, "validation-dots"); const numeric = Number(item.yes), filled = Number.isFinite(numeric) ? Math.min(numeric, item.total) : 0; for (let i = 0; i < item.total; i++) dots.append(make("span", undefined, i < filled ? "is-filled" : "")); row.setAttribute("role", "img"); row.setAttribute("aria-label", Number.isFinite(numeric) ? `${filled} of ${item.total} participants` : `${item.yes} of ${item.total} participants`); row.append(make("span", item.label), dots, make("strong", `${item.yes} of ${item.total}`), make("span", `${item.yes} of ${item.total}`, "sr-only")); board.append(row); }); boardGrid.append(board); }); boards.append(boardGrid); root.append(boards);
+        const quotes = make("section", undefined, "validation-quotes"); quotes.append(make("h3", "In their words")); const quoteGrid = make("div", undefined, "validation-quote-grid"); d.quotes.forEach((item) => { const card = make("figure"), block = make("blockquote", `“${item.quote}”`), cite = make("cite", `${item.participant} · ${item.role}`), tags = make("div", undefined, "validation-tag-list"); card.className = "validation-quote-card"; block.className = "validation-quote"; tags.append(make("span", item.theme, "validation-theme"), make("span", item.scenario, "validation-theme")); card.append(make("span", "“", "validation-quote-mark"), block, cite, tags); quoteGrid.append(card); }); quotes.append(quoteGrid); root.append(quotes);
+        const closing = make("aside", undefined, "validation-closing"); closing.append(make("p", d.limits), make("p", d.next)); root.append(closing);
+        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) { const observer = new IntersectionObserver((entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add("is-visible")), { threshold: 0.2 }); root.querySelectorAll(".validation-dots").forEach((dots) => observer.observe(dots)); }
       };
       renderValidation();
     </script>
