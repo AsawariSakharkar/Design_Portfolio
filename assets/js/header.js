@@ -9,7 +9,7 @@
   var assetPrefix = document.body.dataset.siteRoot || "";
   var homePrefix = isProjectPage ? assetPrefix + "index.html" : "";
   var brandMarkup = isCaseStudy
-    ? '<a class="brand brand--back" href="' + assetPrefix + 'index.html#work" aria-label="Back to projects" data-cursor="interactive">← Back to projects</a>'
+    ? '<a class="brand" href="' + assetPrefix + 'index.html#work" aria-label="Back to projects" data-cursor="interactive">← Back to projects</a>'
     : '<a class="brand" href="' + (isProjectPage ? "index.html" : "#top") + '" aria-label="Asawari, home" data-cursor="interactive">' +
       '<img class="brand__mark" src="' + assetPrefix + 'assets/images/Group 32.png" alt="" width="52" height="52" decoding="async">' +
       "</a>";
