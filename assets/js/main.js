@@ -187,9 +187,9 @@
       status.textContent = item.status || "Case study";
       entry.appendChild(status);
       var card;
-      if (item.title === "Arohi: Disaster Management Interface") {
+      if (item.title === "Arohi: Disaster Management Interface" || item.title === "Suchalak: Better Navigation") {
         card = el("a", "project-card");
-        card.href = "case-studies/arohi.html";
+        card.href = item.title === "Suchalak: Better Navigation" ? "case-studies/suchalak.html" : "case-studies/arohi.html";
       } else if (item.url) {
         card = el("a", "project-card");
         card.href = item.url;
@@ -256,9 +256,13 @@
 
       if (item.url) {
         var caseStudyLink = el("a", "project-case-study");
-        var isArohiCaseStudy = item.title === "Arohi: Disaster Management Interface";
-        caseStudyLink.href = isArohiCaseStudy ? "case-studies/arohi.html" : item.url;
-        if (!isArohiCaseStudy) {
+        var caseStudyPath = item.title === "Arohi: Disaster Management Interface"
+          ? "case-studies/arohi.html"
+          : item.title === "Suchalak: Better Navigation"
+            ? "case-studies/suchalak.html"
+            : item.url;
+        caseStudyLink.href = caseStudyPath;
+        if (caseStudyPath === item.url) {
           caseStudyLink.target = "_blank";
           caseStudyLink.rel = "noopener noreferrer";
         }

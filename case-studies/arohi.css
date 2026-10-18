@@ -7,6 +7,7 @@
   --text: #ecebe8;
   --muted: #b7b6b2;
   --accent: #ff8a5c;
+  --blue: #2140e0;
   --red: #e5383b;
   --line: #3a3b3f;
   --fs-label: 0.875rem;
@@ -69,12 +70,19 @@ img { display: block; width: 100%; max-width: 100%; height: auto; }
 .case-header__identity { display: grid; min-width: 0; gap: 0.05rem; text-align: right; }
 .case-header__identity strong { font-family: var(--arohi-font-display); font-size: var(--fs-small); }
 .case-header__identity span { min-width: 0; overflow-wrap: anywhere; color: var(--muted); font-size: var(--fs-small); line-height: var(--lh-caption); }
-.case-study > .site-header { position: sticky; top: 0; z-index: 50; padding-top: env(safe-area-inset-top); }
+.case-study > .site-header { position: static; top: auto; z-index: auto; padding-top: env(safe-area-inset-top); }
 .case-study .header__inner { min-width: 0; padding-right: max(1rem, env(safe-area-inset-right)); padding-left: max(1rem, env(safe-area-inset-left)); }
-.case-study > .site-header { background: var(--bg); color: var(--text); background-image: none; }
+.case-study > .site-header {
+  background: var(--bg);
+  color: var(--text);
+  background-image: none;
+  border-bottom: 1px solid var(--line);
+  box-shadow: none;
+}
 .case-study .primary-nav__link,
 .case-study .socials__label,
 .case-study .social-link { color: var(--text); }
+.case-study .header__inner { width: min(100% - 3rem, 1120px); padding-block: 0.875rem; }
 .case-study .primary-nav__link:hover,
 .case-study .primary-nav__link:focus-visible,
 .case-study .social-link:hover,
@@ -82,8 +90,8 @@ img { display: block; width: 100%; max-width: 100%; height: auto; }
 .case-study .primary-nav__link--resume { border-color: var(--accent); color: var(--accent); }
 .case-study .primary-nav__link--resume:hover,
 .case-study .primary-nav__link--resume:focus-visible { background: var(--accent); color: var(--bg); }
-.brand--back { align-items: center; justify-content: center; min-height: 44px; color: var(--accent); font-size: var(--fs-label); font-weight: 700; white-space: nowrap; }
-.brand--back:hover { color: var(--text); }
+.brand--back { align-items: center; justify-content: center; min-height: 44px; color: var(--blue); font-size: var(--fs-label); font-weight: 700; white-space: nowrap; }
+.brand--back:hover, .brand--back:focus-visible { color: var(--blue); }
 .case-container { width: min(100% - 2rem, 1040px); min-width: 0; margin: auto; }
 .case-section { padding: var(--space-72) 0; }
 .case-hero + .case-section { padding-top: clamp(1.5rem, 3vw, 3rem); }
