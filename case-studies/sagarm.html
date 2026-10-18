@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>The 99% — Life on Earth</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+<link rel="icon" href="../assets/sagarm/fish-icon.png" type="image/png">
+<link rel="stylesheet" href="sagarm.css">
+</head>
+<body class="project-page case-study" data-site-root="../" id="top">
+<a class="skip-link" href="#main-content">Skip to content</a>
+<header class="site-header" id="site-header"></header>
+<main id="main-content">
+<a class="back" href="../index.html#work">← Back to work</a>
+<div class="top"><span>Data Visualization</span><span>Case Study</span></div>
+<h1><img src="../assets/sagarm/fish-icon.png" alt="">The 99%</h1>
+<p class="sub">Life On Earth</p>
+
+<div class="col">
+  <p class="b">We rarely talk about what is actually happening in the ocean.</p>
+  <p>We lay internet cables, extract oil, and move massive ships across countries.<br>These activities slowly damage — and take away — the only thing marine life has</p>
+  <p class="q">“Their Home”</p>
+</div>
+
+<img class="hero" src="../assets/sagarm/hero.jpg" alt="A whale struck by a ship’s bow, beside a sperm whale shown against a human diver for scale" loading="lazy">
+
+<div class="col">
+  <h2>A hit-and-run accident.</h2>
+  <p class="lead">But instead of humans, coastal wildlife are being injured or killed.</p>
+  <p>We came across a dataset showing ship activity in the ocean, including commercial and fishing vessels.<br>This raised an important question:</p>
+  <blockquote>How much impact do these ships have on the ocean and the marine life beneath it?</blockquote>
+  <p>The answer revealed that the impact is not limited to large marine animals like whales and sharks. It also affects smaller and more fragile ecosystems such as shellfish, small fish, and coral.</p>
+</div>
+
+<div class="strip">
+  <div id="bubble">I am suffocating:(</div>
+  <img src="../assets/sagarm/shell-strip.jpg" alt="A mollusc shell dissolving over Day 1, Day 11, Day 26 and Day 45" loading="lazy">
+</div>
+<p class="cap">Just a 0.8 increase in ocean acidity can dissolve a mollusc shell in 45 days.</p>
+<p class="src">Source: © David Liittschwager/National Geographic Creative.</p>
+<hr>
+<p class="intro">The infographic below illustrates the consequences marine life faces due to human-driven changes in ocean conditions.</p>
+
+<div class="co">
+  <p class="b">1 hour of engine activity = 2,047 kg CO₂</p>
+  <input id="hours" type="range" min="1" max="24" value="1" aria-label="Hours of engine activity">
+  <p class="big"><span id="co2">2,047</span> kg CO₂ <span style="font-size:.4em;font-weight:600;color:var(--muted)">in <span id="hrs">1</span> h</span></p>
+</div>
+
+<div class="info" id="info">
+  <canvas id="cv" aria-label="Infographic of a ship’s emissions acidifying the ocean and dissolving a shell, with a pH scale from 8.10 to 7.00"></canvas>
+  <svg class="fish" id="fish" viewBox="0 0 924 1307" aria-hidden="true"><path id="route" d="M375 950C410 890 450 820 475 770C430 715 340 705 255 745C160 790 95 900 125 965" fill="none"/></svg>
+</div>
+<div class="ctl">
+  <button class="play" id="play" type="button">▶ Play</button>
+  <input id="day" type="range" min="0" max="45" value="45" aria-label="Days in acidic water">
+  <output id="slider-ph" for="day">pH 7.00</output>
+</div>
+<p class="read">Day <span id="dv">45</span> of 45 · pH <span id="pv">7.00</span></p>
+<p class="note">Drag the slider, press play, or tap any pH value on the scale. The pH steps are spread evenly across the 45 days for illustration.</p>
+
+</main>
+<footer><a class="text-link" href="#top">Back to top ↑</a></footer>
+<script src="../assets/js/content.js"></script>
+<script src="../assets/js/icons.js"></script>
+<script src="../assets/js/header.js"></script>
+<script src="sagarm.js"></script>
+</body>
+</html>

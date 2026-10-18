@@ -187,9 +187,9 @@
       status.textContent = item.status || "Case study";
       entry.appendChild(status);
       var card;
-      if (item.title === "Arohi: Disaster Management Interface" || item.title === "Suchalak: Better Navigation") {
+      if (item.title === "Arohi: Disaster Management Interface" || item.title === "Suchalak: Better Navigation" || item.title === "Sagarm: Effect of Ocean Acidification") {
         card = el("a", "project-card");
-        card.href = item.title === "Suchalak: Better Navigation" ? "case-studies/suchalak.html" : "case-studies/arohi.html";
+        card.href = item.title === "Suchalak: Better Navigation" ? "case-studies/suchalak.html" : item.title === "Sagarm: Effect of Ocean Acidification" ? "case-studies/sagarm.html" : "case-studies/arohi.html";
       } else if (item.url) {
         card = el("a", "project-card");
         card.href = item.url;
@@ -260,6 +260,8 @@
           ? "case-studies/arohi.html"
           : item.title === "Suchalak: Better Navigation"
             ? "case-studies/suchalak.html"
+            : item.title === "Sagarm: Effect of Ocean Acidification"
+              ? "case-studies/sagarm.html"
             : item.url;
         caseStudyLink.href = caseStudyPath;
         if (caseStudyPath === item.url) {
