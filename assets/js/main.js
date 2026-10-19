@@ -183,9 +183,6 @@
 
     function appendProjectCard(item) {
       var entry = el("div", "project-entry");
-      var status = el("span", "project-status");
-      status.textContent = item.status || "Case study";
-      entry.appendChild(status);
       var card;
       if (item.title === "Arohi: Disaster Management Interface" || item.title === "Suchalak: Better Navigation" || item.title === "Sagarm: Effect of Ocean Acidification" || item.title === "What fragrances do college students prefer?") {
         card = el("a", "project-card");
@@ -239,9 +236,7 @@
       var steps = el("ol", "project-steps");
       [
         ["Problem", item.problem],
-        ["Research", item.research],
         ["Solution", item.solution],
-        ["Impact", item.impact],
       ].forEach(function (step) {
         var stepItem = el("li", "project-steps__item");
         var stepLabel = el("strong");

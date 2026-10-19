@@ -642,6 +642,8 @@ a {
 }
 
 .project-entry {
+  display: flex;
+  flex-direction: column;
   min-width: 0;
   padding: 1rem;
   border: 1px solid var(--color-border);
@@ -3022,6 +3024,10 @@ p {
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 0.2em;
+}
+
+.project-case-study {
+  margin-top: auto;
 }
 
 .project-case-study:hover,
