@@ -184,9 +184,9 @@
     function appendProjectCard(item) {
       var entry = el("div", "project-entry");
       var card;
-      if (item.title === "Arohi: Disaster Management Interface" || item.title === "Suchalak: Better Navigation" || item.title === "Sagarm: Effect of Ocean Acidification" || item.title === "What fragrances do college students prefer?") {
+      if (item.title === "Arohi: Disaster Management Interface" || item.title === "Suchalak: Better Navigation" || item.title === "Sagarm: Effect of Ocean Acidification" || item.title === "What fragrances do college students prefer?" || item.title.indexOf("ruti") !== -1) {
         card = el("a", "project-card");
-        card.href = item.title === "Suchalak: Better Navigation" ? "case-studies/suchalak.html" : item.title === "Sagarm: Effect of Ocean Acidification" ? "case-studies/sagarm.html" : item.title === "What fragrances do college students prefer?" ? "case-studies/fragrance.html" : "case-studies/arohi.html";
+        card.href = item.title.indexOf("ruti") !== -1 ? "case-studies/sruti.html" : item.title === "Suchalak: Better Navigation" ? "case-studies/suchalak.html" : item.title === "Sagarm: Effect of Ocean Acidification" ? "case-studies/sagarm.html" : item.title === "What fragrances do college students prefer?" ? "case-studies/fragrance.html" : "case-studies/arohi.html";
       } else if (item.url) {
         card = el("a", "project-card");
         card.href = item.url;
@@ -253,6 +253,8 @@
         var caseStudyLink = el("a", "project-case-study");
         var caseStudyPath = item.title === "Arohi: Disaster Management Interface"
           ? "case-studies/arohi.html"
+          : item.title.indexOf("ruti") !== -1
+            ? "case-studies/sruti.html"
           : item.title === "Suchalak: Better Navigation"
             ? "case-studies/suchalak.html"
             : item.title === "Sagarm: Effect of Ocean Acidification"
