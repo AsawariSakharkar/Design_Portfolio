@@ -37,9 +37,13 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
+          # Ensure reruns don't collide with artifacts from previous attempts.
+          name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
           # This is a plain static site, so we publish the repo root as-is.
           path: "."
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          artifact_name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
