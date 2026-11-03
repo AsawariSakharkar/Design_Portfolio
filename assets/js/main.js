@@ -112,13 +112,22 @@
     var groups = Object.create(null);
     (e.groups || []).forEach(function (groupName) {
       var group = el("li", "tag-group");
+      var number = el("span", "tag-group__number");
+      number.textContent = groupName.number || "";
       var heading = el("h3", "tag-group__title");
-      heading.textContent = groupName;
+      heading.textContent = groupName.title || groupName;
       var groupList = el("ul", "tag-group__list");
+      var description = el("p", "tag-group__description");
+      description.textContent = groupName.description || "";
+      var divider = el("span", "tag-group__divider");
+      divider.setAttribute("aria-hidden", "true");
+      group.appendChild(number);
       group.appendChild(heading);
+      group.appendChild(description);
+      group.appendChild(divider);
       group.appendChild(groupList);
       list.appendChild(group);
-      groups[groupName] = groupList;
+      groups[groupName.title || groupName] = groupList;
     });
     (e.tags || []).forEach(function (t) {
       var groupName = t.group || "Skills";
@@ -229,10 +238,6 @@
         });
         entry.appendChild(tags);
       }
-      var role = el("p", "project-role");
-      role.textContent = "Role: " + (item.role || "[Add your role]");
-      entry.appendChild(role);
-
       var steps = el("ol", "project-steps");
       [
         ["Problem", item.problem],
@@ -297,16 +302,6 @@
 
     var categories = p.categories || [];
     categories.forEach(function (category) {
-      var categoryHeading = el("div", "project-category");
-      var categoryTitle = el("h3", "project-category__title");
-      categoryTitle.textContent = category.title || "Case Studies";
-      var count = el("span", "project-category__count");
-      var itemCount = (category.items || []).length;
-      count.textContent = itemCount + " case stud" + (itemCount === 1 ? "y" : "ies");
-      categoryHeading.appendChild(categoryTitle);
-      categoryHeading.appendChild(count);
-      grid.appendChild(categoryHeading);
-
       (category.items || []).forEach(appendProjectCard);
     });
 
@@ -1077,6 +1072,7 @@
       ".hero__text",
       ".hero__art",
       ".section-title",
+      ".capability-section .tag-group",
       ".tag",
       ".project-entry",
       ".article-card",

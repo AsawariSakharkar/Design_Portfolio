@@ -37,36 +37,54 @@
 
     <main id="main-content" tabindex="-1">
       <!-- ===================== HERO ===================== -->
-      <section class="hero" id="hero">
-        <div class="container hero__inner">
-          <div class="hero__text">
-            <p class="section-eyebrow hero__eyebrow">Designing for people, clarity, and better decisions</p>
-            <h1 class="hero__title">
-              <span class="hero__greeting" id="hero-greeting"></span>
-              <span class="hero__name" id="hero-name"></span>
-            </h1>
-            <p class="hero__tagline" id="hero-tagline"></p>
-            <p class="hero__subtitle" id="hero-subtitle"></p>
-            <ul class="hero__identity" aria-label="Professional identity">
-              <li>Information Designer</li>
-              <li>UX &amp; Product Designer</li>
-              <li>M.Des. Information Design &amp; Data Visualization</li>
-            </ul>
-            <div class="hero__actions">
-              <a class="button button--primary" href="#work">See the work</a>
+      <section class="hero hero-replacement" id="hero">
+        <div class="hero-replacement-inner">
+          <div class="hero-role" aria-live="polite">
+            <div class="hero-role-track">
+              <span>Engineer turned designer</span>
+              <span>Research, design and front-end build</span>
+              <span>Information design and data visualization</span>
             </div>
           </div>
-          <figure class="hero__art">
-            <img id="hero-image" src="assets/images/Group 32.png" alt="An open antique locket with two portraits of Asawari, one on each side" width="509" height="376" loading="eager" fetchpriority="high" />
-          </figure>
+          <h1 class="hero-name">Asawari Sakharkar</h1>
+          <div class="hero-locket-row">
+            <div class="hero-side hero-side-left">
+              <strong>Engineer</strong>
+              <span>Systems, constraints, code</span>
+            </div>
+            <figure class="hero-locket">
+              <img src="assets/images/Group 32.png" alt="An open locket with two portraits of Asawari, one on each side" width="509" height="376" loading="eager" fetchpriority="high" />
+            </figure>
+            <div class="hero-side hero-side-right">
+              <strong>Designer</strong>
+              <span>People, evidence, clarity</span>
+            </div>
+          </div>
+          <p class="hero-bridge">Two ways of thinking, one process.</p>
+          <p class="hero-tagline">I connect human behaviour, data and technology to create meaningful experiences.</p>
+          <div class="hero-cta-wrap">
+            <a class="button button--primary hero-cta" href="#work">
+              <span>See the work</span>
+              <span class="hero-cta-arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M12 5v14M5 12l7 7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </span>
+            </a>
+          </div>
+          <p class="hero-proof">2 years building pharma e-learning in HTML/CSS/JS, plus UX internships and case studies that go from first interview to finished interface.</p>
+          <a class="hero-scroll" href="#work" aria-label="Scroll down">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 5v14M5 12l7 7 7-7"></path>
+            </svg>
+          </a>
         </div>
       </section>
 
-      <!-- TODO: replace every metric placeholder with verified, current numbers only. -->
       <section class="metrics-strip" aria-label="Portfolio metrics">
         <div class="container">
           <p class="section-subtitle metrics-strip__subtitle">
-            Highlights of volunteering, hackathons, and conferences attended.
+            I love to participate in events and share my knowledge with the community. Highlights of volunteering, hackathons, and conferences attended.
           </p>
           <div class="metrics-strip__grid">
             <div class="metric" tabindex="0" aria-describedby="metric-ux-india">
@@ -94,16 +112,15 @@
       </section>
 
       <!-- ===================== EXPERTISE ===================== -->
-      <section class="band-maroon expertise" id="expertise">
+      <section class="band-maroon expertise capability-section" id="expertise">
         <div class="container">
           <p class="section-eyebrow">01 / Capabilities</p>
           <h2 class="section-title section-title--light" id="expertise-heading">
             Skills
           </h2>
-          <p class="section-subtitle">A toolkit for making complex problems easier to understand and use.</p>
+          <p class="section-subtitle capability-section__subtitle">Connecting human behaviour, design thinking, data and technology to create meaningful experiences.</p>
           <ul class="tags" id="tags-list"></ul>
         </div>
-        <ul class="impact-panel" id="impact-panel" aria-label="Selected project outcomes"></ul>
       </section>
 
       <!-- ===================== PROJECTS ===================== -->
@@ -139,7 +156,7 @@
           <h3 class="fashion__sub" id="fashion-sub"></h3>
           <p class="fashion__outfit-intro" id="fashion-outfit-intro"></p>
           <div class="currently-strip">
-            <span>Currently reading: White Elephant</span>
+            <span>Currently reading: Lessons in Chemistry</span>
             <span>Currently wearing: Y2K Office Siren</span>
             <span>Currently eating: Spicy Miso Ramen</span>
           </div>
@@ -205,5 +222,6 @@
     <script src="assets/js/icons.js"></script>
     <script src="assets/js/header.js"></script>
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/hero-rotation.js"></script>
   </body>
 </html>
