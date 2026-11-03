@@ -40,6 +40,26 @@ Open `assets/js/content.js`. It's commented and covers:
 - social links (set a `url`, or leave blank to hide)
 - the "My Expertise" tags (add/remove freely)
 - hero image path
+- project timeline content, links, filters, statuses, and optional ISO dates
+
+### Project timeline metadata
+
+Projects are rendered from `projects.categories` in `assets/js/content.js`.
+Each project can optionally define:
+
+```js
+{
+  date: "YYYY-MM-DD",
+  duration: "Month YYYY - Month YYYY",
+  status: "Live", // Live, In Progress, Testing, or Completed
+  categories: ["UX", "Research"]
+}
+```
+
+Only confirmed dates should be added. Projects without a date remain in the
+timeline's "Date to be confirmed" milestone. The timeline automatically sorts
+dated projects chronologically, adds category filters, and preserves each
+existing case-study or external link.
 
 ## Replacing images
 

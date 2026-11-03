@@ -91,6 +91,12 @@ window.SITE_CONTENT = {
   // ---- My Projects --------------------------------------------------------
   projects: {
     heading: "Products I've Worked On",
+    // Add an ISO date (YYYY-MM-DD) to a project when its actual project date
+    // is known. Undated projects remain in the final, explicitly labelled
+    // milestone instead of being assigned a date.
+    timeline: {
+      filters: ["All", "UX", "Research", "Data Visualization", "Development"],
+    },
     // Each category has a subtitle and a live case-study count.
     categories: [
       {
@@ -98,6 +104,7 @@ window.SITE_CONTENT = {
         items: [
           { image: "assets/images/projects/Arohi_tileImage.png", 
             title: "Arohi: Disaster Management Interface", 
+            date: "2025-08-05",
             description: "A case study exploring a clearer interface for disaster management.", 
             tags: ["Disaster Response", "Information Architecture", "Scenario Mapping", "Ecosystem Design"], 
             role: "UX Designer, Information Architect",
@@ -110,6 +117,7 @@ window.SITE_CONTENT = {
 
           { image: "assets/images/projects/suchalck_tileImage.png", 
             title: "Suchalak: Better Navigation", 
+            date: "2025-09-04",
             description: "A navigation-focused case study exploring intuitive wayfinding.", 
             tags: ["Navigation", "Data Driven Design","UI Design", "Psychology"],
             role: "UX Researcher, Information Designer",
@@ -122,6 +130,7 @@ window.SITE_CONTENT = {
 
           { image: "assets/images/projects/mae_tileImage.png", 
             title: "Mae: Virtual Mom", 
+            date: "2026-08-19",
             description: "A virtual companion concept centered on everyday wellbeing support.", 
             tags: ["Digital Wellbeing", "UX Design","App UI", "User Research", "Data Analysis"], 
             role: "UX Designer, Researcher",
@@ -134,6 +143,8 @@ window.SITE_CONTENT = {
 
           { image: "assets/images/projects/dandelion_tileImage.png", 
             title: "Dandelion: To Break Your Overthinking", 
+            date: "2026-09-13",
+            status: "In Progress",
             description: "A digital concept for helping people recognize and work through overthinking.", 
             tags: ["Quality of life", "Prototyping","Usability","Vibe coding"], 
             role: "UX Designer, Researcher, Prototyper",
@@ -150,6 +161,7 @@ window.SITE_CONTENT = {
         items: [
           { image: "assets/images/projects/sruti_tileImage.png", 
             title: "Śruti: Corporate Learning Platform", 
+            date: "2025-11-27",
             description: "A learning platform concept focused on access to corporate training.", 
             tags: ["Corporate Learning", "UI/UX Design","Design Thinking"], 
             role: "UX Designer, UI Designer, Researcher",
@@ -163,6 +175,7 @@ window.SITE_CONTENT = {
 
           { image: "assets/images/projects/UniversalCalculator_tileImage.png", 
             title: "Universal Calculator", 
+            date: "2024-04-29",
             description: "A flexible calculator interface for everyday calculations.", 
             tags: ["Utility", "UI Design"], 
             role: "UI Designer",
@@ -179,6 +192,7 @@ window.SITE_CONTENT = {
         items: [
           { image: "assets/images/projects/perfume_tileImage.png", 
             title: "What fragrances do college students prefer?", 
+            date: "2026-07-19",
             description: "A data-led look at fragrance preferences among college students.", 
             tags: ["Student Preferences", "Data Visualization"], 
             role: "Information Designer",
@@ -191,6 +205,7 @@ window.SITE_CONTENT = {
           },
           { image: "assets/images/projects/sagaram_tileImage.png", 
             title: "Sagarm: Effect of Ocean Acidification", 
+            date: "2025-10-12",
             description: "A data visualization exploring the effects of ocean acidification.", 
             tags: ["Data Visualization", "Ocean Acidification"], 
             role: "Information Designer",

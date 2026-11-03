@@ -189,142 +189,197 @@
     var grid = $("project-grid");
     if (!grid) return;
     grid.innerHTML = "";
+    var categories = p.categories || [];
+    var projects = [];
+    categories.forEach(function (category) {
+      (category.items || []).forEach(function (item) {
+        var filterCategory = category.title === "Data Visualization"
+          ? "Data Visualization"
+          : category.title === "UI Case Studies"
+            ? "Development"
+            : "UX";
+        var filters = item.categories || [filterCategory];
+        if (filterCategory === "UX" && /research/i.test(item.role || "")) {
+          filters = filters.concat("Research");
+        }
+        projects.push({ item: item, group: category.title, filters: filters });
+      });
+    });
+    if (!categories.length) {
+      (p.items || []).forEach(function (item) {
+        projects.push({ item: item, group: "Projects", filters: item.categories || ["UX"] });
+      });
+    }
 
-    function appendProjectCard(item) {
-      var entry = el("div", "project-entry");
-      var card;
-      if (item.title === "Arohi: Disaster Management Interface" || item.title === "Suchalak: Better Navigation" || item.title === "Sagarm: Effect of Ocean Acidification" || item.title === "What fragrances do college students prefer?" || item.title.indexOf("ruti") !== -1) {
-        card = el("a", "project-card");
-        card.href = item.title.indexOf("ruti") !== -1 ? "case-studies/sruti.html" : item.title === "Suchalak: Better Navigation" ? "case-studies/suchalak.html" : item.title === "Sagarm: Effect of Ocean Acidification" ? "case-studies/sagarm.html" : item.title === "What fragrances do college students prefer?" ? "case-studies/fragrance.html" : "case-studies/arohi.html";
-      } else if (item.url) {
-        card = el("a", "project-card");
-        card.href = item.url;
-        card.target = "_blank";
-        card.rel = "noopener noreferrer";
-      } else if (item.title) {
-        card = el("div", "project-card");
-      } else {
-        card = el("div", "project-card");
+    projects.sort(function (a, b) {
+      if (!a.item.date && !b.item.date) return 0;
+      if (!a.item.date) return 1;
+      if (!b.item.date) return -1;
+      return new Date(b.item.date) - new Date(a.item.date);
+    });
+
+    var filters = (p.timeline && p.timeline.filters) || ["All"];
+    var filterBar = $("project-filters");
+    if (filterBar) {
+      filterBar.innerHTML = "";
+      filters.forEach(function (filter, index) {
+        var button = el("button", "project-filter" + (index === 0 ? " is-active" : ""));
+        button.type = "button";
+        button.textContent = filter;
+        button.dataset.filter = filter;
+        button.setAttribute("aria-pressed", index === 0 ? "true" : "false");
+        filterBar.appendChild(button);
+      });
+    }
+
+    var groups = {};
+    projects.forEach(function (project, index) {
+      var year = project.item.date && /^\d{4}-\d{2}-\d{2}$/.test(project.item.date)
+        ? project.item.date.slice(0, 4)
+        : "Date to be confirmed";
+      if (!groups[year]) groups[year] = [];
+      groups[year].push({ project: project, index: index });
+    });
+    function caseStudyPath(item) {
+      return item.title === "Arohi: Disaster Management Interface"
+        ? "case-studies/arohi.html"
+        : item.title.indexOf("ruti") !== -1
+          ? "case-studies/sruti.html"
+          : item.title === "Suchalak: Better Navigation"
+            ? "case-studies/suchalak.html"
+            : item.title === "Sagarm: Effect of Ocean Acidification"
+              ? "case-studies/sagarm.html"
+              : item.title === "What fragrances do college students prefer?"
+                ? "case-studies/fragrance.html"
+                : item.url;
+    }
+
+    function renderProject(project, index) {
+      var item = project.item;
+      var entry = el("article", "project-entry timeline-item " + (index % 2 === 0 ? "timeline-item--left" : "timeline-item--right"));
+      entry.dataset.categories = project.filters.join("|");
+      entry.dataset.index = index;
+      var marker = el("div", "timeline-marker");
+      marker.setAttribute("aria-hidden", "true");
+      entry.appendChild(marker);
+      if (item.date) {
+        var publishedDate = el("time", "timeline-date");
+        var dateParts = item.date.split("-");
+        var dateValue = new Date(Number(dateParts[0]), Number(dateParts[1]) - 1, Number(dateParts[2]));
+        publishedDate.dateTime = item.date;
+        publishedDate.textContent = dateValue.toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+        });
+        publishedDate.setAttribute("aria-label", "Published " + publishedDate.textContent);
+        entry.appendChild(publishedDate);
       }
+      var card = el(item.url ? "a" : "div", "project-card timeline-card");
+      var path = caseStudyPath(item);
+      if (path) {
+        card.href = path;
+        if (path === item.url) {
+          card.target = "_blank";
+          card.rel = "noopener noreferrer";
+        }
+      }
+      var media = el("div", "project-card__media");
+      var mediaLabel = el("span", "project-card__media-label");
+      mediaLabel.textContent = item.cardLabel || project.group;
+      media.appendChild(mediaLabel);
       var img = el("img");
       img.src = encodePath(item.image);
       img.alt = item.title || "Project";
       img.loading = "lazy";
       img.width = 800;
-      img.height = 600;
-      card.appendChild(img);
-
-      if (item.title) {
-        var overlay = el("div", "project-card__overlay");
-        var title = el("span", "project-card__title");
-        title.textContent = item.title;
-        overlay.appendChild(title);
-        card.appendChild(overlay);
+      img.height = 500;
+      media.appendChild(img);
+      card.appendChild(media);
+      var content = el("div", "project-card__content");
+      var meta = el("div", "project-card__meta");
+      var category = el("span");
+      category.textContent = project.filters[0];
+      var projectStatus = item.status || "Completed";
+      var status = el("span", "project-status project-status--" + String(projectStatus).toLowerCase().replace(/\s+/g, "-"));
+      status.textContent = projectStatus;
+      meta.appendChild(category);
+      meta.appendChild(status);
+      content.appendChild(meta);
+      var title = el("h3", "project-card__title");
+      title.textContent = item.title;
+      content.appendChild(title);
+      var description = el("p", "project-card__problem");
+      description.textContent = item.problem || item.description || "";
+      content.appendChild(description);
+      var footer = el("div", "project-card__footer");
+      var details = el("p", "project-card__details");
+      details.textContent = "Role · " + (item.role || "Not specified");
+      if (item.duration) {
+        details.textContent += "  ·  " + item.duration;
       }
-
+      footer.appendChild(details);
+      var cta = el("span", "project-card__cta");
+      cta.textContent = path ? "Open project" : "Project details coming soon";
+      cta.innerHTML += ARROW_RIGHT;
+      footer.appendChild(cta);
+      content.appendChild(footer);
+      card.appendChild(content);
       entry.appendChild(card);
-      if (item.description) {
-        var description = el("p", "project-card__description");
-        description.textContent = item.description;
-        entry.appendChild(description);
-      }
-      if (item.tags && item.tags.length) {
-        var tags = el("ul", "project-tags");
-        tags.setAttribute("aria-label", "Project tags");
-        item.tags.slice(0, 3).forEach(function (label) {
-          var tag = el("li", "project-tags__item");
-          tag.textContent = label;
-          tags.appendChild(tag);
-        });
-        entry.appendChild(tags);
-      }
-      var steps = el("ol", "project-steps");
-      [
-        ["Problem", item.problem],
-        ["Solution", item.solution],
-      ].forEach(function (step) {
-        var stepItem = el("li", "project-steps__item");
-        var stepLabel = el("strong");
-        stepLabel.textContent = step[0];
-        var stepText = el("span");
-        stepText.textContent = step[1] || "[" + step[0] + " summary]";
-        stepItem.appendChild(stepLabel);
-        stepItem.appendChild(stepText);
-        steps.appendChild(stepItem);
-      });
-      entry.appendChild(steps);
-
-      if (item.url) {
-        var caseStudyLink = el("a", "project-case-study");
-        var caseStudyPath = item.title === "Arohi: Disaster Management Interface"
-          ? "case-studies/arohi.html"
-          : item.title.indexOf("ruti") !== -1
-            ? "case-studies/sruti.html"
-          : item.title === "Suchalak: Better Navigation"
-            ? "case-studies/suchalak.html"
-            : item.title === "Sagarm: Effect of Ocean Acidification"
-              ? "case-studies/sagarm.html"
-            : item.title === "What fragrances do college students prefer?"
-              ? "case-studies/fragrance.html"
-            : item.url;
-        caseStudyLink.href = caseStudyPath;
-        if (caseStudyPath === item.url) {
-          caseStudyLink.target = "_blank";
-          caseStudyLink.rel = "noopener noreferrer";
-        }
-        var caseStudyLabel = el("span");
-        caseStudyLabel.textContent = "Read case study";
-        var externalIcon = document.createElementNS(
-          "http://www.w3.org/2000/svg",
-          "svg"
-        );
-        externalIcon.setAttribute("class", "project-case-study__icon");
-        externalIcon.setAttribute("viewBox", "0 0 20 20");
-        externalIcon.setAttribute("aria-hidden", "true");
-        externalIcon.setAttribute("focusable", "false");
-        var externalPath = document.createElementNS(
-          "http://www.w3.org/2000/svg",
-          "path"
-        );
-        externalPath.setAttribute("d", "M6 14 14 6M7 6h7v7");
-        externalPath.setAttribute("fill", "none");
-        externalPath.setAttribute("stroke", "currentColor");
-        externalPath.setAttribute("stroke-width", "1.8");
-        externalPath.setAttribute("stroke-linecap", "round");
-        externalPath.setAttribute("stroke-linejoin", "round");
-        externalIcon.appendChild(externalPath);
-        caseStudyLink.appendChild(caseStudyLabel);
-        caseStudyLink.appendChild(externalIcon);
-        entry.appendChild(caseStudyLink);
-      }
-      grid.appendChild(entry);
+      return entry;
     }
 
-    var categories = p.categories || [];
-    categories.forEach(function (category) {
-      (category.items || []).forEach(appendProjectCard);
+    Object.keys(groups).sort(function (a, b) {
+      if (a === "Date to be confirmed") return 1;
+      if (b === "Date to be confirmed") return -1;
+      return Number(b) - Number(a);
+    }).forEach(function (year) {
+      var milestone = el("div", "timeline-milestone");
+      milestone.id = "project-year-" + year.replace(/\s+/g, "-").toLowerCase();
+      var heading = el("h3");
+      heading.textContent = year;
+      milestone.appendChild(heading);
+      var label = el("span");
+      label.textContent = year === "Date to be confirmed"
+        ? "Actual project dates will be added when confirmed"
+        : "Project milestone";
+      milestone.appendChild(label);
+      grid.appendChild(milestone);
+      groups[year].sort(function (a, b) {
+        return new Date(b.project.item.date || 0) - new Date(a.project.item.date || 0);
+      }).forEach(function (project) {
+        grid.appendChild(renderProject(project.project, project.index));
+      });
     });
 
-    // Keep supporting the original flat data shape for future content edits.
-    if (!categories.length) {
-      (p.items || []).forEach(appendProjectCard);
+    if (p.seeMore && p.seeMore.label && p.seeMore.url) {
+      var more = el("a", "project-more-button");
+      more.href = p.seeMore.url;
+      more.target = "_blank";
+      more.rel = "noopener noreferrer";
+      var moreLabel = el("span");
+      moreLabel.textContent = p.seeMore.label;
+      var moreArrow = el("span", "arrow");
+      moreArrow.innerHTML = ARROW_RIGHT;
+      more.appendChild(moreLabel);
+      more.appendChild(moreArrow);
+      grid.parentNode.appendChild(more);
     }
 
-    if (p.seeMore && p.seeMore.label) {
-      var more = el("a", "project-more-button");
-      if (!p.seeMore.url) return;
-      more.href = p.seeMore.url;
-      if (p.seeMore.url) {
-        more.target = "_blank";
-        more.rel = "noopener noreferrer";
-      }
-      var label = el("span");
-      label.textContent = p.seeMore.label;
-      var arrow = el("span", "arrow");
-      arrow.innerHTML = ARROW_RIGHT;
-      more.appendChild(label);
-      more.appendChild(arrow);
-      grid.appendChild(more);
+    if (filterBar) {
+      filterBar.addEventListener("click", function (event) {
+        var button = event.target.closest(".project-filter");
+        if (!button) return;
+        var selected = button.dataset.filter;
+        filterBar.querySelectorAll(".project-filter").forEach(function (filterButton) {
+          var active = filterButton === button;
+          filterButton.classList.toggle("is-active", active);
+          filterButton.setAttribute("aria-pressed", active ? "true" : "false");
+        });
+        grid.querySelectorAll(".timeline-item").forEach(function (item) {
+          item.hidden = selected !== "All" && item.dataset.categories.indexOf(selected) === -1;
+        });
+      });
     }
   }
 
@@ -1113,6 +1168,19 @@
     });
   }
 
+  function setupTimelineProgress() {
+    var timeline = $("project-grid");
+    if (!timeline) return;
+    function update() {
+      var rect = timeline.getBoundingClientRect();
+      var progress = Math.min(1, Math.max(0, (window.innerHeight * 0.62 - rect.top) / Math.max(1, rect.height)));
+      timeline.style.setProperty("--timeline-progress", (progress * 100).toFixed(2) + "%");
+    }
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+  }
+
   function escapeHtml(s) {
     return String(s)
       .replace(/&/g, "&amp;")
@@ -1136,6 +1204,7 @@
     setupMobileNavigation();
     setupActiveNavigation();
     setupReveal();
+    setupTimelineProgress();
   }
 
   if (document.readyState === "loading") {
