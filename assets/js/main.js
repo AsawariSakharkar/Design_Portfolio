@@ -241,6 +241,7 @@
       groups[year].push({ project: project, index: index });
     });
     function caseStudyPath(item) {
+      if (item.page) return item.page;
       return item.title === "Arohi: Disaster Management Interface"
         ? "case-studies/arohi.html"
         : item.title.indexOf("ruti") !== -1
@@ -275,8 +276,8 @@
         publishedDate.setAttribute("aria-label", "Published " + publishedDate.textContent);
         entry.appendChild(publishedDate);
       }
-      var card = el(item.url ? "a" : "div", "project-card timeline-card");
       var path = caseStudyPath(item);
+      var card = el(path ? "a" : "div", "project-card timeline-card");
       if (path) {
         card.href = path;
         if (path === item.url) {
@@ -288,13 +289,19 @@
       var mediaLabel = el("span", "project-card__media-label");
       mediaLabel.textContent = item.cardLabel || project.group;
       media.appendChild(mediaLabel);
-      var img = el("img");
-      img.src = encodePath(item.image);
-      img.alt = item.title || "Project";
-      img.loading = "lazy";
-      img.width = 800;
-      img.height = 500;
-      media.appendChild(img);
+      if (item.image) {
+        var img = el("img");
+        img.src = encodePath(item.image);
+        img.alt = item.title || "Project";
+        img.loading = "lazy";
+        img.width = 800;
+        img.height = 500;
+        media.appendChild(img);
+      } else {
+        var mediaPlaceholder = el("span", "project-card__media-placeholder");
+        mediaPlaceholder.textContent = item.title || "Project";
+        media.appendChild(mediaPlaceholder);
+      }
       card.appendChild(media);
       var content = el("div", "project-card__content");
       var meta = el("div", "project-card__meta");

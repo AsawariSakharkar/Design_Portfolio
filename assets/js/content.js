@@ -90,12 +90,12 @@ window.SITE_CONTENT = {
 
   // ---- My Projects --------------------------------------------------------
   projects: {
-    heading: "Products I've Worked On",
+    heading: "Projects you need to see",
     // Add an ISO date (YYYY-MM-DD) to a project when its actual project date
     // is known. Undated projects remain in the final, explicitly labelled
     // milestone instead of being assigned a date.
     timeline: {
-      filters: ["All", "UX", "Research", "Data Visualization", "Development"],
+      filters: ["All", "UX", "Research", "Data Visualization", "Ecosystem Mapping", "Development"],
     },
     // Each category has a subtitle and a live case-study count.
     categories: [
@@ -144,7 +144,7 @@ window.SITE_CONTENT = {
           { image: "assets/images/projects/dandelion_tileImage.png", 
             title: "Dandelion: To Break Your Overthinking", 
             date: "2026-09-13",
-            status: "In Progress",
+            status: "Completed",
             description: "A digital concept for helping people recognize and work through overthinking.", 
             tags: ["Quality of life", "Prototyping","Usability","Vibe coding"], 
             role: "UX Designer, Researcher, Prototyper",
@@ -215,6 +215,22 @@ window.SITE_CONTENT = {
             impact: "Enhanced understanding of the impacts of ocean acidification on marine and human communities",
             pdf: "assets/project-pdfs/Sagarm.pdf", 
             url: "https://www.behance.net/gallery/246071569/Effect-of-Ocean-Acidification" },
+          {
+            title: "The House of Belonging: ADHD Ecosystem Map",
+            image: "assets/images/projects/house-of-belonging-tile.png",
+            date: "2026-11-04",
+            status: "In Progress",
+            cardLabel: "Ecosystem Mapping",
+            description: "An interactive ecosystem map showing closeness as rooms in a house.",
+            tags: ["ADHD", "Ecosystem Mapping", "Information Design"],
+            categories: ["Ecosystem Mapping", "Data Visualization"],
+            role: "Information Designer",
+            problem: "Making emotional closeness and masking visible in an ADHD ecosystem",
+            research: "Mapping relationships by closeness, context, and emotional safety",
+            solution: "An interactive top-view house map with explorable relationship layers",
+            impact: "A clearer way to understand belonging, distance, and masking",
+            page: "case-studies/The House of Belonging — ADHD ecosystem map (top view).html",
+          },
         ],
       },
     ],

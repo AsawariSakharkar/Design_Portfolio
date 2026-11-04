@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="stylesheet" href="../assets/css/styles.css">
+<title>The House of Belonging — ADHD ecosystem map (top view)</title>
+<style>
+:root{--bg:#F8EFDE;--pn:#FFF9EE;--ink:#5A3628;--mut:#8A6A56;--ln:#E6D6BA;--ac:#A9501B;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 "Segoe UI",system-ui,-apple-system,sans-serif}
+main{--gp:clamp(14px,1.8vw,24px);--pw:clamp(280px,26vw,340px);max-width:1320px;margin:0 auto;padding:clamp(12px,2vw,28px) clamp(14px,3vw,40px);min-height:100vh;box-sizing:border-box;display:flex;flex-direction:column}
+.project-page > main{padding-top:clamp(5rem,8vw,6rem)}
+h1{font:700 clamp(20px,2.6vw,26px)/1.15 Georgia,serif;margin:0 0 4px}
+.sub{color:var(--mut);margin:0 0 12px;max-width:70ch;font-size:14px;line-height:1.35}
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:clamp(10px,1.4vw,16px)}
+.chips button{font:inherit;font-size:14px;padding:8px 16px;border-radius:99px;border:1.5px solid var(--ln);background:var(--pn);color:var(--ink);cursor:pointer}
+.chips button.on{background:var(--ac);border-color:var(--ac);color:#F8EFDE;font-weight:600}
+.grid{display:flex;align-items:flex-start;gap:var(--gp);container-type:normal}
+@media(max-width:820px){main{height:auto;min-height:100dvh}.grid{flex-direction:column;container-type:normal;flex:none}.stage{width:100%!important}.panel{flex:none;max-width:none;max-height:none;align-self:stretch;overflow:visible}}
+@media(max-width:480px){.chips{gap:8px}.chips button{padding:7px 12px;font-size:13px}.zo{top:8px;right:8px;padding:5px 12px;font-size:13px}}
+.stage{background:#9CC3C2;border-radius:16px;overflow:hidden;border:1px solid var(--ln);box-shadow:0 8px 30px rgba(90,54,40,.2)}
+svg{display:block;width:100%;height:auto;aspect-ratio:800/600}
+.z{cursor:pointer;outline:none}
+.z:hover>.fl,.z:focus-visible>.fl{filter:brightness(1.15)}
+.panel{background:var(--pn);border:1px solid var(--ln);border-radius:16px;padding:clamp(14px,1.6vw,22px);flex:1;min-width:0;max-width:440px;overflow:visible;align-self:flex-start;max-height:none;font-size:15px;line-height:1.5}
+.k{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ac);font-weight:700}
+.panel h2{font:700 21px/1.2 Georgia,serif;margin:2px 0 10px}
+.panel p{margin:0 0 10px}.mut{color:var(--mut)}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 12px}
+.tags span{font-size:13px;padding:3px 10px;border-radius:99px;border:1px solid var(--ln)}
+.dots{display:flex;gap:5px;align-items:center;margin-bottom:12px;font-size:13px;color:var(--mut)}
+.dots i{width:12px;height:12px;border-radius:50%;border:1.5px solid var(--ac);display:inline-block}
+.dots i.f{background:var(--ac)}
+.leg{display:grid;gap:8px;margin-bottom:12px}
+.leg button{font:inherit;text-align:left;display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:10px;border:1px solid var(--ln);background:transparent;color:var(--ink);cursor:pointer}
+.leg b{width:14px;height:14px;border-radius:4px;flex:none}
+.tb{display:none}.rv .tb{display:block}
+g[data-p]{cursor:pointer}g[data-p]:hover .pr,g[data-p].on .pr{stroke-opacity:.9}
+.path{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin:0 0 10px}.path button{font:inherit;font-size:13px;padding:3px 10px;border-radius:99px;border:1px solid var(--ln);background:transparent;color:var(--ink);cursor:pointer}.path button.cur{background:var(--ln)}.path i{color:var(--mut);font-style:normal}
+.row{margin:0 0 10px}.row b{display:block;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
+.stage{position:relative}.zo{position:absolute;top:12px;right:12px;display:none;align-items:center;gap:6px;font:inherit;font-size:14px;padding:6px 14px;border-radius:99px;border:1.5px solid var(--ln);background:var(--pn);color:var(--ink);cursor:pointer}.zo.vis{display:inline-flex}.zo:hover{border-color:var(--ac)}
+.stage{flex:none;align-self:flex-start;aspect-ratio:4/3;width:min(calc(100% - var(--pw) - var(--gp)), 900px)}
+</style>
+</head>
+<body class="project-page case-study" data-site-root="../" id="top">
+<a class="skip-link" href="#case-main">Skip to content</a>
+<header class="site-header" id="site-header"></header>
+<main id="case-main">
+<h1>The House of Belonging</h1>
+<p class="sub">A top-view floor plan of a person with ADHD’s ecosystem — closeness drawn as rooms. Tap a room to step inside.</p>
+<div class="chips" id="chips"></div>
+<div class="grid">
+<div class="stage"><svg id="svg" viewBox="0 0 800 600" role="img" aria-label="Top-view floor plan: bedroom, hall, lobby and outside"></svg><button class="zo" id="zo" aria-label="Zoom out to the whole house">− Zoom out</button></div>
+<aside class="panel" id="panel" aria-live="polite"></aside>
+</div>
+</main>
+<script src="../assets/js/content.js"></script>
+<script src="../assets/js/icons.js"></script>
+<script src="../assets/js/header.js"></script>
+<script>
+const K='#5A3628',svg=document.getElementById('svg');
+const D={
+overview:{vb:[0,0,800,600]},
+bedroom:{vb:[240,180,320,240],n:4,k:'Closest · 2–3 people',t:'The Bedroom',w:['Caregiver 1','Caregiver 2','Caregiver 3'],m:'Fully unmasked',b:'The person with ADHD is completely at ease here. Restlessness, tangents and “weirdness” are met with acceptance, so nothing has to be hidden or managed.',y:'Deep bonds form with a chosen few — built on shared experience and on the other person accepting who they really are.',c:'#F0BFA5'},
+hall:{vb:[120,90,560,420],n:3,k:'Close · everyday life',t:'The Hall',w:['Parents','Siblings','Pets'],m:'Masked to sustain the bond',b:'These people are woven into daily life, so the person with ADHD wears a mask — hiding true feelings and softening their real self to keep the relationship steady.',y:'The closeness is real but conditional. The effort of masking is the cost of staying connected.',c:'#EADBB9'},
+lobby:{vb:[20,15,760,570],n:2,k:'Occasional · formal',t:'The Lobby',w:['Teachers','Relatives','Neighbours','Co-workers','Classmates'],m:'Formal, coming and going',b:'People pass through in a formal setting. Interactions are role-based — student, employee, neighbour — and rarely reach the person underneath.',y:'Without the experience of being accepted, these ties stay shallow however often they meet.',c:'#B4C8AE'},
+outside:{vb:[0,0,800,600],n:1,k:'Distant · beyond the house',t:'Outside',w:['Strangers','Public spaces','Online world'],m:'Distant',b:'Everyone beyond the front door: passing contact with no shared history and no real exchange of selves.',y:'The edge of the map — the world the person moves through, but rarely lets in.',c:'#9CC3C2'}
+};
+const txt=(x,y,s,sz=11,w=500,a='middle',c='#F8EFDE')=>`<text x="${x}" y="${y}" text-anchor="${a}" font-size="${sz}" font-weight="${w}" fill="${c}" stroke="${K}" stroke-width="3" paint-order="stroke" font-family="Segoe UI,system-ui,sans-serif">${s}</text>`;
+const rect=(x,y,w,h,f,r=2,sw=2)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${r}" fill="${f}" stroke="${K}" stroke-width="${sw}"/>`;
+function fig(x,y,col,lab,o={}){const s=o.s||1;return `<g data-p="${lab}" data-x="${x}" data-y="${y}" transform="translate(${x} ${y}) scale(${s})" opacity="${o.op||1}"><title>${lab}</title><circle class="pr" r="26" fill="none" stroke="#F8EFDE" stroke-width="2" stroke-opacity="0" stroke-dasharray="4 3"/>`+
+(o.glow?`<circle r="46" fill="#BE8A2E" opacity=".4"/><circle r="36" fill="#BE8A2E" opacity=".85"/><circle r="26" fill="#F8EFDE" opacity=".85"/>`:'')+
+(o.ring?`<circle r="22" fill="none" stroke="#F8EFDE" stroke-dasharray="3 3" opacity=".6"/>`:'')+
+`<ellipse cy="3" rx="16" ry="8" fill="${col}" stroke="${K}" stroke-width="2"/><circle r="9" fill="#3b2b24" stroke="${K}" stroke-width="2"/><circle cx="2" cy="2" r="4" fill="#F8EFDE" opacity=".9"/>`+
+`${o.tb?`<g class="tb" transform="scale(${1/s})"><rect x="-36" y="${-50*s}" width="72" height="17" rx="8.5" fill="#F8EFDE" stroke="${K}" stroke-width="1.5"/><text y="${-38*s}" text-anchor="middle" font-size="9.5" font-weight="600" fill="${K}" font-family="Segoe UI,system-ui,sans-serif">${o.tb}</text></g>`:''}<g transform="scale(${1/s})">${txt(0,(o.ly||26)*s,lab,o.fs||11,o.fw||500,'middle',o.tc)}</g></g>`}
+function pet(x,y,lab){return `<g data-p="${lab}" data-x="${x}" data-y="${y}" transform="translate(${x} ${y})"><title>${lab}</title><circle class="pr" r="26" fill="none" stroke="#F8EFDE" stroke-width="2" stroke-opacity="0" stroke-dasharray="4 3"/><path d="M-14 2Q-26 4-24 -8" fill="none" stroke="#BE8A2E" stroke-width="4" stroke-linecap="round"/><ellipse rx="15" ry="9" fill="#BE8A2E" stroke="${K}" stroke-width="2"/><circle cx="14" cy="0" r="8" fill="#BE8A2E" stroke="${K}" stroke-width="2"/><circle cx="14" cy="-7" r="3" fill="#8B3F20" stroke="${K}" stroke-width="1.2"/><circle cx="14" cy="7" r="3" fill="#8B3F20" stroke="${K}" stroke-width="1.2"/>${txt(0,32,lab,11,500,'middle',TC.hall)}</g>`}
+function plant(x,y,c='#4E5C37'){let s=`<circle cx="${x}" cy="${y}" r="13" fill="#8B3F20" stroke="${K}" stroke-width="2"/>`;for(let i=0;i<6;i++)s+=`<ellipse cx="${x}" cy="${y-11}" rx="5" ry="12" transform="rotate(${i*60+15} ${x} ${y})" fill="${c}" stroke="${K}" stroke-width="1.6"/>`;return s+`<circle cx="${x}" cy="${y}" r="4" fill="#758B74" stroke="${K}" stroke-width="1.2"/>`}
+function tree(x,y){return `<circle cx="${x}" cy="${y}" r="24" fill="#4E5C37" stroke="${K}" stroke-width="2.5"/><circle cx="${x-6}" cy="${y-6}" r="10" fill="#758B74" opacity=".7"/>`}
+function lights(x1,x2,y){const p=[];for(let i=0;i<=10;i++){const t=i/10;p.push([x1+(x2-x1)*t,y+Math.sin(t*Math.PI)*10])}return `<polyline points="${p.join(' ')}" fill="none" stroke="${K}" stroke-width="1.3"/>`+p.map(q=>`<circle cx="${q[0]}" cy="${q[1]+3}" r="3.2" fill="#F8EFDE" stroke="${K}" stroke-width="1"/>`).join('')}
+function door(x1,x2,y,col){const w=x2-x1;return `<rect x="${x1}" y="${y-6}" width="${w}" height="12" fill="${col}"/><path d="M${x1} ${y}V${y-w}" stroke="#F8EFDE" stroke-width="2.5" stroke-linecap="round"/><path d="M${x1} ${y-w}A${w} ${w} 0 0 1 ${x2} ${y}" fill="none" stroke="#F8EFDE" stroke-width="1.2" stroke-dasharray="3 3" opacity=".6"/>`}
+function zone(id,r,fill,inner){return `<g class="z" data-z="${id}" tabindex="0" role="button" aria-label="${D[id].t}"><rect class="fl" x="${r[0]}" y="${r[1]}" width="${r[2]}" height="${r[3]}" rx="6" fill="${fill}" stroke="${K}" stroke-width="8"/>${inner}</g>`}
+const TP={bedroom:'#A9501B',hall:'#1D4350',lobby:'#6F3330',outside:'#4E5C37'};
+const TC={bedroom:'#F0C070',hall:'#8FC7C9',lobby:'#E8B79F',outside:'#B5CBB1'};
+const lab=(x,y,s,c)=>txt(x,y,s,13,700,'start',c);
+const defs=`<defs>
+<pattern id="pt" width="40" height="40" patternUnits="userSpaceOnUse"><rect width="40" height="40" fill="#B4C8AE"/><path d="M0 0H40V40" fill="none" stroke="#A0B79B" stroke-width="1.5"/></pattern>
+<pattern id="ph" width="48" height="90" patternUnits="userSpaceOnUse"><rect width="48" height="90" fill="#EADBB9"/><path d="M0 0V90M24 0V90M0 45H24M24 20H48M24 70H48" fill="none" stroke="#D8C59F" stroke-width="1.4"/></pattern></defs>`;
+/* outside */
+const out=tree(28,150)+tree(28,450)+tree(772,150)+tree(772,450)+tree(772,40)+lab(20,590,'OUTSIDE',TC.outside)+
+fig(190,574,'#1D4350','Strangers',{op:.85,ly:20,s:.85,tc:TC.outside})+fig(400,574,'#1D4350','Public spaces',{op:.85,ly:20,s:.85,tc:TC.outside})+fig(650,574,'#1D4350','Online world',{op:.85,ly:20,s:.85,tc:TC.outside});
+/* lobby */
+const lob=lab(60,40,'LOBBY',TC.lobby)+
+`<rect x="200" y="45" width="70" height="10" fill="#F8EFDE" stroke="${K}" stroke-width="2"/><rect x="530" y="45" width="70" height="10" fill="#F8EFDE" stroke="${K}" stroke-width="2"/>`+
+door(360,440,550,'#9CC3C2')+plant(100,520)+plant(700,100)+
+fig(110,230,'#4A2A3C','Teachers',{ring:1,tc:TC.lobby,tb:'holding back'})+fig(110,390,'#4A2A3C','Relatives',{ring:1,tc:TC.lobby,tb:'holding back'})+fig(400,88,'#4A2A3C','Neighbours',{ring:1,tc:TC.lobby,tb:'holding back'})+fig(690,230,'#4A2A3C','Classmates',{ring:1,tc:TC.lobby,tb:'holding back'})+fig(690,390,'#4A2A3C','Co-workers',{ring:1,tc:TC.lobby,tb:'holding back'});
+/* hall */
+const hal=lab(160,116,'HALL',TC.hall)+door(440,500,475,'#B4C8AE')+plant(185,445)+
+`<circle cx="590" cy="300" r="26" fill="#6F3330" stroke="${K}" stroke-width="2"/><circle cx="590" cy="300" r="17" fill="#D69F85"/>`+
+fig(215,235,'#1D4350','Parent',{mask:1,tc:TC.hall,tb:'worried'})+fig(215,340,'#1D4350','Parent',{mask:1,tc:TC.hall,tb:'exhausted'})+fig(350,440,'#1D4350','Sibling',{mask:1,tc:TC.hall,tb:'misunderstood'})+pet(590,300,'Pet');
+/* bedroom */
+let books='';['#8B3F20','#BE8A2E','#758B74','#A9501B','#F8EFDE','#6F3330','#1D4350'].forEach((c,i)=>books+=`<rect x="506" y="${230+i*12}" width="16" height="9" fill="${c}" stroke="${K}" stroke-width="1"/>`);
+let rug=rect(292,300,100,80,'#A9501B',3)+[316,340,364].map(y=>`<path d="M296 ${y-14}H388" stroke="#BE8A2E" stroke-width="2.5"/>`).join('');
+const bed=lab(270,186,'BEDROOM',TC.bedroom)+door(300,350,405,'#EADBB9')+
+`<rect x="266" y="250" width="10" height="60" fill="#F8EFDE" stroke="${K}" stroke-width="2"/><rect x="262" y="244" width="18" height="10" fill="#8B3F20" stroke="${K}" stroke-width="1.5"/>`+
+rug+rect(322,212,30,30,'#5A3628',3)+`<circle cx="337" cy="227" r="14" fill="#F8EFDE" opacity=".45"/><circle cx="337" cy="227" r="7" fill="#F8EFDE" stroke="${K}" stroke-width="1.5"/>`+
+rect(355,210,130,140,'#D5C3A1',8)+rect(355,262,130,88,'#1D4350',6)+rect(365,218,50,30,'#F8EFDE',8)+rect(425,218,50,30,'#F8EFDE',8)+`<path d="M355 262H485" stroke="#2a1c17" stroke-width="3"/>`+
+rect(502,225,22,95,'#5A3628',2)+books+plant(509,386)+
+`<circle cx="498" cy="338" r="5" fill="#F8EFDE" stroke="${K}" stroke-width="1.5"/><ellipse cx="500" cy="352" rx="8" ry="4" fill="#6F3330" stroke="${K}" stroke-width="1.5"/>`+
+lights(285,515,203)+
+fig(325,340,'#8B3F20','Caregiver 1',{tc:TC.bedroom})+fig(462,366,'#8B3F20','Caregiver 2',{tc:TC.bedroom})+fig(385,374,'#8B3F20','Caregiver 3',{ly:24,tc:TC.bedroom})+
+fig(420,278,'#A9501B','Person with ADHD',{s:1.3,glow:1,fw:700,ly:28,tc:TC.bedroom});
+svg.innerHTML=defs+
+zone('outside',[0,0,800,600],'#9CC3C2',out)+
+zone('lobby',[60,50,680,500],'url(#pt)',lob)+
+zone('hall',[160,125,480,350],'url(#ph)',hal)+
+zone('bedroom',[270,195,260,210],'#F0BFA5',bed)+'<g id="bl" pointer-events="none"></g>';
+/* UI */
+const panel=document.getElementById('panel'),chips=document.getElementById('chips');
+chips.innerHTML=[['overview','Overview'],['bedroom','Bedroom'],['hall','Hall'],['lobby','Lobby'],['outside','Outside']].map(([k,v])=>`<button data-z="${k}">${v}</button>`).join('')+`<button id="rv" aria-pressed="false" style="margin-left:auto">Reveal true self</button>`;
+let cur=D.overview.vb.slice(),raf,sel='overview';
+function go(t){cancelAnimationFrame(raf);const f=cur.slice(),s=performance.now(),d=matchMedia('(prefers-reduced-motion:reduce)').matches?1:750;
+(function st(n){let k=Math.min(1,(n-s)/d);k=k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2;cur=f.map((v,i)=>v+(t[i]-v)*k);svg.setAttribute('viewBox',cur.join(' '));if(k<1)raf=requestAnimationFrame(st)})(s)}
+const bl=document.getElementById('bl');
+const PATH=c=>`<div class="path" aria-label="How someone moves closer">`+['lobby','hall','bedroom'].map(k=>`<button data-z="${k}" class="${k===c?'cur':''}">${D[k].t.replace('The ','')}</button>`).join('<i>→</i>')+`</div><p class="mut" style="font-size:13px">Closer through shared experience and being accepted — “weirdness” included.</p>`;
+const PD={bedroom:{s:'Fully themselves — restlessness, tangents and all',h:'Nothing held back',b:'Deep, built on acceptance',e:0},hall:{s:'Steady and “fine”',h:'Stress, overwhelm and the need for help',b:'Close but conditional',e:4},lobby:{s:'Formal and role-based',h:'Most of the real self',b:'Shallow, comes and goes',e:3},outside:{s:'Passing and anonymous',h:'Nothing shared',b:'Distant',e:1},Pet:{s:'Comfort without judgment',h:'Little to hide',b:'Close and easy',e:1}};
+function line(p){const z=p.closest('.z').dataset.z;if(p.dataset.p==='Person with ADHD'){bl.innerHTML='';return}const st={bedroom:['0',3.5],hall:['9 6',3],lobby:['2 7',2.5],outside:['1 9',2]}[z];bl.innerHTML=`<line x1="420" y1="278" x2="${p.dataset.x}" y2="${p.dataset.y}" stroke="${TP[z]}" stroke-width="${st[1]}" stroke-dasharray="${st[0]}" stroke-linecap="round" opacity=".9"/>`}
+function rest(){const o=svg.querySelector('[data-p].on');o?line(o):bl.innerHTML=''}
+function clr(){svg.querySelectorAll('[data-p].on').forEach(x=>x.classList.remove('on'));bl.innerHTML=''}
+function showP(p,z){const n=p.dataset.p;if(n==='Person with ADHD'){show(z);return}clr();sel=z;go(D[z].vb);zv(z);chips.querySelectorAll('button[data-z]').forEach(b=>b.classList.toggle('on',b.dataset.z===z));p.classList.add('on');line(p);const d=PD[n]||PD[z];panel.innerHTML=`<div class="k" style="color:${TP[z]}">${D[z].t.replace('The ','')} · ${D[z].m}</div><h2 style="color:${TP[z]}">${n}</h2><div class="dots" aria-label="Mask effort">`+[1,2,3,4,5].map(i=>`<i class="${i<=d.e?'f':''}"></i>`).join('')+`<span style="margin-left:6px">Mask effort</span></div>`+[['Shows up as',d.s],['Underneath',d.h],['Bond',d.b]].map(([a,b])=>`<div class="row"><b>${a}</b>${b}</div>`).join('')+`<p class="mut" style="font-size:13px">Interview quote: add from your fieldwork. Status: hypothesis.</p><div class="path"><button data-z="${z}">← Back to ${D[z].t}</button></div>`}
+const zo=document.getElementById('zo');function zv(id){zo.classList.toggle('vis',id!=='overview'&&id!=='outside')}
+function show(id){clr();sel=id;go(D[id].vb);zv(id);
+chips.querySelectorAll('button[data-z]').forEach(b=>b.classList.toggle('on',b.dataset.z===id));
+if(id==='overview'){panel.innerHTML=`<div class="k">The map</div><h2>Closeness, as a floor plan</h2><p>People with ADHD don’t spread closeness evenly. A few are let into the bedroom, many stay in the hall, and most of the world meets them in the lobby.</p><p class="mut">Deep bonds grow from shared experience and from the other person accepting their “weirdness”. Use “Reveal true self” to see what each person is holding back.</p><div class="leg">`+
+['bedroom','hall','lobby','outside'].map(k=>`<button data-z="${k}"><b style="background:${D[k].c}"></b><span><strong style="color:${TP[k]}">${D[k].t}</strong><br><span class="mut" style="font-size:13px">${D[k].w.join(', ')}</span></span></button>`).join('')+`</div><div class="k" style="margin:4px 0 6px">How someone earns the bedroom</div>`+PATH();return}
+const d=D[id];panel.innerHTML=`<div class="k" style="color:${TP[id]}">${d.k}</div><h2 style="color:${TP[id]}">${d.t}</h2><div class="dots" aria-label="Closeness">`+[1,2,3,4].map(i=>`<i class="${i<=d.n?'f':''}"></i>`).join('')+`<span style="margin-left:6px">${d.m}</span></div><div class="tags">${d.w.map(x=>`<span>${x}</span>`).join('')}</div><p>${d.b}</p><p class="mut"><strong>Why it matters:</strong> ${d.y}</p><p class="mut" style="font-size:13px">Status: hypothesis — validate with interview evidence.</p><div class="k" style="margin:4px 0 6px">How someone earns the bedroom</div>${PATH(id)}`}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&sel!=='overview')show('overview')});
+let rev=false;document.addEventListener('click',e=>{if(e.target.closest('#zo')){show('overview');return}const rb=e.target.closest('#rv');if(rb){rev=!rev;svg.classList.toggle('rv',rev);rb.classList.toggle('on',rev);rb.setAttribute('aria-pressed',rev);return}const pp=e.target.closest('[data-p]');if(pp){showP(pp,pp.closest('.z').dataset.z);return}const t=e.target.closest('[data-z]');if(!t)return;const id=t.dataset.z;show(id===sel&&id!=='overview'&&t.classList.contains('z')?'overview':id)});
+svg.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();e.target.click()}});
+svg.addEventListener('mouseover',e=>{const p=e.target.closest('[data-p]');if(p)line(p)});
+svg.addEventListener('mouseout',e=>{if(e.target.closest('[data-p]'))rest()});
+show('overview');
+</script>
+</body>
+</html>
