@@ -5,67 +5,106 @@
   if (!header) return;
 
   var isProjectPage = document.body.classList.contains("project-page");
-  var isCaseStudy = document.body.classList.contains("case-study");
   var assetPrefix = document.body.dataset.siteRoot || "";
   var homePrefix = isProjectPage ? assetPrefix + "index.html" : "";
-  var brandMarkup = isCaseStudy
-    ? '<a class="brand" href="' + assetPrefix + 'index.html#work" aria-label="Back to projects" data-cursor="interactive">← Back to projects</a>'
-    : '<a class="brand" href="' + (isProjectPage ? "index.html" : "#top") + '" aria-label="Asawari, home" data-cursor="interactive">' +
-      '<img class="brand__mark" src="' + assetPrefix + 'assets/images/Group 32.png" alt="" width="52" height="52" decoding="async">' +
-      "</a>";
-  var navigationMarkup = isCaseStudy
-    ? '<nav class="socials" aria-label="Social links"><span class="socials__label" id="find-me-text">You can find me on</span><ul class="socials__list" id="socials-list"></ul></nav>'
-    :
-    '<button class="nav-toggle" type="button" aria-label="Open navigation" aria-controls="primary-navigation" aria-expanded="false">' +
-    "<span></span><span></span><span></span>" +
-    "</button>" +
-    '<nav class="primary-nav" aria-label="Main navigation">' +
-    '<ul class="primary-nav__list" id="primary-navigation">' +
-    '<li><a class="primary-nav__link" href="' + homePrefix + '#expertise">Skills</a></li>' +
-    '<li><a class="primary-nav__link" href="' + homePrefix + '#work"' +
-    (isProjectPage ? ' aria-current="page"' : "") +
-    ">Work</a></li>" +
-    '<li><a class="primary-nav__link" href="' + homePrefix + '#about-me">About Me</a></li>' +
-    '<li><a class="primary-nav__link" href="' + homePrefix + '#experience">Experience</a></li>' +
-    '<li><a class="primary-nav__link" href="' + homePrefix + '#education">Education</a></li>' +
-    '<li><a class="primary-nav__link primary-nav__link--resume" id="resume-btn" href="' + assetPrefix + 'assets/resume.pdf" target="_blank" rel="noopener noreferrer">' +
-    '<span id="resume-label">Resume</span><span class="visually-hidden">(opens in a new tab)</span>' +
-    '<svg class="primary-nav__external-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
-    "</a></li></ul></nav>" +
-    '<nav class="socials" aria-label="Social links"><span class="socials__label" id="find-me-text">You can find me on</span><ul class="socials__list" id="socials-list"></ul></nav>';
-  header.innerHTML =
-    '<div class="container header__inner">' +
-    brandMarkup +
-    navigationMarkup +
-    "</div>";
+  var homeHref = homePrefix + "#top";
+  var projectsHref = homePrefix + "#work";
 
-  var siteContent = window.SITE_CONTENT || {};
-  var headerContent = siteContent.header || {};
-  var resume = document.getElementById("resume-btn");
-  if (resume && headerContent.resumeFile) resume.href = assetPrefix + headerContent.resumeFile;
-  var findMeText = document.getElementById("find-me-text");
-  if (findMeText) findMeText.textContent = headerContent.findMeText || "You can find me on";
-  var socialsList = document.getElementById("socials-list");
-  (headerContent.socials || []).forEach(function (social) {
-    if (!social.url || !socialsList) return;
-    var item = document.createElement("li");
-    var link = document.createElement("a");
-    link.className = "social-link";
-    link.href = social.url;
-    link.target = "_blank";
-    link.rel = "noopener noreferrer";
-    link.innerHTML = window.SITE_ICONS && window.SITE_ICONS[social.icon]
-      ? window.SITE_ICONS[social.icon]
-      : (social.label || social.icon);
-    link.setAttribute("aria-label", social.label || social.icon);
-    item.appendChild(link);
-    socialsList.appendChild(item);
-  });
+  var icons = {
+    home: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1V10Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
+    skills: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m13 2-9 12h7l-1 8 9-12h-7l1-8Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
+    work: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 7.5A1.5 1.5 0 0 1 4.5 6h5l2 2h8A1.5 1.5 0 0 1 21 9.5v9a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 18V7.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
+    about: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="8" r="3.2" stroke="currentColor" stroke-width="1.8"/><path d="M5 20c.7-3.4 3.1-5.3 7-5.3s6.3 1.9 7 5.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+    experience: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="1.8" stroke="currentColor" stroke-width="1.8"/><path d="M8 7V5.5A1.5 1.5 0 0 1 9.5 4h5A1.5 1.5 0 0 1 16 5.5V7M3 12h18M10 12v2h4v-2" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
+    education: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m3 9 9-4 9 4-9 4-9-4Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M6 11.2v4.3c2.9 2.4 9.1 2.4 12 0v-4.3M21 9v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    social: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><circle cx="17.5" cy="6.7" r="1" fill="currentColor"/></svg>',
+    resume: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 3.5h8l4 4V20a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4.5a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M14 3.5V8h4M8 12h8M8 16h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+  };
 
-  function updateHeaderState() {
-    header.classList.toggle("is-scrolled", window.scrollY > 8);
+  function navLink(label, icon, href, section, extra) {
+    return (
+      '<li><a class="icon-nav__link" href="' + href + '" aria-label="' + label + '"' +
+      (section ? ' data-section="' + section + '"' : "") +
+      (extra || "") + '>' +
+      icons[icon] +
+      '<span class="icon-nav__tooltip">' + label + "</span>" +
+      "</a></li>"
+    );
   }
 
-  window.addEventListener("scroll", updateHeaderState, { passive: true });
-  updateHeaderState();
+  var headerContent = (window.SITE_CONTENT || {}).header || {};
+  var instagram = (headerContent.socials || []).filter(function (social) {
+    return social.icon === "instagram" && social.url;
+  })[0];
+  var socialMarkup = instagram
+    ? navLink("Instagram", "social", instagram.url, "", ' target="_blank" rel="noopener noreferrer"')
+    : "";
+
+  header.innerHTML =
+    '<div class="container header__inner">' +
+    '<a class="brand" href="' + homeHref + '" aria-label="Asawari Sakharkar, home">' +
+    '<span class="brand__mark" aria-hidden="true"><img src="' + assetPrefix + 'assets/images/Group 32.png" alt=""></span>' +
+    '<span class="brand__name">Asawari Sakharkar</span>' +
+    "</a>" +
+    '<span class="header__divider" aria-hidden="true"></span>' +
+    '<nav class="icon-nav" aria-label="Primary"><ul class="icon-nav__list" id="primary-navigation">' +
+    (isProjectPage
+      ? navLink("Back to projects", "work", projectsHref, "", "")
+      : navLink("Home", "home", homeHref, "top") +
+        navLink("Skills", "skills", homePrefix + "#expertise", "expertise") +
+        navLink("Work", "work", homePrefix + "#work", "work") +
+        navLink("About me", "about", homePrefix + "#about-me", "about-me") +
+        navLink("Experience", "experience", homePrefix + "#experience", "experience") +
+        navLink("Education", "education", homePrefix + "#education", "education") +
+        socialMarkup +
+        navLink("Resume", "resume", assetPrefix + (headerContent.resumeFile || "assets/resume.pdf"), "", ' id="resume-btn" target="_blank" rel="noopener noreferrer"')) +
+    "</ul></nav>" +
+    "</div>";
+
+  var links = Array.prototype.slice.call(document.querySelectorAll(".icon-nav__link"));
+  var isHomePage = !isProjectPage;
+
+  function setActive(sectionId) {
+    links.forEach(function (link) {
+      var isActive = isHomePage && link.dataset.section === sectionId;
+      if (!isHomePage && link.dataset.section === "work") isActive = true;
+      if (isActive) {
+        link.setAttribute("aria-current", "page");
+      } else {
+        link.removeAttribute("aria-current");
+      }
+    });
+  }
+
+  if (isHomePage) {
+    var sections = links.map(function (link) {
+      return document.getElementById(link.dataset.section || "");
+    }).filter(Boolean);
+
+    if ("IntersectionObserver" in window) {
+      var visible = new Set();
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) visible.add(entry.target);
+          else visible.delete(entry.target);
+        });
+        var focusY = window.innerHeight * 0.42;
+        var current = Array.from(visible).sort(function (a, b) {
+          return Math.abs(a.getBoundingClientRect().top - focusY) -
+            Math.abs(b.getBoundingClientRect().top - focusY);
+        })[0];
+        setActive(current ? current.id : "top");
+      }, { rootMargin: "-30% 0px -55% 0px", threshold: 0 });
+      sections.forEach(function (section) { observer.observe(section); });
+    } else {
+      setActive("top");
+    }
+  } else {
+    setActive("work");
+  }
+
+  header.classList.toggle("is-scrolled", window.scrollY > 8);
+  window.addEventListener("scroll", function () {
+    header.classList.toggle("is-scrolled", window.scrollY > 8);
+  }, { passive: true });
 })();

@@ -79,6 +79,29 @@ img { display: block; width: 100%; max-width: 100%; height: auto; }
   border-bottom: 1px solid var(--line);
   box-shadow: none;
 }
+.arohi-page > .site-header {
+  background: var(--card) !important;
+  background-image: none !important;
+  border: 1px solid color-mix(in srgb, var(--red) 24%, transparent) !important;
+  border-bottom-color: color-mix(in srgb, var(--red) 24%, transparent) !important;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+.arohi-page > .site-header .brand,
+.arohi-page > .site-header .icon-nav__link {
+  color: var(--text);
+}
+.arohi-page > .site-header .icon-nav__link:hover,
+.arohi-page > .site-header .icon-nav__link:focus-visible,
+.arohi-page > .site-header .icon-nav__link[aria-current="page"] {
+  color: var(--red);
+}
+.arohi-page > .site-header .icon-nav__link:hover,
+.arohi-page > .site-header .icon-nav__link[aria-current="page"] {
+  background: color-mix(in srgb, var(--red) 12%, transparent);
+}
+.arohi-page > .site-header .icon-nav__link[aria-current="page"]::after {
+  background: var(--red);
+}
 .case-study .primary-nav__link,
 .case-study .socials__label,
 .case-study .social-link { color: var(--text); }

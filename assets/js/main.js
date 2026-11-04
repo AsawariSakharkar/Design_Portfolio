@@ -1058,14 +1058,14 @@
 
   function setupActiveNavigation() {
     var links = Array.prototype.slice.call(
-      document.querySelectorAll('.primary-nav__link[href^="#"]')
+      document.querySelectorAll('.icon-nav__link[data-section]')
     );
     if (!links.length) return;
 
     function setActiveLink(sectionId) {
       links.forEach(function (link) {
         if (link.hash.slice(1) === sectionId) {
-          link.setAttribute("aria-current", "location");
+          link.setAttribute("aria-current", "page");
         } else {
           link.removeAttribute("aria-current");
         }

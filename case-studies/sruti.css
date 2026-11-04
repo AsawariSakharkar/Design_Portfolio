@@ -1,37 +1,78 @@
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&display=swap");
 
 /* Keep the existing navigation markup, but carry the Śruti palette into its chrome. */
-.sruti-page { background: #0B1220; }
-.sruti-page > .site-header {
-  position: static;
-  top: auto;
-  z-index: auto;
+.sruti-page {
+  --teal2: #4FD0E3;
   background: #0B1220;
-  border-bottom-color: #22304A;
-  color: #E6EDF5;
+}
+.sruti-page > .site-header {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  z-index: 50;
+  width: fit-content;
+  max-width: calc(100% - 2rem);
+  border: 1px solid color-mix(in srgb, var(--teal2) 22%, transparent) !important;
+  border-bottom: 1px solid color-mix(in srgb, var(--teal2) 22%, transparent) !important;
+  border-radius: 999px;
+  background: #111A2B !important;
+  background-image: none !important;
+  box-shadow: 0 12px 30px rgba(11, 18, 32, 0.28) !important;
+  color: #E6EDF5 !important;
+  transform: translateX(-50%);
+}
+.sruti-page > .site-header .header__inner {
+  width: fit-content;
+  min-height: 0;
+  padding-block: 0.4rem;
+}
+.sruti-page > .site-header .header__divider {
+  background: transparent !important;
 }
 .sruti-page > .site-header .brand,
-.sruti-page > .site-header .primary-nav__link,
-.sruti-page > .site-header .socials__label,
-.sruti-page > .site-header .social-link {
-  color: #E6EDF5;
+.sruti-page > .site-header .icon-nav__link {
+  color: #E6EDF5 !important;
+  opacity: 1;
+}
+.sruti-page > .site-header .brand__name,
+.sruti-page > .site-header .icon-nav__link svg {
+  color: #E6EDF5 !important;
+}
+.sruti-page > .site-header .icon-nav__link svg path,
+.sruti-page > .site-header .icon-nav__link svg rect,
+.sruti-page > .site-header .icon-nav__link svg circle {
+  stroke: #E6EDF5 !important;
+}
+.sruti-page > .site-header .icon-nav__link svg circle:last-child {
+  fill: #E6EDF5 !important;
 }
 .sruti-page > .site-header .brand:hover,
 .sruti-page > .site-header .brand:focus-visible,
-.sruti-page > .site-header .primary-nav__link:hover,
-.sruti-page > .site-header .primary-nav__link:focus-visible,
-.sruti-page > .site-header .social-link:hover,
-.sruti-page > .site-header .social-link:focus-visible {
+.sruti-page > .site-header .icon-nav__link:hover,
+.sruti-page > .site-header .icon-nav__link:focus-visible,
+.sruti-page > .site-header .icon-nav__link[aria-current="page"] {
   color: #4FD0E3;
 }
-.sruti-page > .site-header .primary-nav__link--resume {
-  border-color: #30BED2;
-  color: #30BED2;
+.sruti-page > .site-header .icon-nav__link:hover,
+.sruti-page > .site-header .icon-nav__link[aria-current="page"] {
+  background: rgba(79, 208, 227, 0.12);
 }
-.sruti-page > .site-header .primary-nav__link--resume:hover,
-.sruti-page > .site-header .primary-nav__link--resume:focus-visible {
-  background: #30BED2;
-  color: #0B1220;
+.sruti-page > .site-header .icon-nav__link[aria-current="page"]::after {
+  background: #4FD0E3;
+}
+.sruti-page > .site-header .icon-nav__tooltip {
+  border-color: #22304A;
+  background: #111A2B;
+  color: #E6EDF5;
+}
+@media (max-width: 700px) {
+  .sruti-page > .site-header {
+    top: 0.65rem;
+    width: calc(100% - 1rem);
+  }
+  .sruti-page > .site-header .header__inner {
+    width: 100%;
+  }
 }
 .sruti-page > .sruti-footer {
   width: 100%;
@@ -473,4 +514,3 @@
   .sruti-footer__link { width: min(100% - 32px, 1120px); }
 }
 @media (prefers-reduced-motion: reduce) { .sruti-cs *, .sruti-cs *::before, .sruti-cs *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; } }
-
