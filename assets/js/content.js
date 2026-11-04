@@ -22,7 +22,7 @@ window.SITE_CONTENT = {
   // ---- Header -------------------------------------------------------------
   header: {
     resumeLabel: "Resume",
-    resumeFile: "assets/resume/Asawari_Sakharkar_Resume.pdf",
+    resumeFile: "assets/resume/Asawari's Resume for protfolio.pdf",
     findMeText: "You can find me on",
     // `icon` must match a key in assets/js/icons.js. Leave url "" to hide.
     socials: [
