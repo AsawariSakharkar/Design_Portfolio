@@ -232,6 +232,16 @@
       });
     }
 
+    function updateProjectPositions() {
+      var visibleIndex = 0;
+      grid.querySelectorAll(".timeline-item").forEach(function (item) {
+        if (item.hidden) return;
+        item.classList.toggle("timeline-item--left", visibleIndex % 2 === 0);
+        item.classList.toggle("timeline-item--right", visibleIndex % 2 !== 0);
+        visibleIndex += 1;
+      });
+    }
+
     var groups = {};
     projects.forEach(function (project, index) {
       var year = project.item.date && /^\d{4}-\d{2}-\d{2}$/.test(project.item.date)
@@ -386,6 +396,10 @@
         grid.querySelectorAll(".timeline-item").forEach(function (item) {
           item.hidden = selected !== "All" && item.dataset.categories.indexOf(selected) === -1;
         });
+        grid.querySelectorAll(".timeline-milestone").forEach(function (milestone) {
+          milestone.hidden = selected !== "All";
+        });
+        updateProjectPositions();
       });
     }
   }

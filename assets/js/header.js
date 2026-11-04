@@ -47,6 +47,9 @@
     '<span class="brand__name">Asawari Sakharkar</span>' +
     "</a>" +
     '<span class="header__divider" aria-hidden="true"></span>' +
+    '<button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation">' +
+    '<span></span><span></span><span></span>' +
+    "</button>" +
     '<nav class="icon-nav" aria-label="Primary"><ul class="icon-nav__list" id="primary-navigation">' +
     (isProjectPage
       ? navLink("Back to projects", "work", projectsHref, "", "")
@@ -62,7 +65,30 @@
     "</div>";
 
   var links = Array.prototype.slice.call(document.querySelectorAll(".icon-nav__link"));
+  var nav = header.querySelector(".icon-nav");
+  var navToggle = header.querySelector(".nav-toggle");
   var isHomePage = !isProjectPage;
+
+  function setNavOpen(isOpen) {
+    if (!nav || !navToggle) return;
+    nav.classList.toggle("is-open", isOpen);
+    navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    navToggle.setAttribute("aria-label", isOpen ? "Close navigation" : "Open navigation");
+  }
+
+  if (navToggle) {
+    navToggle.addEventListener("click", function () {
+      setNavOpen(!nav.classList.contains("is-open"));
+    });
+  }
+  links.forEach(function (link) {
+    link.addEventListener("click", function () {
+      setNavOpen(false);
+    });
+  });
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") setNavOpen(false);
+  });
 
   function setActive(sectionId) {
     links.forEach(function (link) {
