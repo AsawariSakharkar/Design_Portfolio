@@ -186,9 +186,10 @@
   function renderProjects() {
     var p = C.projects || {};
     setText("projects-heading", p.heading || "My Projects");
-    var grid = $("project-grid");
-    if (!grid) return;
-    grid.innerHTML = "";
+    var folder = $("project-folder");
+    var panel = $("project-panel");
+    if (!folder || !panel) return;
+    panel.innerHTML = "";
     var categories = p.categories || [];
     var projects = [];
     categories.forEach(function (category) {
@@ -202,12 +203,17 @@
         if (filterCategory === "UX" && /research/i.test(item.role || "")) {
           filters = filters.concat("Research");
         }
-        projects.push({ item: item, group: category.title, filters: filters });
+        var folderCategory = category.title === "UI Case Studies"
+          ? "ui"
+          : category.title === "Data Visualization"
+            ? "dv"
+            : "ux";
+        projects.push({ item: item, group: category.title, category: folderCategory, filters: filters });
       });
     });
     if (!categories.length) {
       (p.items || []).forEach(function (item) {
-        projects.push({ item: item, group: "Projects", filters: item.categories || ["UX"] });
+        projects.push({ item: item, group: "Projects", category: "ux", filters: item.categories || ["UX"] });
       });
     }
 
@@ -218,38 +224,6 @@
       return new Date(b.item.date) - new Date(a.item.date);
     });
 
-    var filters = (p.timeline && p.timeline.filters) || ["All"];
-    var filterBar = $("project-filters");
-    if (filterBar) {
-      filterBar.innerHTML = "";
-      filters.forEach(function (filter, index) {
-        var button = el("button", "project-filter" + (index === 0 ? " is-active" : ""));
-        button.type = "button";
-        button.textContent = filter;
-        button.dataset.filter = filter;
-        button.setAttribute("aria-pressed", index === 0 ? "true" : "false");
-        filterBar.appendChild(button);
-      });
-    }
-
-    function updateProjectPositions() {
-      var visibleIndex = 0;
-      grid.querySelectorAll(".timeline-item").forEach(function (item) {
-        if (item.hidden) return;
-        item.classList.toggle("timeline-item--left", visibleIndex % 2 === 0);
-        item.classList.toggle("timeline-item--right", visibleIndex % 2 !== 0);
-        visibleIndex += 1;
-      });
-    }
-
-    var groups = {};
-    projects.forEach(function (project, index) {
-      var year = project.item.date && /^\d{4}-\d{2}-\d{2}$/.test(project.item.date)
-        ? project.item.date.slice(0, 4)
-        : "Date to be confirmed";
-      if (!groups[year]) groups[year] = [];
-      groups[year].push({ project: project, index: index });
-    });
     function caseStudyPath(item) {
       if (item.page) return item.page;
       return item.title === "Arohi: Disaster Management Interface"
@@ -267,25 +241,9 @@
 
     function renderProject(project, index) {
       var item = project.item;
-      var entry = el("article", "project-entry timeline-item " + (index % 2 === 0 ? "timeline-item--left" : "timeline-item--right"));
-      entry.dataset.categories = project.filters.join("|");
+      var entry = el("article", "project-entry");
+      entry.dataset.category = project.category;
       entry.dataset.index = index;
-      var marker = el("div", "timeline-marker");
-      marker.setAttribute("aria-hidden", "true");
-      entry.appendChild(marker);
-      if (item.date) {
-        var publishedDate = el("time", "timeline-date");
-        var dateParts = item.date.split("-");
-        var dateValue = new Date(Number(dateParts[0]), Number(dateParts[1]) - 1, Number(dateParts[2]));
-        publishedDate.dateTime = item.date;
-        publishedDate.textContent = dateValue.toLocaleDateString("en-US", {
-          month: "short",
-          day: "numeric",
-          year: "numeric",
-        });
-        publishedDate.setAttribute("aria-label", "Published " + publishedDate.textContent);
-        entry.appendChild(publishedDate);
-      }
       var path = caseStudyPath(item);
       var card = el(path ? "a" : "div", "project-card timeline-card");
       if (path) {
@@ -296,9 +254,6 @@
         }
       }
       var media = el("div", "project-card__media");
-      var mediaLabel = el("span", "project-card__media-label");
-      mediaLabel.textContent = item.cardLabel || project.group;
-      media.appendChild(mediaLabel);
       if (item.image) {
         var img = el("img");
         img.src = encodePath(item.image);
@@ -330,12 +285,6 @@
       description.textContent = item.problem || item.description || "";
       content.appendChild(description);
       var footer = el("div", "project-card__footer");
-      var details = el("p", "project-card__details");
-      details.textContent = "Role · " + (item.role || "Not specified");
-      if (item.duration) {
-        details.textContent += "  ·  " + item.duration;
-      }
-      footer.appendChild(details);
       var cta = el("span", "project-card__cta");
       cta.textContent = path ? "Open project" : "Project details coming soon";
       cta.innerHTML += ARROW_RIGHT;
@@ -346,62 +295,93 @@
       return entry;
     }
 
-    Object.keys(groups).sort(function (a, b) {
-      if (a === "Date to be confirmed") return 1;
-      if (b === "Date to be confirmed") return -1;
-      return Number(b) - Number(a);
-    }).forEach(function (year) {
-      var milestone = el("div", "timeline-milestone");
-      milestone.id = "project-year-" + year.replace(/\s+/g, "-").toLowerCase();
-      var heading = el("h3");
-      heading.textContent = year;
-      milestone.appendChild(heading);
-      var label = el("span");
-      label.textContent = year === "Date to be confirmed"
-        ? "Actual project dates will be added when confirmed"
-        : "Project milestone";
-      milestone.appendChild(label);
-      grid.appendChild(milestone);
-      groups[year].sort(function (a, b) {
-        return new Date(b.project.item.date || 0) - new Date(a.project.item.date || 0);
-      }).forEach(function (project) {
-        grid.appendChild(renderProject(project.project, project.index));
-      });
+    var tabs = [
+      { id: "ux", label: "UX" },
+      { id: "ui", label: "UI" },
+      { id: "dv", label: "Data Viz" },
+    ];
+    var tabList = folder.querySelector(".folder__tabs");
+    var tabPanel = panel;
+    var cardsByCategory = {};
+    tabs.forEach(function (tab, tabIndex) {
+      var tabButton = el("button", "folder__tab");
+      var tabId = "project-tab-" + tab.id;
+      var panelId = "project-panel-" + tab.id;
+      var count = projects.filter(function (project) {
+        return project.category === tab.id;
+      }).length;
+      tabButton.type = "button";
+      tabButton.id = tabId;
+      tabButton.dataset.category = tab.id;
+      tabButton.setAttribute("role", "tab");
+      tabButton.setAttribute("aria-controls", panelId);
+      tabButton.setAttribute("aria-selected", tabIndex === 0 ? "true" : "false");
+      tabButton.tabIndex = tabIndex === 0 ? 0 : -1;
+      tabButton.innerHTML = "<span>" + tab.label + "</span><small>" + count + "</small>";
+      tabList.appendChild(tabButton);
+      cardsByCategory[tab.id] = [];
     });
 
-    if (p.seeMore && p.seeMore.label && p.seeMore.url) {
-      var more = el("a", "project-more-button");
-      more.href = p.seeMore.url;
-      more.target = "_blank";
-      more.rel = "noopener noreferrer";
-      var moreLabel = el("span");
-      moreLabel.textContent = p.seeMore.label;
-      var moreArrow = el("span", "arrow");
-      moreArrow.innerHTML = ARROW_RIGHT;
-      more.appendChild(moreLabel);
-      more.appendChild(moreArrow);
-      grid.parentNode.appendChild(more);
+    projects.forEach(function (project, index) {
+      cardsByCategory[project.category].push(renderProject(project, index));
+    });
+
+    tabs.forEach(function (tab, tabIndex) {
+      var categoryPanel = el("div", "folder__content");
+      categoryPanel.id = "project-panel-" + tab.id;
+      categoryPanel.setAttribute("role", "tabpanel");
+      categoryPanel.setAttribute("aria-labelledby", "project-tab-" + tab.id);
+      categoryPanel.tabIndex = 0;
+      categoryPanel.hidden = tabIndex !== 0;
+      var cardGrid = el("div", "folder__grid");
+      cardsByCategory[tab.id].forEach(function (card) {
+        cardGrid.appendChild(card);
+      });
+      if (!cardsByCategory[tab.id].length) {
+        var empty = el("p", "folder__empty");
+        empty.textContent = "Projects for this folder are coming soon.";
+        cardGrid.appendChild(empty);
+      }
+      categoryPanel.appendChild(cardGrid);
+      tabPanel.appendChild(categoryPanel);
+    });
+
+    function activateTab(index, moveFocus) {
+      var activeTab = tabs[index];
+      tabList.querySelectorAll(".folder__tab").forEach(function (tabButton, tabIndex) {
+        var active = tabIndex === index;
+        tabButton.setAttribute("aria-selected", active ? "true" : "false");
+        tabButton.tabIndex = active ? 0 : -1;
+        tabButton.classList.toggle("is-active", active);
+      });
+      tabPanel.querySelectorAll(".folder__content").forEach(function (content) {
+        content.hidden = content.id !== "project-panel-" + activeTab.id;
+      });
+      if (moveFocus) tabList.querySelectorAll(".folder__tab")[index].focus();
     }
 
-    if (filterBar) {
-      filterBar.addEventListener("click", function (event) {
-        var button = event.target.closest(".project-filter");
-        if (!button) return;
-        var selected = button.dataset.filter;
-        filterBar.querySelectorAll(".project-filter").forEach(function (filterButton) {
-          var active = filterButton === button;
-          filterButton.classList.toggle("is-active", active);
-          filterButton.setAttribute("aria-pressed", active ? "true" : "false");
-        });
-        grid.querySelectorAll(".timeline-item").forEach(function (item) {
-          item.hidden = selected !== "All" && item.dataset.categories.indexOf(selected) === -1;
-        });
-        grid.querySelectorAll(".timeline-milestone").forEach(function (milestone) {
-          milestone.hidden = selected !== "All";
-        });
-        updateProjectPositions();
-      });
-    }
+    activateTab(0, false);
+    tabList.addEventListener("click", function (event) {
+      var button = event.target.closest(".folder__tab");
+      if (!button) return;
+      activateTab(tabs.findIndex(function (tab) {
+        return tab.id === button.dataset.category;
+      }), false);
+    });
+    tabList.addEventListener("keydown", function (event) {
+      var buttons = Array.prototype.slice.call(tabList.querySelectorAll(".folder__tab"));
+      var current = buttons.indexOf(document.activeElement);
+      if (current === -1) return;
+      var next = current;
+      if (event.key === "ArrowRight") next = (current + 1) % buttons.length;
+      if (event.key === "ArrowLeft") next = (current - 1 + buttons.length) % buttons.length;
+      if (event.key === "Home") next = 0;
+      if (event.key === "End") next = buttons.length - 1;
+      if (next !== current) {
+        event.preventDefault();
+        activateTab(next, true);
+      }
+    });
   }
 
   // ---- Medium Articles ---------------------------------------------------
@@ -1189,19 +1169,6 @@
     });
   }
 
-  function setupTimelineProgress() {
-    var timeline = $("project-grid");
-    if (!timeline) return;
-    function update() {
-      var rect = timeline.getBoundingClientRect();
-      var progress = Math.min(1, Math.max(0, (window.innerHeight * 0.62 - rect.top) / Math.max(1, rect.height)));
-      timeline.style.setProperty("--timeline-progress", (progress * 100).toFixed(2) + "%");
-    }
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
-  }
-
   function escapeHtml(s) {
     return String(s)
       .replace(/&/g, "&amp;")
@@ -1225,7 +1192,6 @@
     setupMobileNavigation();
     setupActiveNavigation();
     setupReveal();
-    setupTimelineProgress();
   }
 
   if (document.readyState === "loading") {

@@ -4174,212 +4174,186 @@ p {
 }
 
 /* ========================================================================
-   PROJECT JOURNEY
+   PROJECT FOLDER
    ======================================================================== */
-.project-controls {
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-  gap: 1rem;
-  margin: 2rem 0 3rem;
-  flex-wrap: wrap;
+#work .folder {
+  margin-top: 2rem;
 }
 
-.project-filters {
+#work .folder__tabs {
   display: flex;
+  align-items: flex-end;
+  gap: 0.25rem;
+}
+
+#work .folder__tab {
+  display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  flex-wrap: wrap;
-}
-
-.project-filter {
-  appearance: none;
+  min-width: 7rem;
+  justify-content: center;
+  padding: 0.7rem 1rem;
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-pill);
-  background: transparent;
+  border-bottom: 0;
+  border-radius: var(--radius-card) var(--radius-card) 0 0;
+  background: var(--color-surface-tint);
   color: var(--color-text-muted);
   font: inherit;
-  font-size: 0.82rem;
-  font-weight: 600;
-  padding: 0.42rem 0.8rem;
-  text-decoration: none;
-  transition: background 180ms ease, color 180ms ease, border-color 180ms ease;
-}
-
-.project-filter {
-  font-size: 0.78rem;
-}
-
-.project-filter {
+  font-size: 0.85rem;
+  font-weight: 700;
   cursor: pointer;
+  transform: translateY(0.35rem);
+  transition: background 180ms ease, color 180ms ease, transform 180ms ease;
 }
 
-.project-filter:hover,
-.project-filter:focus-visible,
-.project-filter.is-active {
-  border-color: var(--color-accent);
-  background: var(--color-accent);
-  color: var(--color-surface);
+#work .folder__tab small {
+  color: inherit;
+  font-size: 0.7rem;
+  font-weight: 600;
 }
 
-.project-timeline {
-  --timeline-progress: 0%;
-  position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 1.75rem;
-  padding: 0.5rem 0 10rem;
-}
-
-.project-timeline::before,
-.project-timeline::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  width: 2px;
-  transform: translateX(-50%);
-  background: var(--color-border);
-}
-
-.project-timeline::after {
-  bottom: auto;
-  height: var(--timeline-progress);
-  background: var(--color-accent);
-  transition: height 120ms linear;
-}
-
-.timeline-milestone {
+#work .folder__tab.is-active {
   position: relative;
   z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  grid-column: 1 / -1;
-  margin: 1.25rem 0 0.25rem;
-  min-height: 4.5rem;
+  border-color: var(--color-border);
+  border-color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+  background: var(--color-accent);
+  color: var(--color-surface);
+  transform: none;
+  margin-bottom: -1px;
 }
 
-.timeline-milestone h3 {
+#work .folder__tab:hover,
+#work .folder__tab:focus-visible {
+  color: var(--color-accent);
+}
+
+#work .folder__tab.is-active:hover,
+#work .folder__tab.is-active:focus-visible {
+  background: var(--color-accent);
+  color: var(--color-surface-tint);
+}
+
+#work .folder__tab:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+#work .folder__panel {
+  border: 1px solid var(--color-border);
+  border-radius: 0 var(--radius-card) var(--radius-card) var(--radius-card);
+  background: var(--color-surface-tint);
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
+}
+
+#work .folder__content[hidden] {
+  display: none;
+}
+
+#work .folder__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 1.5rem;
+}
+
+#work .folder__grid .project-entry {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: 100%;
   margin: 0;
   padding: 0;
   border: 0;
   border-radius: 0;
-  background: var(--color-background);
-  color: var(--color-text);
-  font-size: 1rem;
-  letter-spacing: 0.02em;
-}
-
-.timeline-milestone span {
-  color: var(--color-text-muted);
-  font-size: 0.78rem;
-}
-
-#project-year-2025 {
-  margin-top: 9rem;
-  margin-bottom: 8rem;
-}
-
-#project-year-2024 {
-  margin-top: 9rem;
-  margin-bottom: 8rem;
-}
-
-.timeline-milestone::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 1rem;
-  height: 1rem;
-  border: 3px solid var(--color-accent);
-  border-radius: 50%;
-  background: var(--color-background);
-  transform: translate(-50%, -50%);
-}
-
-.timeline-milestone h3,
-.timeline-milestone span {
-  transform: translate(7.5rem, 0);
-}
-
-.timeline-item {
-  position: relative;
-  display: block;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  border: 0;
   background: transparent;
   box-shadow: none;
+  transition: none;
 }
 
-.timeline-item:nth-of-type(even) {
-  justify-self: stretch;
-}
-
-.timeline-item--left .timeline-card {
-  width: calc(50% - 2.5rem);
-  margin-right: auto;
-}
-
-.timeline-item--right .timeline-card {
-  width: calc(50% - 2.5rem);
-  margin-left: auto;
-}
-
-.timeline-item:hover,
-.timeline-item:focus-within {
+#work .folder__grid .project-entry:hover,
+#work .folder__grid .project-entry:focus-within {
   transform: none;
   border-color: transparent;
   background: transparent;
   box-shadow: none;
 }
 
-.timeline-marker {
-  position: absolute;
-  z-index: 2;
-  top: 50%;
-  right: auto;
-  left: calc(50% - 0.5rem);
-  width: 1rem;
-  height: 1rem;
-  border: 3px solid var(--color-background);
-  border-radius: 50%;
-  background: var(--color-accent);
-  box-shadow: 0 0 0 1px var(--color-accent);
-  transform: translateY(-50%);
-}
-
-.timeline-date {
-  position: absolute;
-  z-index: 3;
-  top: 50%;
-  left: calc(50% + 1.05rem);
-  right: auto;
-  width: max-content;
-  padding: 0.2rem 0.45rem;
-  border-radius: var(--radius-pill);
-  background: var(--color-background);
+#work .folder__empty {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 3rem 1rem;
   color: var(--color-text-muted);
-  font-size: 1rem;
-  line-height: 1.3;
-  text-align: left;
-  transform: translateY(-50%);
+  text-align: center;
 }
 
-.timeline-item--right .timeline-date {
-  right: calc(50% + 1.05rem);
-  left: auto;
-  text-align: right;
+#work .folder__grid .project-card {
+  width: 100%;
+  height: 100%;
+  container-type: inline-size;
 }
 
-.timeline-item:nth-of-type(even) .timeline-marker {
-  right: auto;
-  left: calc(50% - 0.5rem);
+#work .folder__grid .project-card__media {
+  aspect-ratio: 4 / 3;
+  min-height: 0;
+}
+
+#work .folder__grid .project-card__content {
+  flex: 1;
+  min-width: 0;
+  padding: clamp(0.75rem, 4cqw, 1rem);
+  gap: clamp(0.5rem, 2.5cqw, 0.8rem);
+}
+
+#work .folder__grid .project-card__meta {
+  gap: 0.35rem;
+  font-size: clamp(0.55rem, 2.7cqw, 0.7rem);
+  white-space: nowrap;
+}
+
+#work .folder__grid .project-card__meta > span:first-child {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#work .folder__grid .project-status {
+  min-height: 0;
+  padding: clamp(0.25rem, 1.8cqw, 0.35rem) clamp(0.4rem, 2.8cqw, 0.75rem);
+  font-size: clamp(0.52rem, 2.4cqw, 0.68rem);
+}
+
+#work .folder__grid .timeline-card .project-card__title {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  font-size: clamp(1rem, 7.5cqw, 1.35rem);
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+
+#work .folder__grid .project-card__problem {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  font-size: clamp(0.78rem, 4.8cqw, 0.95rem);
+  line-height: 1.45;
+}
+
+#work .folder__grid .project-card__footer {
+  margin-top: auto;
+  min-width: 0;
+}
+
+#work .folder__grid .project-card__details {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .timeline-card {
@@ -4588,95 +4562,19 @@ p {
   transform: translateX(0.25rem);
 }
 
-.timeline-item[hidden] {
-  display: none;
-}
-
-.timeline-milestone[hidden] {
-  display: none;
-}
-
 .project-more-button {
   width: fit-content;
   max-width: 100%;
   margin-inline: auto;
 }
 
+@media (max-width: 960px) {
+  #work .folder__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 700px) {
-  .project-controls {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .project-timeline {
-    gap: 1.25rem;
-    padding: 0.5rem 0 7rem 1.25rem;
-  }
-
-  .project-timeline::before,
-  .project-timeline::after {
-    left: 0.35rem;
-  }
-
-  .timeline-milestone {
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    gap: 0.35rem 0.6rem;
-    padding-left: 0.75rem;
-    min-height: 4rem;
-  }
-
-  #project-year-2025 {
-    margin-top: 6rem;
-    margin-bottom: 5rem;
-  }
-
-  #project-year-2024 {
-    margin-top: 6rem;
-    margin-bottom: 5rem;
-  }
-
-  .timeline-milestone::before {
-    left: 0.35rem;
-  }
-
-  .timeline-milestone h3,
-  .timeline-milestone span {
-    transform: none;
-  }
-
-  .timeline-item,
-  .timeline-item:nth-of-type(even) {
-    width: 100%;
-    justify-self: stretch;
-    margin-bottom: -5rem;
-  }
-
-  .timeline-item--left .timeline-card,
-  .timeline-item--right .timeline-card {
-    width: 100%;
-  }
-
-  .timeline-marker,
-  .timeline-item:nth-of-type(even) .timeline-marker {
-    top: 2.25rem;
-    right: auto;
-    left: -1.4rem;
-    transform: none;
-  }
-
-  .timeline-date,
-  .timeline-item--right .timeline-date {
-    position: static;
-    display: block;
-    width: auto;
-    margin: 0 0 0.45rem 0.75rem;
-    padding: 0;
-    background: transparent;
-    text-align: left;
-    transform: none;
-  }
-
   .project-card__content {
     padding: 0.9rem;
   }
@@ -4697,8 +4595,34 @@ p {
   }
 }
 
+@media (max-width: 560px) {
+  #work .folder__tabs {
+    gap: 0.15rem;
+  }
+
+  #work .folder__tab {
+    flex: 1 1 0;
+    min-width: 0;
+    padding-inline: 0.35rem;
+    font-size: 0.75rem;
+  }
+
+  #work .folder__panel {
+    padding: 1rem;
+  }
+
+  #work .folder__grid {
+    grid-template-columns: 1fr;
+  }
+
+  #work .folder__grid .project-card__media {
+    aspect-ratio: 4 / 3;
+    min-height: 0;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .project-timeline::after,
+  #work .folder__tab,
   .timeline-card,
   .project-card__media img,
   .timeline-card .project-card__title,
