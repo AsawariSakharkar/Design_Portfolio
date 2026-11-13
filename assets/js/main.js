@@ -696,6 +696,19 @@
     observer.observe(list);
   }
 
+  // ---- Books -------------------------------------------------------------
+  function renderBooks() {
+    var books = C.books || {};
+    var description = $("books-description");
+    if (!description) return;
+    description.innerHTML = "";
+    (books.description || []).forEach(function (paragraphText) {
+      var paragraph = el("p", "section-subtitle");
+      paragraph.textContent = paragraphText;
+      description.appendChild(paragraph);
+    });
+  }
+
   // ---- Fashion ----------------------------------------------------------
   // Encode each path segment so file names with spaces/special chars
   // (e.g. "PXL_...~2.jpg") resolve correctly on GitHub Pages.
@@ -1186,6 +1199,7 @@
     fetchMediumFeed();
     renderExperience();
     renderEducation();
+    renderBooks();
     renderFashion();
     renderConnect();
     renderFooter();

@@ -5058,3 +5058,155 @@ body:not(.project-page) > .site-header .icon-nav__link {
     width: 2rem;
   }
 }
+
+/* ==========================================================================
+   BOOKS RING
+   ========================================================================== */
+.books-section {
+  overflow: visible;
+  overflow-x: clip;
+  padding-inline: clamp(1.5rem, 4vw, 4rem);
+  padding-block: clamp(5rem, 8vw, 7rem);
+  min-height: calc(var(--books-pin-height, 100vh) + var(--books-scroll-extra, 960vh));
+  background: var(--color-background);
+}
+
+.books-section__pin {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.books-section__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(3rem, 8vw, 7rem);
+  height: 100%;
+}
+
+.books-section__copy {
+  position: relative;
+  max-width: 38rem;
+  order: 2;
+  z-index: 2;
+}
+
+.books-section__description {
+  max-width: 65ch;
+}
+
+.books-section__description .section-subtitle {
+  margin: 0 0 1rem;
+}
+
+.books-section__description .section-subtitle:last-child {
+  margin-bottom: 0;
+}
+
+.books-ring-stage {
+  display: grid;
+  min-width: 0;
+  height: 100%;
+  order: 1;
+  overflow: visible;
+  padding: 5rem 2rem;
+  place-items: center;
+  perspective: 1200px;
+  perspective-origin: 50% 35%;
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.books-ring-stage.is-dragging {
+  cursor: grabbing;
+}
+
+.books-ring-stage__tilt {
+  overflow: visible;
+  transform: rotateX(-14deg) rotateZ(6deg);
+  transform-style: preserve-3d;
+}
+
+.books-ring {
+  position: relative;
+  width: var(--books-card-w, 10rem);
+  height: calc(var(--books-card-w, 10rem) * 1.5);
+  overflow: visible;
+  transform-style: preserve-3d;
+}
+
+.books-ring__card {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-md);
+  will-change: transform, filter, opacity;
+}
+
+.books-ring__face {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  backface-visibility: hidden;
+}
+
+.books-ring__face--back {
+  transform: rotateY(180deg);
+}
+
+.books-ring__face img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.books-ring__counter {
+  position: absolute;
+  right: 2rem;
+  bottom: 2.5rem;
+  margin: 0;
+  color: var(--color-text-muted);
+  font-family: var(--font-meta);
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+}
+
+#books {
+  scroll-margin-top: 5.5rem;
+}
+
+@media (max-width: 900px) {
+  .books-section__layout {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto minmax(0, 1fr);
+    height: auto;
+  }
+
+  .books-section__copy {
+    max-width: none;
+    order: 1;
+  }
+
+  .books-section__pin {
+    height: 70vh;
+  }
+
+  .books-ring-stage {
+    order: 2;
+    height: auto;
+    min-height: 0;
+    padding-inline: 1rem;
+  }
+
+  .books-ring {
+    width: min(var(--books-card-w, 10rem), calc(100vw - 3rem));
+    height: calc(min(var(--books-card-w, 10rem), calc(100vw - 3rem)) * 1.5);
+  }
+}
