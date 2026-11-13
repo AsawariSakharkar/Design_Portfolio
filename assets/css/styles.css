@@ -2936,9 +2936,9 @@ p {
 }
 
 .metric__takeaway {
-  position: absolute;
+  position: relative;
   z-index: 2;
-  top: calc(100% + 0.75rem);
+  /* top: calc(100% + 0.75rem); */
   left: 1rem;
   width: min(18rem, calc(100vw - 4rem));
   padding: 0.8rem 0.95rem;
