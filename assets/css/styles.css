@@ -295,7 +295,7 @@ a {
    ========================================================================== */
 .hero {
   position: relative;
-  background-color: var(--color-cream);
+  background-color: var(--color-background);
   background-image:
     radial-gradient(circle at 18% 20%, color-mix(in srgb, var(--color-text) 3%, transparent) 0, transparent 55%),
     radial-gradient(circle at 82% 0%, color-mix(in srgb, var(--color-text) 3.5%, transparent) 0, transparent 45%);
@@ -2153,7 +2153,7 @@ p {
 .hero {
   min-height: 0;
   padding-block: clamp(2rem, 4vw, 3rem);
-  background: var(--color-surface);
+  background: var(--color-background);
   background-image: none;
 }
 
