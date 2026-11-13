@@ -361,8 +361,8 @@ window.SITE_CONTENT = {
   // ---- Books section ------------------------------------------------------
   books: {
     description: [
-      "Every book on this shelf changed how I look at something: a person, a place, or a problem. I read slowly, underline too much, and carry the good ideas into my design work.",
-      "These are the covers I keep coming back to and take inspiration from. I hope you find something here that sparks your curiosity, too.",
+      "I love to read books as they are something that jogs my imagination, forces me to  step out of my own bubble of prespective and makes me think about things in a different way.",
+      "These are the covers I keep coming back to read and loved. I hope you find something here that sparks your curiosity, too.",
     ],
   },
 
