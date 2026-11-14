@@ -5067,7 +5067,7 @@ body:not(.project-page) > .site-header .icon-nav__link {
   overflow-x: clip;
   padding-inline: clamp(1.5rem, 4vw, 4rem);
   padding-block: clamp(5rem, 8vw, 7rem);
-  min-height: calc(var(--books-pin-height, 100vh) + var(--books-scroll-extra, 960vh));
+  min-height: calc(var(--books-pin-height, 100vh) + var(--books-scroll-extra, 320vh));
   background: var(--color-background);
 }
 
@@ -5094,6 +5094,23 @@ body:not(.project-page) > .site-header .icon-nav__link {
 
 .books-section__description {
   max-width: 65ch;
+}
+
+.books-section__skip {
+  display: inline-block;
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: inherit;
+  opacity: 0.7;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+}
+
+.books-section__skip:hover,
+.books-section__skip:focus-visible {
+  opacity: 1;
 }
 
 .books-section__description .section-subtitle {
