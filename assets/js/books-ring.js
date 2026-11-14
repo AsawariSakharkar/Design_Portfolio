@@ -1,7 +1,8 @@
 /**
  * Books fan carousel
  * - Reads covers from SITE_CONTENT.fashion.books and copy from SITE_CONTENT.books.description
- * - Cards only respond to wheel/drag/keys over the stage; the page scrolls normally everywhere else
+ * - While the section is pinned, ANY page scroll (cursor anywhere) turns the cards; scroll is never blocked
+ * - Drag / keys / sideways swipe on the stage also work
  * - Drifts slowly by itself, loops with no seam
  */
 (function () {
@@ -41,7 +42,7 @@
      --------------------------------------------------------------- */
   const AUTO_SPEED   = 0.15;   // cards per second while idle (about 1 card every 6.7 s)
   const WHEEL_GAIN   = 0.004;  // cards per pixel of horizontal swipe / shift+wheel
-  const VERTICAL_NUDGE = 0.002; // cards per pixel of normal scrolling; the page still scrolls, cards just follow a little (0 = ignore)
+  const SCROLL_CARDS = 1;      // cards turned per card-count of scroll runway (1 = whole set once over the pinned section)
   const LERP         = 0.12;   // smoothing toward the target
   const RESUME_DELAY = 2000;   // ms after the last interaction before drifting again
   const SNAP_DELAY   = 150;    // ms before settling on a whole card
@@ -110,13 +111,36 @@
       e.preventDefault();
       target += (e.deltaX || e.deltaY) * WHEEL_GAIN;
       interacted(true);
-    } else if (VERTICAL_NUDGE) {
-      // normal scrolling: NEVER blocked, the page scrolls as usual and the cards follow a little
-      target += e.deltaY * VERTICAL_NUDGE;
-      interacted(true);
     }
+    // vertical wheel is left alone: the scroll listener below drives the cards wherever the cursor is
   };
   stage.addEventListener("wheel", onWheel, { passive: false });
+
+  /* ---------------------------------------------------------------
+     Page scroll drives the cards while the section is pinned,
+     regardless of where the cursor is. Uses scroll deltas, so it
+     works for wheel, trackpad, touch, keyboard and scrollbar drags.
+     --------------------------------------------------------------- */
+  const section = document.getElementById("books");
+  let lastY = window.scrollY;
+  const onScroll = function () {
+    const y = window.scrollY;
+    const dy = y - lastY;
+    lastY = y;
+    if (!section || !dy) return;
+    const r = section.getBoundingClientRect();
+    const runway = Math.max(1, r.height - window.innerHeight);   // pixels of scrolling while pinned
+    // distance of this scroll step that happened inside the pinned range
+    const before = -(r.top + dy);                                // scroll offset into section before the step
+    const after  = -r.top;                                       // ... and after
+    const lo = Math.max(0, Math.min(runway, Math.min(before, after)));
+    const hi = Math.max(0, Math.min(runway, Math.max(before, after)));
+    if (hi === lo) return;
+    const inside = (hi - lo) * (dy > 0 ? 1 : -1);
+    target += inside / runway * N * SCROLL_CARDS;
+    interacted(true);
+  };
+  window.addEventListener("scroll", onScroll, { passive: true });
 
   /* ---------------------------------------------------------------
      Drag (mouse + touch). CSS touch-action: pan-y keeps vertical page scroll.
@@ -236,6 +260,7 @@
     ro.disconnect();
     io.disconnect();
     stage.removeEventListener("wheel", onWheel);
+    window.removeEventListener("scroll", onScroll);
     stage.removeEventListener("pointerdown", onDown);
     stage.removeEventListener("pointerenter", onEnter);
     stage.removeEventListener("pointerleave", onLeave);
