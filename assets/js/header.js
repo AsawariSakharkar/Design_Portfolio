@@ -110,10 +110,22 @@
   /* ---------- Active section highlight ---------- */
 
   var links = Array.prototype.slice.call(pageNav.querySelectorAll(".icon-nav__link"));
+  var targets = links
+    .map(function (link) {
+      return { id: link.dataset.section, el: document.getElementById(link.dataset.section) };
+    })
+    .filter(function (t) { return t.el; });
 
-  function setActive(sectionId) {
+  var currentId = null;
+  var locked = false;
+  var ticking = false;
+  var idleTimer = null;
+
+  function setActive(id) {
+    if (id === currentId) return;
+    currentId = id;
     links.forEach(function (link) {
-      if (link.dataset.section === sectionId) {
+      if (link.dataset.section === id) {
         link.setAttribute("aria-current", "page");
       } else {
         link.removeAttribute("aria-current");
@@ -121,26 +133,51 @@
     });
   }
 
-  var sections = links
-    .map(function (link) { return document.getElementById(link.dataset.section); })
-    .filter(Boolean);
-
-  if ("IntersectionObserver" in window) {
-    var visible = new Set();
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) visible.add(entry.target);
-        else visible.delete(entry.target);
-      });
-      var focusY = window.innerHeight * 0.42;
-      var current = Array.from(visible).sort(function (a, b) {
-        return Math.abs(a.getBoundingClientRect().top - focusY) -
-               Math.abs(b.getBoundingClientRect().top - focusY);
-      })[0];
-      setActive(current ? current.id : "top");
-    }, { rootMargin: "-30% 0px -55% 0px", threshold: 0 });
-    sections.forEach(function (section) { observer.observe(section); });
-  } else {
-    setActive("top");
+  // The active section is the last one whose top has passed the focus line.
+  function sectionInView() {
+    var focusY = window.innerHeight * 0.4;
+    var found = "top";
+    targets.forEach(function (t) {
+      if (t.id !== "top" && t.el.getBoundingClientRect().top <= focusY) found = t.id;
+    });
+    var atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+    if (atBottom && targets.length) found = targets[targets.length - 1].id;
+    return found;
   }
+
+  function update() {
+    ticking = false;
+    if (!locked) setActive(sectionInView());
+  }
+
+  function unlockSoon(delay) {
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(function () {
+      locked = false;
+      update();
+    }, delay);
+  }
+
+  function onScroll() {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(update);
+    }
+    if (locked) unlockSoon(150);
+  }
+
+  // Tapping a link highlights it straight away and holds that
+  // until the smooth scroll has finished.
+  links.forEach(function (link) {
+    link.addEventListener("click", function () {
+      setActive(link.dataset.section);
+      locked = true;
+      unlockSoon(900);
+    });
+  });
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll);
+  window.addEventListener("load", update);
+  update();
 })();

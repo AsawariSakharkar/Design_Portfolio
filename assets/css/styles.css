@@ -6312,3 +6312,107 @@ body.project-page #site-header .header__inner {
     animation: none;
   }
 }
+/* ==========================================================================
+   MOBILE NAV FIX
+   Paste at the very END of styles.css (after header-nav.css).
+   - Bottom nav: full width, icons only, the active item shows its label
+   - Top bar: logo + name on the left, Instagram + Resume on the right
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  /* Top bar: undo leftover order rules from the old header CSS */
+  #site-header .header__inner {
+    justify-content: space-between;
+  }
+
+  #site-header .brand,
+  #site-header .header__other {
+    order: 0;
+  }
+
+  #site-header .brand__name {
+    display: inline;
+  }
+
+  /* Bottom nav: always full width, centred */
+  #page-nav {
+    right: auto;
+    left: 50%;
+    width: calc(100% - 1.5rem);
+    max-width: 30rem;
+    padding: 0.4rem;
+    background: color-mix(in srgb, var(--color-surface) 97%, transparent);
+    transform: translateX(-50%);
+  }
+
+  #page-nav .icon-nav__list {
+    gap: 0.15rem;
+  }
+
+  #page-nav .icon-nav__list > li {
+    flex: 1 1 0;
+    transition: flex-grow 220ms ease;
+  }
+
+  /* The active item grows to make room for its label */
+  #page-nav .icon-nav__list > li:has(> [aria-current="page"]) {
+    flex-grow: 2.6;
+  }
+
+  #page-nav .icon-nav__link {
+    flex-direction: row;
+    justify-content: center;
+    gap: 0.4rem;
+    min-height: 2.9rem;
+    padding: 0.4rem 0.5rem;
+  }
+
+  /* Labels hidden by default, shown only on the active item */
+  #page-nav .icon-nav__tooltip {
+    display: none;
+  }
+
+  #page-nav .icon-nav__link[aria-current="page"] .icon-nav__tooltip {
+    display: inline;
+    font-size: 0.78rem;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 380px) {
+  #site-header .brand__name {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #page-nav .icon-nav__list > li {
+    transition: none;
+  }
+}
+/* ==========================================================================
+   NAV TOUCH FIX
+   Paste at the very END of styles.css (after header-mobile-fix.css).
+   Stops the "stuck hover" tint on touch screens and removes tap delay/flash.
+   ========================================================================== */
+
+#page-nav .icon-nav__link,
+#site-header a {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+@media (hover: none) {
+  #page-nav .icon-nav__link:hover:not([aria-current="page"]) {
+    background: transparent;
+    color: var(--color-text-muted);
+    opacity: 0.75;
+    transform: none;
+  }
+
+  #site-header .header__other-link:hover:not(.header__other-link--resume) {
+    background: transparent;
+    color: var(--color-text);
+  }
+}
