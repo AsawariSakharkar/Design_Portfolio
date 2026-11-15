@@ -14,6 +14,9 @@
   var resumeHref = siteRoot + (content.resumeFile || "assets/resume.pdf");
   var logoSrc = siteRoot + "assets/images/Group 32.png";
 
+  // Fallback: paste your LinkedIn profile URL here if it isn't in content.js
+  var LINKEDIN_URL = "https://www.linkedin.com/in/asawari-sakharkar-0861b3300/";
+
   var icons = {
     home: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1V10Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
     skills: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m13 2-9 12h7l-1 8 9-12h-7l1-8Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
@@ -21,7 +24,7 @@
     about: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="8" r="3.2" stroke="currentColor" stroke-width="1.8"/><path d="M5 20c.7-3.4 3.1-5.3 7-5.3s6.3 1.9 7 5.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
     experience: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="1.8" stroke="currentColor" stroke-width="1.8"/><path d="M8 7V5.5A1.5 1.5 0 0 1 9.5 4h5A1.5 1.5 0 0 1 16 5.5V7M3 12h18M10 12v2h4v-2" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
     education: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m3 9 9-4 9 4-9 4-9-4Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M6 11.2v4.3c2.9 2.4 9.1 2.4 12 0v-4.3M21 9v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-    social: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><circle cx="17.5" cy="6.7" r="1" fill="currentColor"/></svg>',
+    linkedin: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.8"/><path d="M8 10.5V16M8 7.8v.01M12 16v-5.5M12 12.8c0-1.4 1-2.3 2.3-2.3 1.4 0 2.2.9 2.2 2.4V16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     resume: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 3.5h8l4 4V20a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4.5a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M14 3.5V8h4M8 12h8M8 16h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>'
   };
 
@@ -72,9 +75,10 @@
     );
   }
 
-  var instagram = (content.socials || []).filter(function (social) {
-    return social.icon === "instagram" && social.url;
+  var linkedin = (content.socials || []).filter(function (social) {
+    return social.icon === "linkedin" && social.url;
   })[0];
+  var linkedinUrl = (linkedin && linkedin.url) || LINKEDIN_URL;
 
   var externalAttrs = ' target="_blank" rel="noopener noreferrer"';
 
@@ -83,7 +87,7 @@
     '<div class="header__inner">' +
       brandMarkup +
       '<ul class="header__other">' +
-        (instagram ? otherLink("Instagram", "social", instagram.url, externalAttrs) : "") +
+        (linkedinUrl ? otherLink("LinkedIn", "linkedin", linkedinUrl, externalAttrs) : "") +
         otherLink("Resume", "", resumeHref, ' id="resume-btn"' + externalAttrs, "header__other-link--resume") +
       "</ul>" +
     "</div>";
