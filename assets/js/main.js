@@ -596,7 +596,39 @@
     window.addEventListener("resize", update);
     update();
   }
+  function wireExperienceCarousel() {
+    var track = $("experience-list");
+    var prev = $("experience-prev");
+    var next = $("experience-next");
+    if (!track) return;
 
+    function stepSize() {
+      var item = track.querySelector(".timeline__item");
+      if (!item) return track.clientWidth;
+      var gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+      return item.getBoundingClientRect().width + gap;
+    }
+
+    function update() {
+      var maxScroll = track.scrollWidth - track.clientWidth - 2;
+      if (prev) prev.disabled = track.scrollLeft <= 2;
+      if (next) next.disabled = track.scrollLeft >= maxScroll;
+    }
+
+    if (prev) {
+      prev.addEventListener("click", function () {
+        track.scrollBy({ left: -stepSize(), behavior: "smooth" });
+      });
+    }
+    if (next) {
+      next.addEventListener("click", function () {
+        track.scrollBy({ left: stepSize(), behavior: "smooth" });
+      });
+    }
+    track.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    update();
+  }
   function renderExperience() {
     var ex = C.experience || {};
     setText("experience-heading", ex.heading || "My Experience");
