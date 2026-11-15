@@ -5,10 +5,14 @@
   if (!header) return;
 
   var isProjectPage = document.body.classList.contains("project-page");
-  var assetPrefix = document.body.dataset.siteRoot || "";
-  var homePrefix = isProjectPage ? assetPrefix + "index.html" : "";
+  var siteRoot = document.body.dataset.siteRoot || "";
+  var homePrefix = isProjectPage ? siteRoot + "index.html" : "";
   var homeHref = homePrefix + "#top";
   var projectsHref = homePrefix + "#work";
+
+  var content = (window.SITE_CONTENT || {}).header || {};
+  var resumeHref = siteRoot + (content.resumeFile || "assets/resume.pdf");
+  var logoSrc = siteRoot + "assets/images/Group 32.png";
 
   var icons = {
     home: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1V10Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
@@ -18,83 +22,98 @@
     experience: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="1.8" stroke="currentColor" stroke-width="1.8"/><path d="M8 7V5.5A1.5 1.5 0 0 1 9.5 4h5A1.5 1.5 0 0 1 16 5.5V7M3 12h18M10 12v2h4v-2" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
     education: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m3 9 9-4 9 4-9 4-9-4Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M6 11.2v4.3c2.9 2.4 9.1 2.4 12 0v-4.3M21 9v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     social: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><circle cx="17.5" cy="6.7" r="1" fill="currentColor"/></svg>',
-    resume: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 3.5h8l4 4V20a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4.5a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M14 3.5V8h4M8 12h8M8 16h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>',
+    resume: '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 3.5h8l4 4V20a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4.5a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M14 3.5V8h4M8 12h8M8 16h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>'
   };
 
-  function navLink(label, icon, href, section, extra) {
+  /* ---------- Shared pieces ---------- */
+
+  var brandMarkup =
+    '<a class="brand" href="' + homeHref + '" aria-label="Asawari Sakharkar, home">' +
+      '<span class="brand__mark" aria-hidden="true"><img src="' + logoSrc + '" alt=""></span>' +
+      '<span class="brand__name">Asawari Sakharkar</span>' +
+    "</a>";
+
+  /* ---------- Project pages: logo + name, then "Back to projects" ---------- */
+
+  if (isProjectPage) {
+    header.innerHTML =
+      '<div class="header__inner">' +
+        brandMarkup +
+        '<span class="header__divider" aria-hidden="true"></span>' +
+        '<a class="back-link" href="' + projectsHref + '">' +
+          icons.work +
+          "<span>Back to projects</span>" +
+        "</a>" +
+      "</div>";
+    return;
+  }
+
+  /* ---------- Home page ---------- */
+
+  function navLink(label, icon, href, section, shortLabel) {
     return (
-      '<li><a class="icon-nav__link" href="' + href + '" aria-label="' + label + '"' +
-      (section ? ' data-section="' + section + '"' : "") +
-      (extra || "") + '>' +
-      icons[icon] +
-      '<span class="icon-nav__tooltip">' + label + "</span>" +
-      "</a></li>"
+      "<li>" +
+        '<a class="icon-nav__link" href="' + href + '" aria-label="' + label + '" data-section="' + section + '">' +
+          icons[icon] +
+          '<span class="icon-nav__tooltip">' + (shortLabel || label) + "</span>" +
+        "</a>" +
+      "</li>"
     );
   }
 
-  var headerContent = (window.SITE_CONTENT || {}).header || {};
-  var instagram = (headerContent.socials || []).filter(function (social) {
+  function otherLink(label, icon, href, extra, modifier) {
+    return (
+      "<li>" +
+        '<a class="header__other-link' + (modifier ? " " + modifier : "") + '" href="' + href + '" aria-label="' + label + '"' + (extra || "") + ">" +
+          (icon ? icons[icon] : "") +
+          "<span>" + label + "</span>" +
+        "</a>" +
+      "</li>"
+    );
+  }
+
+  var instagram = (content.socials || []).filter(function (social) {
     return social.icon === "instagram" && social.url;
   })[0];
-  var socialMarkup = instagram
-    ? navLink("Instagram", "social", instagram.url, "", ' target="_blank" rel="noopener noreferrer"')
-    : "";
 
+  var externalAttrs = ' target="_blank" rel="noopener noreferrer"';
+
+  // Top bar: brand on the left, other links on the right.
   header.innerHTML =
-    '<div class="container header__inner">' +
-    '<a class="brand" href="' + homeHref + '" aria-label="Asawari Sakharkar, home">' +
-    '<span class="brand__mark" aria-hidden="true"><img src="' + assetPrefix + 'assets/images/Group 32.png" alt=""></span>' +
-    '<span class="brand__name">Asawari Sakharkar</span>' +
-    "</a>" +
-    '<span class="header__divider" aria-hidden="true"></span>' +
-    '<button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation">' +
-    '<span></span><span></span><span></span>' +
-    "</button>" +
-    '<nav class="icon-nav" aria-label="Primary"><ul class="icon-nav__list" id="primary-navigation">' +
-    (isProjectPage
-      ? navLink("Back to projects", "work", projectsHref, "", "")
-      : navLink("Home", "home", homeHref, "top") +
-        navLink("Work", "work", homePrefix + "#work", "work") +
-        navLink("Skills", "skills", homePrefix + "#expertise", "expertise") +
-        navLink("About me", "about", homePrefix + "#about-me", "about-me") +
-        navLink("Experience", "experience", homePrefix + "#experience", "experience") +
-        navLink("Education", "education", homePrefix + "#education", "education") +
-        socialMarkup +
-        navLink("Resume", "resume", assetPrefix + (headerContent.resumeFile || "assets/resume.pdf"), "", ' id="resume-btn" target="_blank" rel="noopener noreferrer"')) +
-    "</ul></nav>" +
+    '<div class="header__inner">' +
+      brandMarkup +
+      '<ul class="header__other">' +
+        (instagram ? otherLink("Instagram", "social", instagram.url, externalAttrs) : "") +
+        otherLink("Resume", "", resumeHref, ' id="resume-btn"' + externalAttrs, "header__other-link--resume") +
+      "</ul>" +
     "</div>";
 
-  var links = Array.prototype.slice.call(document.querySelectorAll(".icon-nav__link"));
-  var nav = header.querySelector(".icon-nav");
-  var navToggle = header.querySelector(".nav-toggle");
-  var isHomePage = !isProjectPage;
+  // Main navigation: centred on desktop, fixed to the bottom on mobile (see CSS).
+  var existing = document.getElementById("page-nav");
+  if (existing) existing.remove();
 
-  function setNavOpen(isOpen) {
-    if (!nav || !navToggle) return;
-    nav.classList.toggle("is-open", isOpen);
-    navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
-    navToggle.setAttribute("aria-label", isOpen ? "Close navigation" : "Open navigation");
-  }
+  var pageNav = document.createElement("nav");
+  pageNav.id = "page-nav";
+  pageNav.className = "page-nav";
+  pageNav.setAttribute("aria-label", "Primary");
+  pageNav.innerHTML =
+    '<ul class="icon-nav__list">' +
+      navLink("Home", "home", "#top", "top") +
+      navLink("Work", "work", "#work", "work") +
+      navLink("Skills", "skills", "#expertise", "expertise") +
+      navLink("About me", "about", "#about-me", "about-me", "About") +
+      navLink("Experience", "experience", "#experience", "experience") +
+      navLink("Education", "education", "#education", "education", "Study") +
+    "</ul>";
+  header.parentNode.insertBefore(pageNav, header.nextSibling);
 
-  if (navToggle) {
-    navToggle.addEventListener("click", function () {
-      setNavOpen(!nav.classList.contains("is-open"));
-    });
-  }
-  links.forEach(function (link) {
-    link.addEventListener("click", function () {
-      setNavOpen(false);
-    });
-  });
-  document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape") setNavOpen(false);
-  });
+  /* ---------- Active section highlight ---------- */
+
+  var links = Array.prototype.slice.call(pageNav.querySelectorAll(".icon-nav__link"));
 
   function setActive(sectionId) {
     links.forEach(function (link) {
-      var isActive = isHomePage && link.dataset.section === sectionId;
-      if (!isHomePage && link.dataset.section === "work") isActive = true;
-      if (isActive) {
+      if (link.dataset.section === sectionId) {
         link.setAttribute("aria-current", "page");
       } else {
         link.removeAttribute("aria-current");
@@ -102,35 +121,26 @@
     });
   }
 
-  if (isHomePage) {
-    var sections = links.map(function (link) {
-      return document.getElementById(link.dataset.section || "");
-    }).filter(Boolean);
+  var sections = links
+    .map(function (link) { return document.getElementById(link.dataset.section); })
+    .filter(Boolean);
 
-    if ("IntersectionObserver" in window) {
-      var visible = new Set();
-      var observer = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) visible.add(entry.target);
-          else visible.delete(entry.target);
-        });
-        var focusY = window.innerHeight * 0.42;
-        var current = Array.from(visible).sort(function (a, b) {
-          return Math.abs(a.getBoundingClientRect().top - focusY) -
-            Math.abs(b.getBoundingClientRect().top - focusY);
-        })[0];
-        setActive(current ? current.id : "top");
-      }, { rootMargin: "-30% 0px -55% 0px", threshold: 0 });
-      sections.forEach(function (section) { observer.observe(section); });
-    } else {
-      setActive("top");
-    }
+  if ("IntersectionObserver" in window) {
+    var visible = new Set();
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) visible.add(entry.target);
+        else visible.delete(entry.target);
+      });
+      var focusY = window.innerHeight * 0.42;
+      var current = Array.from(visible).sort(function (a, b) {
+        return Math.abs(a.getBoundingClientRect().top - focusY) -
+               Math.abs(b.getBoundingClientRect().top - focusY);
+      })[0];
+      setActive(current ? current.id : "top");
+    }, { rootMargin: "-30% 0px -55% 0px", threshold: 0 });
+    sections.forEach(function (section) { observer.observe(section); });
   } else {
-    setActive("work");
+    setActive("top");
   }
-
-  header.classList.toggle("is-scrolled", window.scrollY > 8);
-  window.addEventListener("scroll", function () {
-    header.classList.toggle("is-scrolled", window.scrollY > 8);
-  }, { passive: true });
 })();
