@@ -60,7 +60,13 @@ body {
   margin: 0;
   font-family: var(--font-ui);
   color: var(--color-text);
-  background: var(--color-background);
+  background-color: var(--color-background);
+  background-image:
+    radial-gradient(ellipse 70% 55% at 50% 30%, color-mix(in srgb, var(--surface) 75%, transparent), transparent 70%),
+    linear-gradient(color-mix(in srgb, var(--color-text) 4%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--color-text) 4%, transparent) 1px, transparent 1px);
+  background-size: auto, 24px 24px, 24px 24px;
+  background-attachment: fixed;
   cursor: auto;
   line-height: 1.35;
   -webkit-font-smoothing: antialiased;
@@ -1992,7 +1998,7 @@ html {
 }
 
 body {
-  background: var(--color-background);
+  background-color: var(--color-background);
   color: var(--color-text);
   font-family: var(--font-ui);
   font-size: 1.0625rem;
@@ -2213,7 +2219,7 @@ p {
 
 .expertise,
 .fashion {
-  background: var(--bg);
+  background: var(--color-surface-tint);
 }
 
 .projects,
@@ -2222,6 +2228,10 @@ p {
   background: var(--color-background);
 }
 
+#experience,
+.connect {
+  background: var(--color-surface);
+}
 
 .projects,
 .timeline-section,
@@ -2900,7 +2910,7 @@ p {
 .metrics-strip {
   padding-block: 1.5rem;
   border-block: 1px solid var(--border);
-  /* background: var(--surface); */
+  background: var(--surface);
   overflow: hidden;
 }
 
@@ -2971,6 +2981,11 @@ p {
 .metric:focus-visible .metric__takeaway {
   opacity: 1;
   transform: translateY(0) scale(1);
+}
+
+.expertise,
+.fashion {
+  background: var(--maroon-light);
 }
 
 .section-eyebrow,
@@ -3774,7 +3789,9 @@ p {
   position: relative;
   overflow: hidden;
   padding-block: clamp(4rem, 8vw, 7rem);
-  background:var(--bg);
+  background:
+    radial-gradient(circle at 8% 18%, rgba(255, 250, 250, 0.7), transparent 28%),
+    var(--maroon-light);
   color: var(--text);
 }
 
@@ -5058,7 +5075,7 @@ body:not(.project-page) > .site-header .icon-nav__link {
   overflow-x: clip;
   padding-inline: clamp(1.5rem, 4vw, 4rem);
   padding-block: clamp(5rem, 8vw, 7rem);
-  min-height: calc(var(--books-pin-height, 100vh) + var(--books-scroll-extra, 320vh));
+  min-height: calc(var(--books-pin-height, 100vh) + var(--books-scroll-extra, 960vh));
   background: var(--color-background);
 }
 
@@ -5085,23 +5102,6 @@ body:not(.project-page) > .site-header .icon-nav__link {
 
 .books-section__description {
   max-width: 65ch;
-}
-
-.books-section__skip {
-  display: inline-block;
-  margin-top: 1.5rem;
-  font-size: 0.85rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: inherit;
-  opacity: 0.7;
-  text-decoration: none;
-  border-bottom: 1px solid currentColor;
-}
-
-.books-section__skip:hover,
-.books-section__skip:focus-visible {
-  opacity: 1;
 }
 
 .books-section__description .section-subtitle {
@@ -5216,5 +5216,229 @@ body:not(.project-page) > .site-header .icon-nav__link {
   .books-ring {
     width: min(var(--books-card-w, 10rem), calc(100vw - 3rem));
     height: calc(min(var(--books-card-w, 10rem), calc(100vw - 3rem)) * 1.5);
+  }
+}
+
+/* ==========================================================================
+   PAGE BACKGROUND - let the body grid and glow show through the cream sections
+   ========================================================================== */
+#hero,
+#work,
+#articles,
+#education,
+#books {
+  background-color: transparent;
+}
+
+/* ==========================================================================
+   GRID OVERRIDE - tinted and white sections become semi-transparent so the
+   body grid shows through; their colour is kept as a light wash
+   ========================================================================== */
+#expertise,
+#about-me {
+  background-color: color-mix(in srgb, var(--bg) 40%, transparent);
+}
+
+#highlights,
+#experience {
+  background-color: color-mix(in srgb, var(--bg) 40%, transparent);
+}
+
+/* ==========================================================================
+   EXPERIENCE CAROUSEL: horizontal cards, two visible at a time, arrows on both sides
+   ========================================================================== */
+.exp-carousel {
+  position: relative;
+}
+
+#experience-list {
+  display: flex;
+  gap: 1.25rem;
+  margin: 0 3.25rem;
+  padding: 0.25rem 0 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+#experience-list::-webkit-scrollbar {
+  display: none;
+}
+
+#experience-list::before {
+  display: none;
+}
+
+#experience-list > .timeline__item {
+  display: block;
+  flex: 0 0 calc((100% - 1.25rem) / 2);
+  min-width: 0;
+  margin: 0;
+  padding: 1.5rem 1.5rem 1.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  scroll-snap-align: start;
+}
+
+#experience-list > .timeline__item:last-child {
+  padding-bottom: 1.75rem;
+}
+
+#experience-list > .timeline__item::before {
+  display: none;
+}
+
+#experience-list .timeline__date {
+  display: block;
+  margin-bottom: 0.75rem;
+  color: var(--maroon);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+#experience-list .timeline__content {
+  padding-left: 2.6rem;
+}
+
+#experience-list .timeline__role {
+  display: block;
+  font-size: 1.25rem;
+  line-height: 1.25;
+}
+
+#experience-list .timeline__desc-list {
+  max-width: none;
+  margin-left: 0;
+  padding-left: 1.1rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.exp-carousel__nav {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: grid;
+  width: 2.6rem;
+  height: 2.6rem;
+  place-items: center;
+  transform: translateY(-50%);
+  border: 1px solid var(--color-accent);
+  border-radius: 50%;
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  color: var(--color-accent);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 180ms ease, color 180ms ease, opacity 180ms ease;
+}
+
+.exp-carousel__nav--prev {
+  left: 0;
+}
+
+.exp-carousel__nav--next {
+  right: 0;
+}
+
+.exp-carousel__nav:hover:not(:disabled),
+.exp-carousel__nav:focus-visible {
+  background: var(--color-accent);
+  color: var(--surface);
+}
+
+.exp-carousel__nav:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+@media (max-width: 700px) {
+  #experience-list {
+    margin: 0 2.4rem;
+  }
+
+  #experience-list > .timeline__item {
+    flex-basis: 100%;
+  }
+
+  .exp-carousel__nav {
+    width: 2.2rem;
+    height: 2.2rem;
+    font-size: 1.25rem;
+  }
+}
+
+/* ==========================================================================
+   EXPERIENCE TIMELINE (horizontal): line starts at the left, cards wider
+   ========================================================================== */
+#experience-list {
+  margin: 0 2.75rem;
+  padding: 3.9rem 0 1rem;
+}
+
+#experience-list > .timeline__item {
+  position: relative;
+  padding: 1.25rem 1.35rem 1.4rem;
+}
+
+/* horizontal line above each card; joins the next card across the gap */
+#experience-list > .timeline__item::before {
+  display: block;
+  position: absolute;
+  top: -2.1rem;
+  left: 0;
+  right: -1.25rem;
+  width: auto;
+  height: 2px;
+  background: var(--color-accent);
+  content: "";
+}
+
+#experience-list > .timeline__item:last-child::before {
+  right: 0;
+}
+
+#experience-list .timeline__date {
+  position: absolute;
+  top: -3.4rem;
+  left: 2.3rem;
+  margin: 0;
+  white-space: nowrap;
+}
+
+#experience-list .timeline__content {
+  padding-left: 0;
+}
+
+#experience-list .timeline__marker {
+  top: -4.55rem;
+  left: -1.35rem;
+}
+
+#experience-list .timeline__desc-list {
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+#experience-list .timeline__desc-item {
+  margin: 0.2rem 0;
+}
+
+.exp-carousel__nav {
+  top: calc(50% + 1.9rem);
+}
+
+@media (max-width: 700px) {
+  #experience-list {
+    margin: 0 2.2rem;
+  }
+
+  #experience-list > .timeline__item {
+    padding: 1.1rem 1.1rem 1.2rem;
   }
 }

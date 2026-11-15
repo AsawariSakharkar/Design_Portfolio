@@ -54,8 +54,8 @@
     (isProjectPage
       ? navLink("Back to projects", "work", projectsHref, "", "")
       : navLink("Home", "home", homeHref, "top") +
-        navLink("Skills", "skills", homePrefix + "#expertise", "expertise") +
         navLink("Work", "work", homePrefix + "#work", "work") +
+        navLink("Skills", "skills", homePrefix + "#expertise", "expertise") +
         navLink("About me", "about", homePrefix + "#about-me", "about-me") +
         navLink("Experience", "experience", homePrefix + "#experience", "experience") +
         navLink("Education", "education", homePrefix + "#education", "education") +

@@ -111,28 +111,28 @@
         </div>
       </section>
 
-      <!-- ===================== EXPERTISE ===================== -->
-      <section class="band-maroon expertise capability-section" id="expertise">
-        <div class="container">
-          <p class="section-eyebrow">01 / Capabilities</p>
-          <h2 class="section-title section-title--light" id="expertise-heading">
-            Skills
-          </h2>
-          <p class="section-subtitle capability-section__subtitle">Connecting human behaviour, design thinking, data and technology to create meaningful experiences.</p>
-          <ul class="tags" id="tags-list"></ul>
-        </div>
-      </section>
-
       <!-- ===================== PROJECTS ===================== -->
       <section class="projects" id="work">
         <div class="container">
-          <p class="section-eyebrow">02 / Work</p>
+          <p class="section-eyebrow">01 / Work</p>
           <h2 class="section-title" id="projects-heading">My Projects</h2>
           <p class="section-subtitle">Converting data insights to products, interfaces and data vizs.</p>
           <div class="folder" id="project-folder">
             <div class="folder__tabs" role="tablist" aria-label="Project folders"></div>
             <div class="folder__panel" id="project-panel"></div>
           </div>
+        </div>
+      </section>
+
+      <!-- ===================== EXPERTISE ===================== -->
+      <section class="band-maroon expertise capability-section" id="expertise">
+        <div class="container">
+          <p class="section-eyebrow">02 / Capabilities</p>
+          <h2 class="section-title section-title--light" id="expertise-heading">
+            Skills
+          </h2>
+          <p class="section-subtitle capability-section__subtitle">Connecting human behaviour, design thinking, data and technology to create meaningful experiences.</p>
+          <ul class="tags" id="tags-list"></ul>
         </div>
       </section>
 
@@ -169,7 +169,11 @@
           <p class="section-eyebrow">05 / Experience</p>
           <h2 class="section-title" id="experience-heading">My Experience</h2>
           <p class="section-subtitle">Work across UX research, product design, and interface development.</p>
-          <ol class="timeline" id="experience-list"></ol>
+          <div class="exp-carousel">
+            <button class="exp-carousel__nav exp-carousel__nav--prev" type="button" id="experience-prev" aria-label="Show previous experience">&#8249;</button>
+            <ol class="timeline" id="experience-list"></ol>
+            <button class="exp-carousel__nav exp-carousel__nav--next" type="button" id="experience-next" aria-label="Show next experience">&#8250;</button>
+          </div>
         </div>
       </section>
       <div class="section-break section-break--red"></div>
@@ -192,7 +196,6 @@
               <p class="section-eyebrow">07 / Books</p>
               <h2 class="section-title" id="books-heading">An idea on paper is worth a million</h2>
               <div class="books-section__description" id="books-description"></div>
-              <a class="books-section__skip" href="#connect">Skip books ↓</a>
             </div>
             <div class="books-ring-stage" id="books-stage" tabindex="0" aria-label="Book carousel">
               <div class="books-ring-stage__tilt">
