@@ -2902,7 +2902,7 @@ p {
 
 .metrics-strip {
   padding-block: 1.5rem;
-  border-block: 1px solid var(--border);
+  /* border-block: 1px solid var(--border); */
   background: var(--surface);
   overflow: hidden;
 }
@@ -6414,5 +6414,88 @@ body.project-page #site-header .header__inner {
   #site-header .header__other-link:hover:not(.header__other-link--resume) {
     background: transparent;
     color: var(--color-text);
+  }
+}
+/* ==========================================================================
+   DECORATIVE SHAPES
+   Paste at the very END of styles.css.
+   Shapes sit behind the content, ignore clicks, and only animate on screen.
+   ========================================================================== */
+
+.has-deco {
+  position: relative;
+  overflow-x: clip;
+}
+
+/* Keep real content above the decorations */
+.has-deco > :not(.deco-layer) {
+  position: relative;
+  z-index: 1;
+}
+
+.deco-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.deco {
+  position: absolute;
+  display: block;
+  color: var(--color-accent);
+  opacity: var(--o, 0.05);
+  animation: deco-float var(--dur, 10s) ease-in-out var(--delay, 0s) infinite alternate;
+  will-change: transform;
+}
+
+.deco svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* Keep lines thin at every size */
+.deco svg * {
+  vector-effect: non-scaling-stroke;
+}
+
+.deco--spin {
+  animation: deco-spin var(--dur, 48s) linear var(--delay, 0s) infinite;
+}
+
+/* Pause animations while a section is off screen */
+.deco-layer:not(.is-live) .deco {
+  animation-play-state: paused;
+}
+
+@keyframes deco-float {
+  from {
+    transform: translateY(0) rotate(var(--r0, 0deg));
+  }
+  to {
+    transform: translateY(var(--drift, -16px)) rotate(var(--r1, 8deg));
+  }
+}
+
+@keyframes deco-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Skills section: remove the old circles that were cut off at the edges.
+   decor.js adds full, complete shapes there instead. */
+.capability-section::before,
+.capability-section::after {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .deco,
+  .deco--spin {
+    animation: none;
   }
 }
