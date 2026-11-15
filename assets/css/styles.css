@@ -6513,21 +6513,6 @@ body.project-page #site-header .header__inner {
 #books {
   background-color: transparent;
 }
-
-/* ==========================================================================
-   GRID OVERRIDE - tinted and white sections become semi-transparent so the
-   body grid shows through; their colour is kept as a light wash
-   ========================================================================== */
-#expertise,
-#about-me {
-  background-color: color-mix(in srgb, var(--maroon-light) 55%, transparent);
-}
-
-#highlights,
-#experience {
-  background-color: color-mix(in srgb, var(--surface) 60%, transparent);
-}
-
 /* ==========================================================================
    EXPERIENCE CAROUSEL: horizontal cards, two visible at a time, arrows on both sides
    ========================================================================== */
