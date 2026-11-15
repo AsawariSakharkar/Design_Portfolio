@@ -84,7 +84,9 @@ window.SITE_CONTENT = {
       { label: "AI Workflow Design", group: "Technology & Prototyping" },
       { label: "AI Evaluation & Responsible Design", group: "Technology & Prototyping" },
       { label: "Prototyping", group: "Technology & Prototyping" },
-     // { label: "And an Outfit Planner", accent: true },
+      { label: "Content & Discoverability", group: "Data & Storytelling" },
+      { label: "Generative Engine Optimization (GEO)", group: "Technology & Prototyping" },
+    //  { label: "And an Outfit Planner", accent: true },
     ],
   },
 
