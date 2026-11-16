@@ -5786,8 +5786,8 @@ body:not(.project-page) > .site-header .icon-nav__link {
 
 #experience-list .timeline__dot {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 133%;
+  left: 117%;
   display: block;
   width: 1rem;
   height: 1rem;
