@@ -6796,3 +6796,20 @@ body:not(.project-page) > .site-header .brand__mark img {
 .books-ring-stage.is-dragging {
   cursor: default;
 }
+.library-btn {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  border-color: var(--color-accent);
+  border: 1.5px solid var(--color-accent);
+  color: var(--color-accent);
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.library-btn:hover,
+.library-btn:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
