@@ -1,0 +1,631 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ADHD, after childhood</title>
+<meta name="description" content="A scroll-through research story on how childhood ADHD persists into adult life, and why people end up leaning on tools to cope.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,400;9..144,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css">
+<style>
+  :root{
+    --paper:#faf8f3;
+    --paper-2:#f1ece0;
+    --ink:#1d1b18;
+    --muted:#6a655b;
+    --line:#ddd5c4;
+    --accent:#e4572e;
+    --deep:#1f4e5f;
+    --amber:#f2b134;
+    --serif:"EditorialNew","Fraunces",Georgia,serif;
+    --sans:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:18px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  a{color:var(--deep)}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+
+  /* progress + nav */
+  #bar{position:fixed;top:0;left:0;height:4px;width:0;background:var(--accent);z-index:50}
+  #dots{position:fixed;right:18px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:12px;z-index:40}
+  #dots a{width:11px;height:11px;border-radius:50%;border:2px solid var(--ink);display:block;transition:.25s;position:relative}
+  #dots a.on{background:var(--accent);border-color:var(--accent);transform:scale(1.25)}
+  #dots a span{position:absolute;right:22px;top:50%;transform:translateY(-50%);white-space:nowrap;font-size:13px;background:var(--ink);color:var(--paper);padding:2px 9px;border-radius:99px;opacity:0;pointer-events:none;transition:.2s}
+  #dots a:hover span{opacity:1}
+  @media(max-width:900px){#dots{display:none}}
+
+  /* placeholders */
+  .ph{font-family:var(--mono);font-size:.82em;background:repeating-linear-gradient(135deg,#fff3d1,#fff3d1 6px,#ffe9ae 6px,#ffe9ae 12px);border:1.5px dashed #c98a00;border-radius:5px;padding:1px 7px;color:#6b4a00;white-space:normal}
+  .ph.block{display:block;padding:14px 16px;font-size:.9em;line-height:1.5}
+
+  /* type */
+  .kicker{font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:18px}
+  h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.08;letter-spacing:-.01em}
+  h2{font-size:clamp(34px,5.4vw,64px);margin-bottom:26px;max-width:16ch}
+  h3{font-size:22px;line-height:1.2;margin-bottom:8px}
+  .lede{font-size:clamp(19px,2.2vw,23px);max-width:46ch;color:#34312b;margin-bottom:34px}
+  p+p{margin-top:14px}
+  .small{font-size:14px;color:var(--muted)}
+
+  /* chapters */
+  section.chapter{padding:120px 0;border-top:1px solid var(--line);position:relative}
+  section.alt{background:var(--paper-2)}
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s ease}
+  .reveal.in{opacity:1;transform:none}
+  .d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
+
+  /* hero */
+  #hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden}
+  #hero h1{font-size:clamp(52px,10vw,132px);max-width:11ch;margin-bottom:28px}
+  #hero h1 em{font-style:italic;color:var(--accent)}
+  #hero .sub{font-size:clamp(19px,2.4vw,26px);max-width:34ch;color:#34312b;margin-bottom:36px}
+  .meta{font-family:var(--mono);font-size:13px;color:var(--muted);display:flex;gap:18px;flex-wrap:wrap}
+  .cue{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-align:center}
+  .cue i{display:block;width:1px;height:38px;background:var(--ink);margin:10px auto 0;animation:drip 1.8s infinite}
+  @keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+  #field{position:absolute;inset:0;z-index:0;pointer-events:none}
+  #field b{position:absolute;border-radius:50%;background:var(--ink);opacity:.14;animation:drift var(--t) ease-in-out infinite alternate}
+  #field b.hot{background:var(--accent);opacity:.7}
+  @keyframes drift{from{transform:translate(0,0)}to{transform:translate(var(--dx),var(--dy))}}
+  #hero .wrap{position:relative;z-index:1}
+
+  /* ch1 barriers */
+  .path{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin:44px 0 40px;position:relative}
+  .gate{background:var(--paper);border:2px solid var(--ink);border-radius:18px;padding:24px 22px 22px;position:relative;box-shadow:6px 6px 0 var(--ink)}
+  .gate .n{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.12em}
+  .gate p{font-size:16px;line-height:1.55;color:#3a362f}
+  .ends{display:flex;justify-content:space-between;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:-18px;margin-bottom:34px}
+  .ends b{color:var(--accent)}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 8px}
+  .chip{border:1.5px solid var(--ink);border-radius:99px;padding:6px 16px;font-size:15px;background:var(--paper)}
+  .callout{border-left:5px solid var(--accent);background:var(--paper);padding:20px 24px;border-radius:0 14px 14px 0;max-width:62ch;margin:28px 0}
+  .alt .callout{background:#fff}
+  .strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:36px}
+  .stat{background:var(--ink);color:var(--paper);border-radius:20px;padding:26px 26px 22px}
+  .stat .big{font-family:var(--serif);font-size:clamp(46px,6vw,72px);line-height:1;color:var(--amber);margin-bottom:10px}
+  .stat p{font-size:15.5px;line-height:1.5;color:#e9e4d6}
+  .stat .src{display:block;margin-top:12px;font-family:var(--mono);font-size:11.5px;color:#a9a392;letter-spacing:.04em}
+  .stat.light{background:#fff;color:var(--ink);border:2px solid var(--ink)}
+  .stat.light .big{color:var(--accent)}
+  .stat.light p{color:#3a362f}
+  .stat.light .src{color:var(--muted)}
+
+  /* ch2 timeline */
+  .tl{position:relative;margin:56px 0 24px;padding-left:46px}
+  .tl::before{content:"";position:absolute;left:14px;top:6px;bottom:6px;width:4px;background:var(--line);border-radius:4px}
+  .tl::after{content:"";position:absolute;left:14px;top:6px;width:4px;height:calc((100% - 12px)*var(--p,0));background:var(--accent);border-radius:4px;transition:height .15s linear}
+  .node{position:relative;padding-bottom:42px}
+  .node:last-child{padding-bottom:0}
+  .node::before{content:"";position:absolute;left:-41px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--paper);border:3px solid var(--ink)}
+  .alt .node::before{background:var(--paper-2)}
+  .node.hit::before{background:var(--accent);border-color:var(--accent)}
+  .node .age{font-family:var(--mono);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+  .node p{max-width:56ch;font-size:17px}
+  .twin{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;margin-top:40px}
+
+  /* ch3 */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;margin-top:30px}
+  @media(max-width:820px){.split{grid-template-columns:1fr}}
+  .locks{display:grid;gap:12px}
+  .lock{display:flex;align-items:center;gap:16px;background:#fff;border:2px solid var(--ink);border-radius:16px;padding:16px 20px}
+  .lock svg{flex:none}
+  .lock b{display:block;font-size:18px}
+  .lock span{font-size:14.5px;color:var(--muted)}
+  .meter{background:#fff;border:2px solid var(--ink);border-radius:20px;padding:24px}
+  .meter h3{font-size:19px;margin-bottom:18px}
+  .row{margin-bottom:22px}
+  .row label{display:flex;justify-content:space-between;font-size:15px;margin-bottom:8px}
+  .track{height:26px;background:var(--paper-2);border-radius:99px;overflow:hidden}
+  .fill{height:100%;width:0;border-radius:99px;transition:width 1.4s cubic-bezier(.2,.8,.2,1)}
+  .fill.a{background:var(--accent)}
+  .fill.b{background:var(--deep)}
+  .in .fill.a{width:92%}
+  .in .fill.b{width:22%}
+  .note{font-size:13px;color:var(--muted);font-style:italic}
+  .quote-line{font-family:var(--serif);font-size:clamp(24px,3.4vw,38px);line-height:1.2;max-width:26ch;margin:60px 0 6px}
+  .quote-line em{color:var(--accent)}
+
+  /* ch4 */
+  .cloud{display:flex;flex-wrap:wrap;gap:14px 16px;margin:36px 0 12px;align-items:center}
+  .tag{font-family:var(--serif);font-size:clamp(26px,4.4vw,54px);line-height:1.1;padding:4px 20px;border-radius:99px;border:2px solid var(--ink);background:#fff;transition:transform .3s}
+  .tag:nth-child(3n+1){background:var(--ink);color:var(--paper)}
+  .tag:nth-child(3n+2){transform:rotate(-2deg)}
+  .tag:nth-child(3n){transform:rotate(1.6deg);border-color:var(--accent);color:var(--accent)}
+  .tag:hover{transform:rotate(0) scale(1.04)}
+  .quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin:34px 0}
+  .q{background:#fff;border:2px solid var(--ink);border-radius:18px;padding:22px}
+  .q::before{content:"\201C";font-family:var(--serif);font-size:60px;line-height:.6;color:var(--accent);display:block;margin-bottom:8px}
+
+  /* ch6 loop */
+  .loopwrap{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;margin-top:34px}
+  @media(max-width:820px){.loopwrap{grid-template-columns:1fr}}
+  .loop-steps{list-style:none;counter-reset:s}
+  .loop-steps li{counter-increment:s;padding:14px 0 14px 54px;position:relative;border-bottom:1px solid var(--line);font-size:17px}
+  .loop-steps li::before{content:counter(s);position:absolute;left:0;top:12px;width:36px;height:36px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;font-family:var(--mono);font-size:14px}
+  .loop-steps li b{display:block}
+  .spin{animation:spin 26s linear infinite;transform-origin:50% 50%}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .hmw{background:var(--ink);color:var(--paper);border-top:0;padding:130px 0}
+  .hmw .kicker{color:var(--amber)}
+  .hmw h2{max-width:20ch;font-size:clamp(34px,5.6vw,68px)}
+  .hmw h2 em{color:var(--amber)}
+  .hmw p{color:#d8d2c3;max-width:56ch}
+
+  /* sources */
+  footer{padding:90px 0 120px;border-top:1px solid var(--line)}
+  footer h2{font-size:clamp(28px,4vw,42px);margin-bottom:22px}
+  .srcs{columns:2 340px;column-gap:44px;font-size:14.5px;color:#3a362f}
+  .srcs li{margin:0 0 12px 18px;break-inside:avoid}
+  .legend{margin-top:34px;padding:20px;border-radius:14px;background:#fff;border:1px solid var(--line);font-size:15px}
+
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .reveal{opacity:1;transform:none;transition:none}
+    #field b,.cue i,.spin{animation:none}
+    .fill{transition:none;width:var(--w)!important}
+  }
+</style>
+</head>
+<body class="project-page case-study" data-site-root="../" id="top">
+<a class="skip-link" href="#hero">Skip to content</a>
+<header class="site-header" id="site-header"></header>
+<div id="bar"></div>
+<nav id="dots" aria-label="Chapters"></nav>
+
+<!-- HERO -->
+<header id="hero" data-title="Start">
+  <div id="field" aria-hidden="true"></div>
+  <div class="wrap">
+    <p class="kicker reveal">Research case study</p>
+    <h1 class="reveal d1">ADHD, <em>after</em> childhood</h1>
+    <p class="sub reveal d2">How a condition that starts in childhood keeps shaping adult life, and why so many people end up leaning on a tool to hold their day together.</p>
+    <div class="meta reveal d3">
+      <span>November 2026</span>
+      <span class="">Asawari Sakharakar | Design for Social Impact</span>
+    </div>
+  </div>
+  <!-- <div class="cue">Scroll<i></i></div> -->
+</header>
+
+<!-- CH 1 -->
+<section class="chapter" id="c1" data-title="Unseen">
+  <div class="wrap">
+    <p class="kicker reveal">01 &mdash; Childhood</p>
+    <h2 class="reveal d1">It starts early. It is often missed.</h2>
+    <p class="lede reveal d2">ADHD is a neurodevelopmental condition, not a character flaw. It affects attention, impulse control, memory and emotional regulation. To meet diagnostic criteria, symptoms must be persistent, rooted in childhood and disruptive in at least two settings: work, school or home.</p>
+    <p class="reveal d3">And yet many people grow up without a diagnosis. Four things keep it hidden.</p>
+
+    <div class="path">
+      <div class="gate reveal">
+        <div class="n">BARRIER 01</div>
+        <h3>Access</h3>
+        <p>Diagnosis depends on someone noticing and being able to act. Caregivers act as gatekeepers, and diagnosis rates vary by race and community.</p>
+      </div>
+      <div class="gate reveal d1">
+        <div class="n">BARRIER 02</div>
+        <h3>Not knowing the symptoms</h3>
+        <p>The signs get read as personality rather than as a condition, so nobody thinks to look further.</p>
+      </div>
+      <div class="gate reveal d2">
+        <div class="n">BARRIER 03</div>
+        <h3>Masking</h3>
+        <p>Mirroring other people&rsquo;s behaviour in social settings so that nothing looks out of place.</p>
+      </div>
+      <div class="gate reveal d3">
+        <div class="n">BARRIER 04</div>
+        <h3>Dysfunctional coping</h3>
+        <p>Strategies for avoiding anxiety-heavy situations. They manage the moment, not the condition.</p>
+      </div>
+    </div>
+    <div class="ends reveal"><span>Child with ADHD</span><b>Undiagnosed adult</b></div>
+
+    <div class="callout reveal">
+      <h3>Why it is hard to diagnose, even when someone looks</h3>
+      <p>ADHD symptoms overlap with other conditions, so they are easily confused with each other:</p>
+      <div class="chips">
+        <span class="chip">Depressive disorders</span>
+        <span class="chip">Anxiety disorders</span>
+        <span class="chip">Antisocial personality disorder</span>
+        <span class="chip">Borderline personality disorder</span>
+        <span class="chip">PTSD &amp; childhood trauma</span>
+      </div>
+      <p class="small">ADHD alongside borderline personality disorder is described as the biggest diagnostic challenge.</p>
+      <p>Trauma is the quietest look-alike. Hypervigilance can read as inattention, and intrusive memories as distractibility. Up to 17% of trauma-exposed children meet ADHD criteria, and adults with ADHD are nearly seven times more likely to have PTSD. So a missed trauma history can hide behind an ADHD label, and the reverse.</p>
+      <p class="small">Source: PTSD UK; Szymanski et al. (2011); Boodoo et al.</p>
+    </div>
+
+    <div class="strip">
+      <div class="stat reveal">
+        <div class="big"><span data-count="5.48" data-dec="2">5.48</span>&ndash;<span data-count="25.7" data-dec="1">25.7</span>%</div>
+        <p>Range of adult ADHD prevalence estimates across studies in India. The spread comes from differences in method and population, and adults remain largely undiagnosed.</p>
+        <span class="src">INDIA PILOT STUDIES &middot; see sources</span>
+      </div>
+      <div class="stat light reveal d1">
+        <div class="big">10&ndash;25%</div>
+        <p>of adults with ADHD receive an accurate diagnosis and proper treatment, so most go unrecognised.</p>
+        <span class="src">PSYCHIATRY RESEARCH REVIEW, 2024 &middot; via UPI</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CH 2 -->
+<section class="chapter alt" id="c2" data-title="Adulthood">
+  <div class="wrap">
+    <p class="kicker reveal">02 &mdash; Adulthood</p>
+    <h2 class="reveal d1">It doesn&rsquo;t end at eighteen. It gets more complicated.</h2>
+    <p class="lede reveal d2">Symptoms change as people age. Left unnamed, the coping habits of childhood carry on, and they stop working once life asks for more.</p>
+
+    <div class="tl" id="timeline">
+      <div class="node reveal">
+        <div class="age">Childhood</div>
+        <h3>Traits are there, but unread</h3>
+        <p>Inattention, impulsivity and big feelings are seen by others as temperament. Coping strategies begin here.</p>
+      </div>
+      <div class="node reveal">
+        <div class="age">Teens</div>
+        <h3>Feeling different</h3>
+        <p>Emotional problems tend to grow with age, often from peer rejection, constant friction with teachers, and the sense of being different. Planning skills are still maturing, and at home a parent often does the planning, which quietly covers the gap.</p>
+      </div>
+      <div class="node reveal">
+        <div class="age">Higher study &amp; work</div>
+        <h3>The pressure to present a certain way</h3>
+        <p>Responsibility rises, and so does the need to show up in an expected manner. The old coping mechanisms for emotions start to catch up.</p>
+      </div>
+      <div class="node reveal">
+        <div class="age">Late 20s</div>
+        <h3>Holding life together</h3>
+        <p>When the person who planned is no longer there, deadlines start to slip. Work they love can pull them into tunnel vision and time blindness; work they don&rsquo;t love is hard to stay in, so many struggle to hold a job.</p>
+      </div>
+      <div class="node reveal">
+        <div class="age">Adult life</div>
+        <h3>Depression and generalised anxiety</h3>
+        <p>What began as an unseen difference turns into more complicated problems, such as depression and generalised anxiety disorder (GAD).</p>
+      </div>
+    </div>
+
+    <div class="twin">
+      <div class="stat light reveal">
+        <div class="big">16&ndash;31%</div>
+        <p>of adults with ADHD currently have major depression, with lifetime rates as high as 45%.</p>
+        <span class="src">FARAONE &amp; ANTSHEL, 2008</span><p style="display:none"></p>
+      </div>
+      <div class="stat light reveal d1">
+        <div class="big">25&ndash;43%</div>
+        <p>of adults with ADHD meet criteria for generalised anxiety disorder, with lifetime rates as high as 59%.</p>
+        <span class="src">FARAONE &amp; ANTSHEL, 2008</span><p style="display:none"></p>
+      </div>
+    </div>
+
+    <div class="callout reveal" style="margin-top:44px">
+      <p>Most people cope. They build their own systems to hold back the drawbacks: overstimulation, emotional frustration and impulsivity.</p>
+      <p><b>But there is one thing a personal system can&rsquo;t reach.</b></p>
+    </div>
+  </div>
+</section>
+
+<!-- CH 3 -->
+<section class="chapter" id="c3" data-title="Executive function">
+  <div class="wrap">
+    <p class="kicker reveal">03 &mdash; The gap</p>
+    <h2 class="reveal d1">Planning, schedules and deadlines.</h2>
+    <p class="lede reveal d2">Most people do these almost without thinking. For many with ADHD, these are exactly the things that slip, even when they badly want them not to.</p>
+
+    <div class="split">
+      <div>
+        <div class="locks">
+          <div class="lock reveal">
+            <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><rect x="6" y="15" width="22" height="15" rx="3" fill="#1d1b18"/><path d="M11 15v-4a6 6 0 0 1 12 0v4" fill="none" stroke="#1d1b18" stroke-width="3"/></svg>
+            <div><b>Planning</b><span>Knowing where to begin and what comes next</span></div>
+          </div>
+          <div class="lock reveal d1">
+            <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><rect x="6" y="15" width="22" height="15" rx="3" fill="#1d1b18"/><path d="M11 15v-4a6 6 0 0 1 12 0v4" fill="none" stroke="#1d1b18" stroke-width="3"/></svg>
+            <div><b>Scheduling</b><span>Holding time in mind and sequencing it</span></div>
+          </div>
+          <div class="lock reveal d2">
+            <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><rect x="6" y="15" width="22" height="15" rx="3" fill="#1d1b18"/><path d="M11 15v-4a6 6 0 0 1 12 0v4" fill="none" stroke="#1d1b18" stroke-width="3"/></svg>
+            <div><b>Keeping deadlines</b><span>Following through on time, every time</span></div>
+          </div>
+        </div>
+        <p class="reveal" style="margin-top:26px">These skills keep maturing through the teens. Brain-imaging studies suggest that in ADHD this development can follow a different, later timeline (Yasumura et al., 2019; Hoogman et al., 2017). It is a difference in development, not in effort.</p>
+      </div>
+
+      <div class="meter reveal" id="meter">
+        <h3>What runs the system instead: dopamine</h3>
+        <div class="row">
+          <label><span>Novel, rewarding thing (a ping, a scroll, a game)</span><b>easy to start</b></label>
+          <div class="track"><div class="fill a" style="--w:92%"></div></div>
+        </div>
+        <div class="row">
+          <label><span>Required, effortful, &ldquo;boring&rdquo; task</span><b>hard to start</b></label>
+          <div class="track"><div class="fill b" style="--w:22%"></div></div>
+        </div>
+        <p class="note">Illustration of the idea, not measured data.</p>
+        <p style="font-size:16px;margin-top:14px">ADHD brains tend to have lower baseline dopamine activity, so they are pulled toward instant reward and novelty. When dopamine is dysregulated, effortful tasks stay out of reach and frustration follows.</p>
+      </div>
+    </div>
+
+    <p class="quote-line reveal">Screens can turn <em>time distortion</em> into hours lost, and hyperfocus into compulsion.</p>
+    <p class="small reveal">A new text can hit the brain&rsquo;s reward system and make the next effortful task feel even duller.</p>
+
+    <div class="callout reveal" style="margin-top:44px">
+      <h3>Even with tools, the same walls remain</h3>
+      <p>In one study, participants had already tried many productivity and support tools and still struggled with:</p>
+      <div class="chips">
+        <span class="chip">Communication paralysis</span>
+        <span class="chip">Hyperfocus &amp; difficulty switching</span>
+        <span class="chip">Activation paralysis</span>
+        <span class="chip">Emotional dysregulation</span>
+        <span class="chip">Working-memory gaps</span>
+        <span class="chip">Sensory overload</span>
+        <span class="chip">Rejection sensitivity</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CH 4 -->
+<section class="chapter alt" id="c4" data-title="The labels">
+  <div class="wrap">
+    <p class="kicker reveal">04 &mdash; Real life</p>
+    <h2 class="reveal d1">From the outside, it looks like character.</h2>
+    <p class="lede reveal d2">When executive function fails in public, people don&rsquo;t see a condition. They see a person, and they attach labels. These are the ones that came up in interviews.</p>
+
+    <div class="cloud" aria-label="Labels people with ADHD hear">
+      <span class="tag reveal">extremely moody</span>
+      <span class="tag reveal d1">forgetful</span>
+      <span class="tag reveal d2">undisciplined</span>
+      <span class="tag reveal">careless</span>
+      <span class="tag reveal d1">depressive</span>
+      <span class="tag reveal d2">wasted potential</span>
+      <span class="tag reveal d3">unreliable</span>
+    </div>
+    <p class="small reveal">Source: Primary interviews: 3 people with ADHD (2 students, 1 working professional) and 5 without (3 students, 2 working professionals).</p>
+
+    <div class="quotes">
+      <div class="q reveal"><span class="">I mask my symptoms, but when I am overstimulated, I can't function properly, and isolate myself.<br>&mdash; Mina, 26, Student</span></div>
+      <div class="q reveal d1"><span class="">I think I have ADHD, but I'm not sure. I've always been like this.<br>&mdash; Pranav, 30, Student</span></div>
+      <div class="q reveal d2"><span class="">I think ADHD is related to restlessness and difficulty focusing.<br>&mdash; Sarah, 28, Working Professional</span></div>
+    </div>
+
+    <div class="callout reveal">
+      <h3>Being close doesn&rsquo;t mean understanding</h3>
+      <p>The interviews point to a pattern: the people nearest to someone with ADHD tend to reach for personality explanations, not neurodevelopmental ones.</p>
+    </div>
+
+    <p class="reveal" style="max-width:56ch;margin-top:34px">Many try to fix it as a personal responsibility. But that is a heavy load to carry while working and pursuing higher studies, and it is exactly where the weight lands.</p>
+  </div>
+</section>
+
+<!-- CH 5 -->
+<section class="chapter" id="c5" data-title="The weight">
+  <div class="wrap">
+    <p class="kicker reveal">05 &mdash; The weight</p>
+    <h2 class="reveal d1">Responsibility piles up. Support doesn&rsquo;t.</h2>
+    <p class="lede reveal d2">Studying and working raise the demands on exactly the skills that are hardest to summon. Asking for help carries its own risk.</p>
+
+    <div class="strip">
+      <div class="stat reveal">
+        <div class="big"><span data-count="64">64</span>%</div>
+        <p>of employed neurodivergent adults worried that disclosing would hurt them at work.</p>
+        <span class="src">UNDERSTOOD.ORG &middot; 2025</span>
+      </div>
+      <div class="stat reveal d1">
+        <div class="big"><span data-count="82">82</span>%</div>
+        <p>said stigma pressures them to mask at work.</p>
+        <span class="src">UNDERSTOOD.ORG &middot; 2025</span>
+      </div>
+      <div class="stat reveal d2">
+        <div class="big"><span data-count="51">51</span>%</div>
+        <p>had ever requested a workplace accommodation.</p>
+        <span class="src">UNDERSTOOD.ORG &middot; 2025</span>
+      </div>
+      <div class="stat reveal d3">
+        <div class="big"><span data-count="23">23</span>%</div>
+        <p>of those who asked reported losing a job or being demoted afterwards.</p>
+        <span class="src">UNDERSTOOD.ORG &middot; 2024</span>
+      </div>
+    </div>
+    <p class="small reveal" style="margin-top:14px;max-width:70ch">These surveys cover neurodivergent adults broadly (ADHD, dyslexia and others), not ADHD alone, and all figures are self-reported.</p>
+
+    <div class="callout reveal" style="margin-top:44px">
+      <h3>In India, there is no clear route to ask</h3>
+      <p>ADHD is not among the 21 disability categories recognised under the Rights of Persons with Disabilities Act, 2016. In workplace research, people mostly relied on their own strategies, such as limiting distractions, scheduling tasks and taking breaks.</p>
+    </div>
+
+    <p class="reveal" style="max-width:56ch;margin-top:34px"><b>So the people most affected go looking for a solution, or lean heavily on a tool to stand in for their executive function.</b></p>
+  </div>
+</section>
+
+<!-- CH 6 -->
+<section class="chapter alt" id="c6" data-title="The loop">
+  <div class="wrap">
+    <p class="kicker reveal">06 &mdash; The tool</p>
+    <h2 class="reveal d1">The tool becomes part of the problem.</h2>
+    <p class="lede reveal d2">For many adults with ADHD, the phone is an external brain: reminders, calendars, notes, messages. But the phone is also built around interruption and endless content.</p>
+
+    <div class="loopwrap">
+      <svg viewBox="0 0 420 420" role="img" aria-label="A loop: the phone is the main tool, it derails the day, the person blames themselves, and relies on it again" class="reveal">
+        <defs>
+          <marker id="arr" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#e4572e"/></marker>
+        </defs>
+        <g class="spin">
+          <circle cx="210" cy="210" r="132" fill="none" stroke="#e4572e" stroke-width="3" stroke-dasharray="10 10" marker-end="url(#arr)"/>
+        </g>
+        <g font-family="DM Sans, sans-serif" font-size="15" text-anchor="middle" fill="#1d1b18">
+          <rect x="130" y="20" width="160" height="52" rx="14" fill="#fff" stroke="#1d1b18" stroke-width="2"/>
+          <text x="210" y="43">Phone as</text><text x="210" y="61">external brain</text>
+          <rect x="296" y="130" width="116" height="62" rx="14" fill="#fff" stroke="#1d1b18" stroke-width="2"/>
+          <text x="354" y="157">Needs the</text><text x="354" y="175">skills it lacks</text>
+          <rect x="196" y="334" width="170" height="52" rx="14" fill="#fff" stroke="#1d1b18" stroke-width="2"/>
+          <text x="281" y="357">Derailed by</text><text x="281" y="375">interruptions</text>
+          <rect x="30" y="228" width="130" height="62" rx="14" fill="#1d1b18"/>
+          <text x="95" y="255" fill="#faf8f3">&ldquo;I&rsquo;m not using</text><text x="95" y="273" fill="#faf8f3">it properly&rdquo;</text>
+        </g>
+        <text x="210" y="205" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="26" fill="#e4572e">the loop</text>
+      </svg>
+
+      <ol class="loop-steps">
+        <li class="reveal"><b>The phone runs the day.</b>Reminders, calendar, notes and communication all live in one place.</li>
+        <li class="reveal d1"><b>It needs executive function to use.</b>Starting, sequencing and returning are exactly what is hardest.</li>
+        <li class="reveal d2"><b>It also interrupts.</b>Constant pings, endless content, and tasks left half-finished.</li>
+        <li class="reveal d3"><b>The person blames themselves</b>for &ldquo;not using it properly&rdquo;, and tries again.</li>
+      </ol>
+    </div>
+
+    <p class="reveal" style="margin-top:40px;max-width:56ch">Tools for body doubling, time blocking, reminders and gamified tasks do exist (Todoist, Notion, Trello, Forest, Focusmate, Google Keep). But each solves one problem, and none are connected to each other, so results are hit or miss.</p>
+    <div class="callout reveal">
+      <h3>The system is another job</h3>
+      <p>So people build their own: physical cues that remind them to do things in order. The even bigger task is creating that system, finding what actually works, then testing a tool and fitting it into daily life. That effort is itself an executive-function task, which is why adoption so often fails.</p>
+    </div>
+    <p class="small reveal">Source: primary interviews; Chalmers University study.</p>
+  </div>
+</section>
+
+<!-- CLOSE -->
+<section class="chapter hmw" id="c7" data-title="The question">
+  <div class="wrap">
+    <p class="kicker reveal">The question</p>
+    <h2 class="reveal d1">How might we design a system that supports a missing executive function, and makes life <em>easier</em>?</h2>
+    <p class="reveal d2">The aim is to cover the executive-function gap quietly, building on patterns people have already learned, using the existing tools they already rely on or find work better for them. Those patterns come from user research, validated by experts and research papers.</p>
+    <p class="reveal d3">The proposal is a system that works like their brain and for their brain: it plans, executes, and gives a physical cue when something needs doing, helping point tunnel vision at the task at hand. It needs no diagnosis, no disclosure and no labels.</p>
+  </div>
+</section>
+
+<footer id="src" data-title="Sources">
+  <div class="wrap">
+    <h2 class="reveal">Sources &amp; notes</h2>
+    <ul class="srcs reveal">
+      <li><b>Literature review.</b> Schmidt &amp; Petermann (2009), BMC Psychiatry. <a href="https://link.springer.com/article/10.1186/1471-244X-9-58">Link</a></li>
+      <li>Murray et al. (2022), Psychological Medicine, developmental trajectories. <a href="https://www.cambridge.org/core/journals/psychological-medicine/article/abs/developmental-trajectories-of-adhd-symptoms-in-a-large-populationrepresentative-longitudinalstudy/E14738C42E8853ACA8CF4C234D731D66">Link</a></li>
+      <li>Niina, Eyre, Wootton, Stergiakouli, Thapar &amp; Riglin (2022), Journal of Attention Disorders. <a href="https://journals.sagepub.com/doi/abs/10.1177/10870547211025612">Link</a></li>
+      <li>Tang et al. (2018), Developmental Neuroscience, resting-state fMRI. <a href="https://karger.com/dne/article-abstract/40/3/246/117127/Different-Developmental-Pattern-of-Brain">Link</a></li>
+      <li>Yasumura et al. (2019), Brain and Development, frontal lobe function. <a href="https://www.sciencedirect.com/science/article/abs/pii/S0387760418304364">Link</a></li>
+      <li>Hoogman et al. (2017), The Lancet Psychiatry, subcortical volumes. <a href="https://www.thelancet.com/journals/lanpsy/article/PIIS2215-0366(17)30049-4/abstract">Link</a></li>
+      <li>Wender, Wolf &amp; Wasserstein (2001), Annals of the NY Academy of Sciences, dopamine and adult treatment. <a href="https://nyaspubs.onlinelibrary.wiley.com/doi/abs/10.1111/j.1749-6632.2001.tb05770.x">Link</a></li>
+      <li>Faraone &amp; Antshel (2008), World Psychiatry, adult diagnosis and comorbidity (depression, GAD figures). <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC2559915/pdf/wpa030131.pdf">Link</a></li>
+      <li>Lovett &amp; Harrison (2021), adult assessment and overdiagnosis. <a href="https://www.tandfonline.com/doi/full/10.1080/13803395.2021.1950640">Link</a></li>
+      <li>Abdelnour, Jansen &amp; Gold (2022), Missouri Medicine, diagnostic trends. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9616454/">Link</a></li>
+      <li>Shi et al. (2021), JAMA Network Open, racial disparities in diagnosis. <a href="https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2776807">Link</a></li>
+      <li>Szymanski, Sapanski &amp; Conway (2011), Trauma and ADHD: association or diagnostic confusion? <a href="https://www.tandfonline.com/doi/full/10.1080/15289168.2011.575704">Link</a></li>
+      <li>Boodoo, Lagman, Jairath &amp; Baweja, A review of ADHD and childhood trauma, Current Developmental Disorders Reports.</li>
+      <li>PTSD UK, &ldquo;Can PTSD be mistaken for ADHD?&rdquo; (blog), citing the National Child Traumatic Stress Network (2016).</li>
+      <li><b>Other sources.</b> Undiagnosed share (10&ndash;25%): Psychiatry Research review (2024), reported by <a href="https://www.upi.com/Health_News/2024/04/30/adhd-adults-undiagnosed/6101714402346/">UPI</a>.</li>
+      <li>Adult prevalence range of 5.48% to 25.7% in India: pilot study in urban India (Mental Health Review Journal) and related Indian studies.</li>
+      <li>Workplace survey figures (64%, 82%, 51%, 23%): Understood.org Neurodiversity at Work surveys, 2024 and 2025.</li>
+      <li>India&rsquo;s RPwD Act 2016 (21 categories, ADHD not named) and workplace strategies: IAFOR study on ADHD in the Indian workforce.</li>
+      <li>Participants still struggling after trying tools: Chalmers University study. <a href="https://odr.chalmers.se/server/api/core/bitstreams/d60ef9bd-44e6-4ed5-b574-ec99dee1fd3d/content">Link</a></li>
+      <li>Screens, dopamine and time distortion: <a href="https://www.beyondbooksmart.com/executive-functioning-strategies-blog/why-screens-feel-irresistible-with-adhd-and-what-to-do-about-it">Beyond BookSmart</a>.</li>
+      <li>Workplace difficulties: <a href="https://laconciergepsychologist.com/blog/10-adhd-workplace-accommodations/">La Concierge Psychologist</a>.</li>
+      <li>Labels, parental planning and &ldquo;proximity is not understanding&rdquo;: primary interviews.</li>
+    </ul>
+    <div class="legend reveal">
+      Upcoming case study and solution for adults with ADHD
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/content.js"></script>
+<script src="../assets/js/header.js"></script>
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // hero drifting dots
+  var field = document.getElementById('field');
+  for (var i = 0; i < 46; i++) {
+    var b = document.createElement('b');
+    var s = 8 + Math.random() * 34;
+    b.style.width = b.style.height = s + 'px';
+    b.style.left = Math.random() * 100 + '%';
+    b.style.top = Math.random() * 100 + '%';
+    b.style.setProperty('--dx', (Math.random() * 120 - 60) + 'px');
+    b.style.setProperty('--dy', (Math.random() * 120 - 60) + 'px');
+    b.style.setProperty('--t', (4 + Math.random() * 7) + 's');
+    if (i % 11 === 0) b.className = 'hot';
+    field.appendChild(b);
+  }
+
+  // chapter dots
+  var nav = document.getElementById('dots');
+  var secs = [].slice.call(document.querySelectorAll('[data-title]'));
+  secs.forEach(function(sec, idx){
+    if (!sec.id) sec.id = 's' + idx;
+    var a = document.createElement('a');
+    a.href = '#' + sec.id;
+    a.setAttribute('aria-label', sec.getAttribute('data-title'));
+    a.innerHTML = '<span>' + sec.getAttribute('data-title') + '</span>';
+    nav.appendChild(a);
+  });
+  var links = [].slice.call(nav.children);
+
+  // progress + active chapter + timeline fill
+  var bar = document.getElementById('bar');
+  var tl = document.getElementById('timeline');
+  var nodes = tl ? [].slice.call(tl.querySelectorAll('.node')) : [];
+  function onScroll(){
+    var h = document.documentElement;
+    var p = h.scrollTop / (h.scrollHeight - h.clientHeight);
+    bar.style.width = (p * 100) + '%';
+
+    var mid = window.innerHeight * 0.45, active = 0;
+    secs.forEach(function(sec, i){
+      if (sec.getBoundingClientRect().top < mid) active = i;
+    });
+    links.forEach(function(l, i){ l.classList.toggle('on', i === active); });
+
+    if (tl) {
+      var r = tl.getBoundingClientRect();
+      var f = (window.innerHeight * 0.6 - r.top) / r.height;
+      f = Math.max(0, Math.min(1, f));
+      tl.style.setProperty('--p', f);
+      nodes.forEach(function(n){
+        var nr = n.getBoundingClientRect();
+        n.classList.toggle('hit', nr.top < window.innerHeight * 0.6);
+      });
+    }
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll);
+  onScroll();
+
+  // reveal
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:.15});
+  [].forEach.call(document.querySelectorAll('.reveal'), function(el){ io.observe(el); });
+
+  // counters
+  function countUp(el){
+    var end = parseFloat(el.getAttribute('data-count'));
+    var dec = parseInt(el.getAttribute('data-dec') || '0', 10);
+    if (reduce) { el.textContent = end.toFixed(dec); return; }
+    var t0 = null, dur = 1400;
+    function step(t){
+      if (!t0) t0 = t;
+      var k = Math.min(1, (t - t0) / dur);
+      k = 1 - Math.pow(1 - k, 3);
+      el.textContent = (end * k).toFixed(dec);
+      if (k < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  var co = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { countUp(e.target); co.unobserve(e.target); }
+    });
+  }, {threshold:.6});
+  [].forEach.call(document.querySelectorAll('[data-count]'), function(el){
+    if (!reduce) el.textContent = '0';
+    co.observe(el);
+  });
+})();
+</script>
+</body>
+</html>

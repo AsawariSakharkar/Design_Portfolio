@@ -193,19 +193,23 @@
     var categories = p.categories || [];
     var projects = [];
     categories.forEach(function (category) {
+      var categoryTitle = String(category.title || "").toLowerCase();
+      var isUiCategory = categoryTitle.indexOf("ui case studies") !== -1;
+      var isResearchCategory = categoryTitle.indexOf("research") !== -1 ||
+        categoryTitle.indexOf("data visualization") !== -1;
       (category.items || []).forEach(function (item) {
-        var filterCategory = category.title === "Data Visualization"
-          ? "Data Visualization"
-          : category.title === "UI Case Studies"
+        var filterCategory = isResearchCategory
+          ? "Research & Data Visualization"
+          : isUiCategory
             ? "Development"
             : "UX";
         var filters = item.categories || [filterCategory];
-        if (filterCategory === "UX" && /research/i.test(item.role || "")) {
+        if (!isResearchCategory && !isUiCategory && /research/i.test(item.role || "")) {
           filters = filters.concat("Research");
         }
-        var folderCategory = category.title === "UI Case Studies"
+        var folderCategory = isUiCategory
           ? "ui"
-          : category.title === "Data Visualization"
+          : isResearchCategory
             ? "dv"
             : "ux";
         projects.push({ item: item, group: category.title, category: folderCategory, filters: filters });
