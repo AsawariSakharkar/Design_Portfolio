@@ -298,7 +298,7 @@
     var tabs = [
       { id: "ux", label: "UX" },
       { id: "ui", label: "UI" },
-      { id: "dv", label: "Data Viz" },
+      { id: "dv", label: "Research & Data Visualization" },
     ];
     var tabList = folder.querySelector(".folder__tabs");
     var tabPanel = panel;

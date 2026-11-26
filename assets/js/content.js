@@ -190,7 +190,7 @@ window.SITE_CONTENT = {
         ],
       },
       {
-        title: "Data Visualization",
+        title: "Reseach & Data Visualization Case Studies",
         items: [
           { image: "assets/images/projects/perfume_tileImage.png", 
             title: "What fragrances do college students prefer?", 
