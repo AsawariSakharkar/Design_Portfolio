@@ -4211,7 +4211,7 @@ p {
   border-bottom: 0;
   border-radius: var(--radius-card) var(--radius-card) 0 0;
   background: var(--tab-inactive-bg);
-  color: var(--color-text-muted);
+  color: var(--maroon);
   font: inherit;
   font-size: 0.85rem;
   font-weight: 700;
